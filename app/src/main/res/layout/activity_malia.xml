@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="At:"
-                android:visibility="gone"></TextView>
+                android:visibility="gone"/>
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -171,16 +171,6 @@
         android:visibility="gone"
         ></TextView>
 
-            <CalendarView
-                android:id="@+id/simpleCalendarView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:firstDayOfWeek="2"
-                android:maxDate="01/01/2023"
-                android:minDate="01/01/2018"
-
-
-></CalendarView>
 
 </LinearLayout>
 
@@ -198,15 +188,7 @@
 
                     ></TextView>
 
-            <CalendarView
-                android:id="@+id/simple1CalendarView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:firstDayOfWeek="2"
-                android:maxDate="01/01/2023"
-                android:minDate="01/01/2018"
 
-                ></CalendarView>
 
             </LinearLayout>
 

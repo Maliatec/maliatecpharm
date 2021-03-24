@@ -1,7 +1,6 @@
 package com.maliatecpharm.activity
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -14,6 +13,7 @@ import com.maliatecpharm.uimodel.AlarmCount
 import com.maliatecpharm.uimodel.InstructionsUIModel
 import com.maliatecpharm.uimodel.MedicationTypeUIModel
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.switchmaterial.SwitchMaterial
 import java.util.*
 
@@ -21,7 +21,7 @@ import java.util.*
 class MaliaActivity : AppCompatActivity(),
     InstructionsAdapter.InstructionsInteractor,
     MedicationTypeAdapter.MedicationTypeInteractor,
-    DayNameAdapter.DayNameInteractor
+    DayNameAdapter.DayNameInteractor, AlarmCountAdapter.AlarmCountInteractor
 {
 
 
@@ -30,11 +30,7 @@ class MaliaActivity : AppCompatActivity(),
     }
 
     private val alarmCountAdapter by lazy {
-        AlarmCountAdapter(context = this)
-    }
-
-    private val dayCountAdapter by lazy {
-        DayCountAdapter(context = this)
+        AlarmCountAdapter(context = this, interactor = this)
     }
 
     private val instructionsAdapter by lazy {
@@ -61,14 +57,15 @@ class MaliaActivity : AppCompatActivity(),
         MedicationTypeUIModel(id = 5, name = "Other", R.drawable.cross),
     )
 
-    private val timesList = listOf(
-        AlarmCount(1, "Once a day", 1),
-        AlarmCount(2, "2 times a day", 2),
-        AlarmCount(3, "3 times a day", 3),
-        AlarmCount(4, "4 times a day", 4),
-        AlarmCount(5, "5 times a day", 5),
-        AlarmCount(6, "6 times a day", 6),
-        AlarmCount(7, "7 times a day", 7),
+    var lastClickedAlarmCount = 1
+    private var alarmsCountList = listOf(
+        AlarmCount(1, "Once a day", mutableListOf("02:00")),
+        AlarmCount(2, "2 times a day", mutableListOf("08:00", "20:00")),
+        AlarmCount(3, "3 times a day", mutableListOf("08:00", "14:00","20:00")),
+        AlarmCount(4, "4 times a day",  mutableListOf("08:00", "12:00","16:00","20:00")),
+        AlarmCount(5, "5 times a day",  mutableListOf("08:00", "11:00","14:00","17:00","20:00")),
+        AlarmCount(6, "6 times a day",  mutableListOf("08:00", "10:00","11:00")),
+        AlarmCount(7, "7 times a day",  mutableListOf("08:00", "20:00")),
     )
 
     private val pillsList = arrayOf(
@@ -77,7 +74,7 @@ class MaliaActivity : AppCompatActivity(),
         "Teaspoon", "Patch", "Mcg", "lu", "Meq", "Cartoon", "Spray",
     )
 
-    private val selectedDayIds: MutableList<String> = mutableListOf("Sunday")
+    private val selectedDayIds: MutableList<Int> = mutableListOf(1)
 
     private val dayNameList = listOf<Day>(
         Day(id = 1, name = "Sunday", R.color.teal_200),
@@ -106,8 +103,6 @@ class MaliaActivity : AppCompatActivity(),
     private lateinit var dayRecyclerView: RecyclerView
     private lateinit var dayCountRecyclerView: RecyclerView
     private lateinit var onText: TextView
-    private lateinit var simpleCalendarView: CalendarView
-    private lateinit var simple1CalendarView: CalendarView
     private lateinit var confirmButton: MaterialButton
     private lateinit var checkBox :CheckBox
     private lateinit var startTv: TextView
@@ -130,10 +125,6 @@ class MaliaActivity : AppCompatActivity(),
         setReminderSwitchListener()
         popRecyclerView()
         setOnButtonClicked()
-        populateDayCountRecycleView()
-
-
-
     }
 
     private fun setupViews()
@@ -154,13 +145,10 @@ class MaliaActivity : AppCompatActivity(),
         confirmButton = findViewById(R.id.btnConfirm)
         alarmRecyclerView = findViewById(R.id.recyclerview_alarm_count)
         dayRecyclerView = findViewById(R.id.Recylerview_day)
-        simpleCalendarView = findViewById(R.id.simpleCalendarView)
-        simple1CalendarView = findViewById(R.id.simple1CalendarView)
         dayCountRecyclerView = findViewById(R.id.Recylerview_day_count)
         checkBox = findViewById(R.id.repeat_Check_Box)
         startTv = findViewById(R.id.start_Text_View)
         endTv = findViewById(R.id.end_Text_View)
-
     }
 
     private fun setupTextViews()
@@ -170,18 +158,6 @@ class MaliaActivity : AppCompatActivity(),
         medicationTypeTv.text = getString(R.string.medication_type)
         medicationName.text = getString(R.string.medication_title)
         reminderSwitch.text = getString(R.string.switch_reminder_text)
-
-                simpleCalendarView.focusedMonthDateColor (Color.RED)
-                simpleCalendarView.unfocusedMonthDateColor(Color.BLUE)
-                simpleCalendarView.selectedWeekBackgroundColor (Color.RED)
-                simpleCalendarView.weekSeparatorLineColor(Color.GREEN)
-
-
-        simple1CalendarView.focusedMonthDateColor (Color.RED)
-        simple1CalendarView.unfocusedMonthDateColor(Color.BLUE)
-        simple1CalendarView.selectedWeekBackgroundColor (Color.RED)
-        simple1CalendarView.weekSeparatorLineColor(Color.GREEN)
-
 
     }
 
@@ -216,24 +192,23 @@ class MaliaActivity : AppCompatActivity(),
         alarmRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MaliaActivity, RecyclerView.HORIZONTAL, false)
             adapter = alarmCountAdapter
-            alarmCountAdapter.updateList(0)
         }
     }
 
-    private fun populateDayCountRecycleView()
-    {
-        dayCountRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MaliaActivity, RecyclerView.HORIZONTAL, false)
-            adapter = dayCountAdapter
-            dayCountAdapter.updateList(0)
-        }
-
-    }
+//    private fun populateDayCountRecycleView()
+//    {
+//        dayCountRecyclerView.apply {
+//            layoutManager = LinearLayoutManager(this@MaliaActivity, RecyclerView.HORIZONTAL, false)
+//            adapter = dayCountAdapter
+//            dayCountAdapter.updateList(0)
+//        }
+//
+//    }
 
 
     private fun populateTimeSpinner()
     {
-        val times = timesList.map { item -> item.text }
+        val times = alarmsCountList.map { item -> item.text }
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, times)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         timesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
@@ -248,8 +223,9 @@ class MaliaActivity : AppCompatActivity(),
             {
                 val timeClickedText = times[position]
                 // search in original times to find a match between an item and the text clicked
-                val count = timesList.first { item -> item.text == timeClickedText }.count
-                alarmCountAdapter.updateList(count)
+                val itemClicked = alarmsCountList.first { item -> item.text == timeClickedText }
+                lastClickedAlarmCount = itemClicked.id
+                alarmCountAdapter.updateList(itemClicked.timeList)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?)
@@ -314,7 +290,6 @@ class MaliaActivity : AppCompatActivity(),
 
     override fun onMedicationTypeClicked(medicationType: MedicationTypeUIModel)
     {
-
         val updatedList = medicationTypeList.map { item ->
             item.copy(colorRes = getColor(selected = item.id == medicationType.id))
         }
@@ -327,23 +302,26 @@ class MaliaActivity : AppCompatActivity(),
 
     override fun onDayClicked(day: Day)
     {
-        if (selectedDayIds.contains(day.name))
+        if (selectedDayIds.contains(day.id))
         {
-            selectedDayIds.remove(day.name)
+            selectedDayIds.remove(day.id)
         }
         else
         {
-            selectedDayIds.add(day.name)
+            selectedDayIds.add(day.id)
         }
 
         val updatedList = dayNameList.map { item ->
-            item.copy(colorRes = getColor(selected = selectedDayIds.contains(item.name)))
+            item.copy(colorRes = getColor(selected = selectedDayIds.contains(item.id)))
         }
 
         daynameAdapter.updateList(updatedList)
 
-        tvSelectedDays.text = selectedDayIds.toString()
+        val selectedDaysText = dayNameList
+            .filter { item -> selectedDayIds.contains(item.id) }
+            .joinToString { item -> item.name }
 
+        tvSelectedDays.text = selectedDaysText
     }
 
     //        dayNameList.forEach { item ->
@@ -369,6 +347,10 @@ class MaliaActivity : AppCompatActivity(),
 
     //
 
+    val dateRangePicker =
+        MaterialDatePicker.Builder.dateRangePicker()
+            .setTitleText("Select dates")
+            .build()
 
     private fun setOnButtonClicked()
     {
@@ -378,26 +360,15 @@ class MaliaActivity : AppCompatActivity(),
 
     }
 
+    override fun onAlarmTimeClicked(position: Int)
+    {
+        val dummyText = "Elie"
+        val newList = alarmsCountList
+            .first { item -> item.id == lastClickedAlarmCount }
+            .timeList.apply { set(position, dummyText) }
 
+        alarmCountAdapter.updateList(newList)
+    }
 }
 
-private fun CalendarView.selectedWeekBackgroundColor(RED: Int)
-{
-
-}
-
-private fun CalendarView.weekSeparatorLineColor(GREEN: Int)
-{
-
-}
-
-private fun CalendarView.unfocusedMonthDateColor(BLUE: Int)
-{
-
-}
-
-private fun CalendarView.focusedMonthDateColor(RED: Int)
-{
-
-}
 

@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
 
 class AlarmCountAdapter(
-    private val context: Context
+    private val context: Context,
+    private val interactor: AlarmCountInteractor
 ) :
     RecyclerView.Adapter<AlarmCountAdapter.AlarmCountViewHolder>() {
 
-    private var alarmCountList: List<Unit> = emptyList()
+    private var alarmCountList: List<String> = emptyList()
 
-    fun updateList(count: Int = 0) {
-        alarmCountList = if (count == 0) emptyList() else (0..count-1).map {}
+    fun updateList(alarmCountList: List<String>) {
+        this.alarmCountList = alarmCountList
         notifyDataSetChanged()
     }
 
@@ -31,7 +33,8 @@ class AlarmCountAdapter(
     }
 
     override fun onBindViewHolder(holder: AlarmCountViewHolder, position: Int) {
-        holder.bindData()
+        val time = alarmCountList[position]
+        holder.bindData(time, position)
     }
 
     override fun getItemCount() = alarmCountList.size
@@ -39,10 +42,17 @@ class AlarmCountAdapter(
     inner class AlarmCountViewHolder constructor(private val view: View) :
         RecyclerView.ViewHolder(view) {
 
-        private val setAnAlarm: EditText = view.findViewById(R.id.edittext_alarm)
+        private val setAnAlarm: TextView = view.findViewById(R.id.textview_time)
 
-        fun bindData() {
-            val text = setAnAlarm.text
+        fun bindData(time: String, position: Int) {
+            setAnAlarm.text = time
+            setAnAlarm.setOnClickListener{
+                interactor.onAlarmTimeClicked(position)
+            }
         }
+    }
+
+    interface AlarmCountInteractor{
+        fun onAlarmTimeClicked(position: Int)
     }
 }

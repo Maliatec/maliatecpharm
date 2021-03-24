@@ -7,11 +7,10 @@
 
 
 
-    <EditText
-        android:id="@+id/edittext_alarm"
+    <TextView
+        android:id="@+id/textview_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:minWidth="92dp"
         android:textAlignment="center"
         android:text="09:00"
