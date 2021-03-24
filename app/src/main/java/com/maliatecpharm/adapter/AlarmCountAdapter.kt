@@ -20,6 +20,7 @@ class AlarmCountAdapter(
     fun updateList(alarmCountList: List<String>) {
         this.alarmCountList = alarmCountList
         notifyDataSetChanged()
+
     }
 
     override fun onCreateViewHolder(
