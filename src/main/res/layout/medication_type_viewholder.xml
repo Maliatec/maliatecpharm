@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:paddingEnd="16dp"
+    android:paddingStart="0dp"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/inner_layout"
+        android:layout_width="72dp"
+        android:padding="16dp"
+        android:layout_height="wrap_content"
+        >
+
+    <ImageView
+        android:id="@+id/imageview_medication"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        tools:src="@drawable/cross"
+        android:layout_gravity="center_horizontal"
+        />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/textview_medication"
+        android:layout_width="wrap_content"
+        android:textAlignment="center"
+        android:minWidth="72dp"
+        android:inputType="textMultiLine"
+        tools:text="Liquid"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"/>
+
+
+
+
+</LinearLayout>
