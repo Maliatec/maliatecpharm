@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Dosage_array">
+        <item>Pills(s)</item>
+        <item>Cc</item>
+        <item>MI</item>
+        <item>Gr</item>
+        <item>Mg</item>
+        <item>Drop(s)</item>
+        <item>Piece(s)</item>
+        <item>Puff(s)</item>
+        <item>Unit(s)</item>
+        <item>Teaspoon(s)</item>
+        <item>Tablespoon(s)</item>
+        <item>Patch</item>
+        <item>Mcg</item>
+        <item>lu</item>
+        <item>Meq</item>
+        <item>Carton</item>
+        <item>Spray</item>
+
+    </string-array>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

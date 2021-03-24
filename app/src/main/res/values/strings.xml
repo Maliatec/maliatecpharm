@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Elie \' s School</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="title_activity_main3">MainActivity</string>
+
+    <string name="title_activity_malia_tech_app">MaliaTechApp</string>
+    <string name="title_activity_malia">malia</string>
+
+    <string name="medication_title">Medication Name</string>
+    <string name="medication_type">Medication Type</string>
+    <string name="instructions">Instructions</string>
+    <string name="dosage">Dosage</string>
+    <string name="medication_name_hint">e.g.Paracetamol</string>
+    <string name="switch_reminder_text">Schedule and Reminder</string>
+    <string name="button_confirm">Confirm</string>
+    <string name="textview_reminder">Reminder:</string>
+    <string name="default_alarm_date">09:00</string>
+
+</resources>
