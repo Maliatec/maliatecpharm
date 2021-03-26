@@ -43,10 +43,10 @@ class AlarmCountAdapter(
     inner class AlarmCountViewHolder constructor(private val view: View) :
         RecyclerView.ViewHolder(view) {
 
-        private val setAnAlarm: TextView = view.findViewById(R.id.textview_time)
+        private val setAnAlarm: EditText = view.findViewById(R.id.textview_time)
 
         fun bindData(time: String, position: Int) {
-            setAnAlarm.text = time
+            setAnAlarm.setText(time)
             setAnAlarm.setOnClickListener{
                 interactor.onAlarmTimeClicked(position)
             }

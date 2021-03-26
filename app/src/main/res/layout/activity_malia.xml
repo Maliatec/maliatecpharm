@@ -117,7 +117,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="At:"
-                android:visibility="gone"/>
+                android:visibility="gone" />3
+
+
+
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -135,6 +138,7 @@
                 android:layout_marginTop="16dp"
                 android:text="ON :"
                 android:visibility="gone" />
+
 
             <TextView
                 android:id="@+id/TVSelectedDays"
@@ -156,41 +160,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    >
-
-    <TextView
-        android:id="@+id/start_Text_View"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        android:visibility="gone"
-        ></TextView>
-
-
-</LinearLayout>
-
-            <LinearLayout
+            <Button
+                android:id="@+id/btn1_timePicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:text="From"
+                android:textSize="16dp"
+                android:visibility="gone"
+
+                >   </Button>
+
+            <TextView
+                android:id="@+id/tv_textTime1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+
                 >
 
-                <TextView
-                    android:id="@+id/end_Text_View"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="End"
+            </TextView>
 
-                    ></TextView>
+            <Button
+                android:id="@+id/btn2_timePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To"
+                android:textSize="16dp"
+                android:visibility="gone"
+
+                >   </Button>
+
+            <TextView
+                android:id="@+id/tv_textTime2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+
+                >
+
+            </TextView>
 
 
-
-            </LinearLayout>
 
             <CheckBox
                 android:id="@+id/repeat_Check_Box"

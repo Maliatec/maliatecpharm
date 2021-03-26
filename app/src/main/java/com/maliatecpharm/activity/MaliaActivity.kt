@@ -1,9 +1,15 @@
 package com.maliatecpharm.activity
 
+
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.format.DateFormat.is24HourFormat
 import android.view.View
 import android.widget.*
+import android.widget.Toast.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,21 +19,25 @@ import com.maliatecpharm.uimodel.AlarmCount
 import com.maliatecpharm.uimodel.InstructionsUIModel
 import com.maliatecpharm.uimodel.MedicationTypeUIModel
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.switchmaterial.SwitchMaterial
+import android.widget.TimePicker
+import java.text.DateFormat
+
 import java.util.*
 
 
 class MaliaActivity : AppCompatActivity(),
     InstructionsAdapter.InstructionsInteractor,
     MedicationTypeAdapter.MedicationTypeInteractor,
-    DayNameAdapter.DayNameInteractor, AlarmCountAdapter.AlarmCountInteractor
+    DayNameAdapter.DayNameInteractor, AlarmCountAdapter.AlarmCountInteractor,
+    TimePickerDialog.OnTimeSetListener
 {
 
 
     private val medicationTypeAdapter by lazy {
         MedicationTypeAdapter(context = this, medicationTypeInteractor = this)
     }
+
 
     private val alarmCountAdapter by lazy {
         AlarmCountAdapter(context = this, interactor = this)
@@ -61,18 +71,19 @@ class MaliaActivity : AppCompatActivity(),
     private var alarmsCountList = listOf(
         AlarmCount(1, "Once a day", mutableListOf("02:00")),
         AlarmCount(2, "2 times a day", mutableListOf("08:00", "20:00")),
-        AlarmCount(3, "3 times a day", mutableListOf("08:00", "14:00","20:00")),
-        AlarmCount(4, "4 times a day",  mutableListOf("08:00", "12:00","16:00","20:00")),
-        AlarmCount(5, "5 times a day",  mutableListOf("08:00", "11:00","14:00","17:00","20:00")),
-        AlarmCount(6, "6 times a day",  mutableListOf("08:00", "10:00","11:00")),
-        AlarmCount(7, "7 times a day",  mutableListOf("08:00", "20:00")),
+        AlarmCount(3, "3 times a day", mutableListOf("08:00", "14:00", "20:00")),
+        AlarmCount(4, "4 times a day", mutableListOf("08:00", "12:00", "16:00", "20:00")),
+        AlarmCount(5, "5 times a day", mutableListOf("08:00", "11:00", "14:00", "17:00", "20:00")),
+        AlarmCount(6, "6 times a day", mutableListOf("08:00", "10:00", "11:00")),
+        AlarmCount(7, "7 times a day", mutableListOf("08:00", "20:00")),
     )
 
     private val pillsList = arrayOf(
         "Pill(s)", "CC", "MI", "Gr", "Mg",
         "Drop(s)", "Piece(s)", "Puff(s)", "Unit(s)",
-        "Teaspoon", "Patch", "Mcg", "lu", "Meq", "Cartoon", "Spray",
+        "Teaspoon", "Patch", "Mcg", "lu", "Meq", "Cartoon", "Spray"
     )
+
 
     private val selectedDayIds: MutableList<Int> = mutableListOf(1)
 
@@ -104,9 +115,37 @@ class MaliaActivity : AppCompatActivity(),
     private lateinit var dayCountRecyclerView: RecyclerView
     private lateinit var onText: TextView
     private lateinit var confirmButton: MaterialButton
-    private lateinit var checkBox :CheckBox
-    private lateinit var startTv: TextView
-    private lateinit var endTv: TextView
+    private lateinit var checkBox: CheckBox
+    private lateinit var btn1Date: Button
+    private lateinit var textDate1: TextView
+    private lateinit var btn2Date: Button
+    private lateinit var textDate2: TextView
+
+
+    var sDay = 0
+    var sMonth = 0
+    var sYear = 0
+    var sHour = 0
+    var sMinute = 0
+
+    var sSavedDay = 0
+    var sSavedMonth = 0
+    var sSavedYear = 0
+    var sSavedHour = 0
+    var sSavedMinute = 0
+
+    var fDay = 0
+    var fMonth = 0
+    var fYear = 0
+    var fHour = 0
+    var fMinute = 0
+
+    var fSavedDay = 0
+    var fSavedMonth = 0
+    var fSavedYear = 0
+    var fSavedHour = 0
+    var fSavedMinute = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -125,6 +164,9 @@ class MaliaActivity : AppCompatActivity(),
         setReminderSwitchListener()
         popRecyclerView()
         setOnButtonClicked()
+        pickSDate()
+        pickFDate()
+
     }
 
     private fun setupViews()
@@ -147,8 +189,12 @@ class MaliaActivity : AppCompatActivity(),
         dayRecyclerView = findViewById(R.id.Recylerview_day)
         dayCountRecyclerView = findViewById(R.id.Recylerview_day_count)
         checkBox = findViewById(R.id.repeat_Check_Box)
-        startTv = findViewById(R.id.start_Text_View)
-        endTv = findViewById(R.id.end_Text_View)
+        btn1Date = findViewById(R.id.btn1_timePicker)
+        textDate1 = findViewById(R.id.tv_textTime1)
+        btn2Date = findViewById(R.id.btn2_timePicker)
+        textDate2 = findViewById(R.id.tv_textTime2)
+
+
     }
 
     private fun setupTextViews()
@@ -195,16 +241,6 @@ class MaliaActivity : AppCompatActivity(),
         }
     }
 
-//    private fun populateDayCountRecycleView()
-//    {
-//        dayCountRecyclerView.apply {
-//            layoutManager = LinearLayoutManager(this@MaliaActivity, RecyclerView.HORIZONTAL, false)
-//            adapter = dayCountAdapter
-//            dayCountAdapter.updateList(0)
-//        }
-//
-//    }
-
 
     private fun populateTimeSpinner()
     {
@@ -249,8 +285,10 @@ class MaliaActivity : AppCompatActivity(),
             dayRecyclerView.visibility = visibility
             dayCountRecyclerView.visibility = visibility
             checkBox.visibility = visibility
-            startTv.visibility = visibility
-            endTv.visibility = visibility
+            btn1Date.visibility = visibility
+            textDate1.visibility = visibility
+            btn2Date.visibility = visibility
+            textDate2.visibility = visibility
 
 
         }
@@ -324,6 +362,7 @@ class MaliaActivity : AppCompatActivity(),
         tvSelectedDays.text = selectedDaysText
     }
 
+
     //        dayNameList.forEach { item ->
     //            if (item.id == day.id)
     //            {
@@ -345,21 +384,6 @@ class MaliaActivity : AppCompatActivity(),
     //
     //    }
 
-    //
-
-    val dateRangePicker =
-        MaterialDatePicker.Builder.dateRangePicker()
-            .setTitleText("Select dates")
-            .build()
-
-    private fun setOnButtonClicked()
-    {
-        confirmButton.setOnClickListener {
-            startActivity(Intent(this, MedicationTypeAdapter::class.java))
-        }
-
-    }
-
     override fun onAlarmTimeClicked(position: Int)
     {
         val dummyText = "Elie"
@@ -369,6 +393,99 @@ class MaliaActivity : AppCompatActivity(),
 
         alarmCountAdapter.updateList(newList)
     }
+
+
+    private fun setOnButtonClicked()
+    {
+        confirmButton.setOnClickListener {
+            startActivity(Intent(this, MedicationTypeAdapter::class.java))
+        }
+
+    }
+
+    private fun getSDateTimeCalendar()
+    {
+        val cal = Calendar.getInstance()
+        sDay = cal.get(Calendar.DAY_OF_MONTH)
+        sMonth = cal.get(Calendar.MONTH)
+        sYear = cal.get(Calendar.YEAR)
+        sHour = cal.get(Calendar.HOUR)
+        sMinute = cal.get(Calendar.MINUTE)
+    }
+
+    private fun getFDateTimeCalendar()
+    {
+        val calf = Calendar.getInstance()
+        fDay = calf.get(Calendar.DAY_OF_MONTH)
+        fMonth = calf.get(Calendar.MONTH)
+        fYear = calf.get(Calendar.YEAR)
+        fHour = calf.get(Calendar.HOUR)
+        fMinute = calf.get(Calendar.MINUTE)
+    }
+
+    private fun pickSDate()
+    {
+        btn1Date.setOnClickListener {
+            getSDateTimeCalendar()
+
+            DatePickerDialog(this, fromListener, sYear, sMonth, sDay)
+                .show()
+        }
+    }
+
+    private fun pickFDate()
+    {
+        btn2Date.setOnClickListener {
+            getFDateTimeCalendar()
+
+            DatePickerDialog(this, toListener, fYear, fMonth, fDay)
+                .show()
+        }
+    }
+
+    val fromListener = OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+
+        sSavedDay = dayOfMonth
+        sSavedMonth = month
+        sSavedYear = year
+
+        getSDateTimeCalendar()
+
+        TimePickerDialog(this, this, sHour, sMinute, true).show()
+
+    }
+
+    val toListener = OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+        fSavedDay = dayOfMonth
+        fSavedMonth = month
+        fSavedYear = year
+
+        getFDateTimeCalendar()
+
+        TimePickerDialog(this, this, fHour, fMinute, true).show()
+
+    }
+
+
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int)
+    {
+        sSavedHour = hourOfDay
+        sSavedMinute = minute
+
+        textDate1.text = "Starting Date: \n$sSavedDay - $sSavedMonth - $sSavedYear \nHour: $sSavedHour Minute: $sSavedMinute"
+
+
+
+        fSavedHour = hourOfDay
+        fSavedMinute = minute
+
+        textDate2.text = "End Date: \n$fSavedDay - $fSavedMonth - $fSavedYear \nHour: $fSavedHour Minute: $fSavedMinute"
+
+
+    }
+
+
 }
+
 
 
