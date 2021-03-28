@@ -117,8 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="At:"
-                android:visibility="gone" />3
-
+                android:visibility="gone" />
 
 
 
@@ -129,6 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="gone" />
+
 
 
             <TextView
@@ -160,6 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
+
             <Button
                 android:id="@+id/btn1_timePicker"
                 android:layout_width="wrap_content"
@@ -168,17 +169,17 @@
                 android:textSize="16dp"
                 android:visibility="gone"
 
-                >   </Button>
+                ></Button>
 
             <TextView
                 android:id="@+id/tv_textTime1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
+                android:layout_marginTop="20dp"
+                android:text="Start Date"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"
                 android:visibility="gone"
 
                 >
@@ -193,23 +194,22 @@
                 android:textSize="16dp"
                 android:visibility="gone"
 
-                >   </Button>
+                ></Button>
 
             <TextView
                 android:id="@+id/tv_textTime2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
+                android:layout_marginTop="20dp"
+                android:text="End Date"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"
                 android:visibility="gone"
 
                 >
 
             </TextView>
-
 
 
             <CheckBox
