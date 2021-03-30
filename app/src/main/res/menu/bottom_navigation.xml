@@ -4,26 +4,22 @@
     <item
         android:id="@+id/FirstFragment"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home"
-
+        android:title="Add Medication"
 
         >
     </item>
-
 
     <item
         android:id="@+id/SecondFragment"
         android:icon="@drawable/ic_baseline_medical_services_24"
         android:title="Medications">
-
     </item>
 
     <item
-        android:id="@+id/nav_more"
-        android:icon="@drawable/ic_baseline_more_horiz_24"
-        android:title="More"
+        android:id="@+id/ThirdFragment"
+        android:icon="@drawable/ic_baseline_close_fullscreen_24"
+        android:title="Personal Info"
         >
-
     </item>
 
 </menu>

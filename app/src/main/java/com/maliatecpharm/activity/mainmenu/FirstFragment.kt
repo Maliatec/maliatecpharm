@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.MaliaActivity
 
@@ -32,7 +31,7 @@ class FirstFragment : Fragment()
         text2 = view.findViewById(R.id.text2)
 
         setOnBtnClicked()
-        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.NavigateToSecondFragment)}
+        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_FirstFragment_to_SecondFragment)}
 
         return view
     }

@@ -27,6 +27,7 @@
             android:label="My first App"
             android:theme="@style/Theme.InventoryManagement.NoActionBar" />
         <activity android:name=".activity.MaliaActivity" />
+        <activity android:name=".activity.Infos" />
     </application>
 
 </manifest>

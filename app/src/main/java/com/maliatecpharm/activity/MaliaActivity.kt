@@ -59,11 +59,11 @@ class MaliaActivity : AppCompatActivity(),
     )
 
     private val medicationTypeList = listOf(
-        MedicationTypeUIModel(id = 1, name = "Liquid", R.drawable.image, R.color.teal_200),
-        MedicationTypeUIModel(id = 2, name = "Pill", R.drawable.images),
-        MedicationTypeUIModel(id = 3, name = "Syringe", R.drawable.syringue),
-        MedicationTypeUIModel(id = 4, name = "Tablet", R.drawable.tablet),
-        MedicationTypeUIModel(id = 5, name = "Other", R.drawable.cross),
+        MedicationTypeUIModel(id = 1, name = "Liquid", medicationImageRes = R.drawable.image, colorRes = R.color.teal_200),
+        MedicationTypeUIModel(id = 2, name = "Pill", medicationImageRes = R.drawable.images),
+        MedicationTypeUIModel(id = 3, name = "Syringe",medicationImageRes =  R.drawable.syringue),
+        MedicationTypeUIModel(id = 4, name = "Tablet", medicationImageRes = R.drawable.tablet),
+        MedicationTypeUIModel(id = 5, name = "Other", medicationImageRes = R.drawable.cross),
     )
 
 
@@ -90,7 +90,7 @@ class MaliaActivity : AppCompatActivity(),
     private val selectedDayIds: MutableList<Int> = mutableListOf(1)
 
     private val dayNameList = listOf<Day>(
-        Day(id = 1, name = "Sunday", R.color.teal_200),
+        Day(id = 1, name = "Sunday", colorRes = R.color.teal_200),
         Day(id = 2, name = "Monday"),
         Day(id = 3, name = "Tuesday"),
         Day(id = 4, name = "Wednesday"),

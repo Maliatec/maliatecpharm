@@ -17,8 +17,8 @@
         android:text="View your regular medications
         and turn on/off your reminders"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="69dp"></TextView>
+
+        ></TextView>
 
     <Button
         android:id="@+id/btn1"
@@ -29,8 +29,8 @@
         android:text="+"
 
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="180dp"
-        tools:layout_editor_absoluteY="123dp">
+
+       >
 
 
     </Button>
@@ -43,8 +43,8 @@
         android:gravity="center_vertical"
         android:text="Add medication"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="170dp"
-        tools:layout_editor_absoluteY="221dp"></TextView>
+
+       ></TextView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
