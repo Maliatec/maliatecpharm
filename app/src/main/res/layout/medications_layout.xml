@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="60dp"
-    android:layout_marginBottom="60dp"
-    android:layout_marginLeft="60dp"
-    android:layout_marginRight="60dp"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+
+    android:padding="16dp">
 
     <TextView
+        android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/medicationsText_textView"
-        android:text="View your regular medications and turn on/off your reminders"
-        ></TextView>
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="72dp"
+        android:gravity="center_vertical"
 
-    <MaterialButton
-        android:id="@+id/add_medication_btn"
+        android:text="View your regular medications and turn on/off your reminders"></TextView>
+
+    <Button
+        android:id="@+id/btn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="72dp"
+        android:background="@color/teal_700"
         android:text="+"
-        android:textSize="32sp"
 
-        ></MaterialButton>
+        >
 
+
+    </Button>
 
     <TextView
-        android:id="@+id/add_medication_text_view"
+        android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
         android:text="Add medication"
 
-        > </TextView>
+        ></TextView>
 
 
 </LinearLayout>

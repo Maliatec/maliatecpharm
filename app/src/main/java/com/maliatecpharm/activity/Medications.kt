@@ -2,38 +2,37 @@ package com.maliatecpharm.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.maliatecpharm.R
-import com.google.android.material.button.MaterialButton
+
+class  Medications : AppCompatActivity()
+{
+    private lateinit var text1: TextView
+    private lateinit var btn1: Button
+    private lateinit var text2: TextView
 
 
-class Medications:AppCompatActivity() {
 
-    private lateinit var medicationsText: TextView
-    private lateinit var medicationButton : MaterialButton
-    private lateinit var addMedicationText: TextView
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.medications_layout)
 
 
-        medicationsText = findViewById(R.id.medicationsText_textView)
-        medicationButton= findViewById(R.id.add_medication_btn)
-        addMedicationText = findViewById(R.id.add_medication_text_view)
+        text1 = findViewById(R.id.text1)
+        btn1 = findViewById(R.id.btn1)
+        text2 = findViewById(R.id.text2)
 
-        setOnMedicationButtonClicked()
-
+        setOnBtnClicked()
 
     }
 
-    private fun setOnMedicationButtonClicked()
+    private fun setOnBtnClicked()
     {
-        medicationButton .setOnClickListener {
+        btn1.setOnClickListener {
             startActivity(Intent(this, MaliaActivity::class.java))
         }
-
     }
 }

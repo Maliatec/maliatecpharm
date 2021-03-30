@@ -9,13 +9,12 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.MaliaActivity
 
 
 class DayNameAdapter(
 
     private val context: Context,
-    private val dayNameInteractor: MaliaActivity
+    private val dayNameInteractor: DayNameInteractor
 ) :
     RecyclerView.Adapter<DayNameAdapter.DAYNAMEViewHolder>()
 {

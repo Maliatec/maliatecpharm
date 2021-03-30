@@ -15,6 +15,7 @@
         android:minWidth="92dp"
         android:textAlignment="center"
         android:text="09:00"
+        android:inputType="number"
         tools:ignore="MissingConstraints" />
 
 

@@ -50,9 +50,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#DDDDDD"
+                android:hint="1"
                 android:inputType="number"
                 android:minWidth="92dp"
-            android:hint="1"
                 android:textAlignment="center" />
 
             <Spinner
@@ -136,7 +136,6 @@
                 android:layout_marginTop="16dp"
 
                 android:visibility="gone" />
-
 
 
             <TextView
@@ -237,10 +236,7 @@
             android:id="@+id/btnConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_confirm"
-            />
-
-
+            android:text="@string/button_confirm" />
 
 
     </LinearLayout>

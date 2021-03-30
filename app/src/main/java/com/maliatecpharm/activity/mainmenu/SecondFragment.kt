@@ -1,53 +1,52 @@
-package com.maliatecpharm.activity
-
+package com.maliatecpharm.activity.mainmenu
 
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
-import android.widget.Toast.*
-import androidx.annotation.NonNull
-import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.maliatecpharm.R
+import com.maliatecpharm.activity.Medications
 import com.maliatecpharm.adapter.*
+import com.maliatecpharm.adapter.DayNameAdapter.DayNameInteractor
 import com.maliatecpharm.uimodel.AlarmCount
 import com.maliatecpharm.uimodel.InstructionsUIModel
 import com.maliatecpharm.uimodel.MedicationTypeUIModel
 import java.util.*
 
 
-class MaliaActivity : AppCompatActivity(),
+class SecondFragment : Fragment(),
     InstructionsAdapter.InstructionsInteractor,
     MedicationTypeAdapter.MedicationTypeInteractor,
-    DayNameAdapter.DayNameInteractor,
+    DayNameInteractor,
     AlarmCountAdapter.AlarmCountInteractor,
     TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener
 {
 
-
     private val medicationTypeAdapter by lazy {
-        MedicationTypeAdapter(context = this, medicationTypeInteractor = this)
+        MedicationTypeAdapter(requireContext(), medicationTypeInteractor = this)
     }
 
 
     private val alarmCountAdapter by lazy {
-        AlarmCountAdapter(context = this, interactor = this)
+        AlarmCountAdapter(requireContext(), interactor = this)
     }
 
     private val instructionsAdapter by lazy {
-        InstructionsAdapter(context = this, instructionsInteractor = this)
+        InstructionsAdapter(requireContext(), instructionsInteractor = this)
     }
 
     private val daynameAdapter by lazy {
-        DayNameAdapter(context = this@MaliaActivity, dayNameInteractor = this@MaliaActivity)
+        DayNameAdapter(requireContext(), dayNameInteractor = this)
     }
 
 
@@ -84,7 +83,6 @@ class MaliaActivity : AppCompatActivity(),
         "Drop(s)", "Piece(s)", "Puff(s)", "Unit(s)",
         "Teaspoon", "Patch", "Mcg", "lu", "Meq", "Cartoon", "Spray"
     )
-
 
 
     private val selectedDayIds: MutableList<Int> = mutableListOf(1)
@@ -131,9 +129,6 @@ class MaliaActivity : AppCompatActivity(),
     private lateinit var medicineName: TextView
 
 
-
-
-
     var sDay = 0
     var sMonth = 0
     var sYear = 0
@@ -158,15 +153,14 @@ class MaliaActivity : AppCompatActivity(),
     var fSavedHour = 0
     var fSavedMinute = 0
 
-
-    override fun onCreate(savedInstanceState: Bundle?)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View?
     {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_malia)
+        val view = inflater.inflate(R.layout.activity_malia, container, false)
 
-
-
-        setupViews()
+        setupViews(view)
         setupTextViews()
         medSpinner()
         populateInstructionsRecycleView()
@@ -179,43 +173,39 @@ class MaliaActivity : AppCompatActivity(),
         pickSDate()
         pickFDate()
         medicineNameSpinner()
+        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.NavigateToFirstFragment) }
 
-
+        return view
     }
 
-    private fun setupViews()
+    private fun setupViews(view:View)
     {
-        pillsSpinner = findViewById(R.id.spinner_pills)
-        medicationName = findViewById(R.id.textview_medication_name)
-        dosage = findViewById(R.id.textview_dosage)
-        instructionsTv = findViewById(R.id.textview_instructions)
-        medicationTypeTv = findViewById(R.id.textview_medication_type)
-        instructionsRecyclerView = findViewById(R.id.recyclerview_instructions)
-        medicationTypeRecyclerView = findViewById(R.id.recyclerview_medication_type)
-        reminderSwitch = findViewById(R.id.switch_reminder)
-        reminderTv = findViewById(R.id.textview_reminder)
-        tvSelectedDays = findViewById(R.id.TVSelectedDays)
-        timesSpinner = findViewById(R.id.spinner_time)
-        atTv = findViewById(R.id.Text_View_At)
-        onText = findViewById(R.id.TextView_ON)
-        confirmButton = findViewById(R.id.btnConfirm)
-        alarmRecyclerView = findViewById(R.id.recyclerview_alarm_count)
-        dayRecyclerView = findViewById(R.id.Recylerview_day)
-        dayCountRecyclerView = findViewById(R.id.Recylerview_day_count)
-        checkBox = findViewById(R.id.repeat_Check_Box)
-        btn1Date = findViewById(R.id.btn1_timePicker)
-        textDate1 = findViewById(R.id.tv_textTime1)
-        btn2Date = findViewById(R.id.btn2_timePicker)
-        textDate2 = findViewById(R.id.tv_textTime2)
-        medicinesSpinner = findViewById(R.id.medicinesList)
-        medicineName = findViewById(R.id.nameOfMedicine)
-
+        pillsSpinner = view.findViewById(R.id.spinner_pills)
+        medicationName = view.findViewById(R.id.textview_medication_name)
+        dosage = view.findViewById(R.id.textview_dosage)
+        instructionsTv = view.findViewById(R.id.textview_instructions)
+        medicationTypeTv = view.findViewById(R.id.textview_medication_type)
+        instructionsRecyclerView = view.findViewById(R.id.recyclerview_instructions)
+        medicationTypeRecyclerView = view.findViewById(R.id.recyclerview_medication_type)
+        reminderSwitch = view.findViewById(R.id.switch_reminder)
+        reminderTv = view.findViewById(R.id.textview_reminder)
+        tvSelectedDays = view.findViewById(R.id.TVSelectedDays)
+        timesSpinner = view.findViewById(R.id.spinner_time)
+        atTv = view.findViewById(R.id.Text_View_At)
+        onText = view.findViewById(R.id.TextView_ON)
+        confirmButton = view.findViewById(R.id.btnConfirm)
+        alarmRecyclerView = view.findViewById(R.id.recyclerview_alarm_count)
+        dayRecyclerView = view.findViewById(R.id.Recylerview_day)
+        dayCountRecyclerView = view.findViewById(R.id.Recylerview_day_count)
+        checkBox = view.findViewById(R.id.repeat_Check_Box)
+        btn1Date = view.findViewById(R.id.btn1_timePicker)
+        textDate1 = view.findViewById(R.id.tv_textTime1)
+        btn2Date = view.findViewById(R.id.btn2_timePicker)
+        textDate2 = view.findViewById(R.id.tv_textTime2)
+        medicinesSpinner = view.findViewById(R.id.medicinesList)
+        medicineName = view.findViewById(R.id.nameOfMedicine)
 
     }
-
-
-
-
 
     private fun setupTextViews()
     {
@@ -229,19 +219,20 @@ class MaliaActivity : AppCompatActivity(),
 
     private fun medSpinner()
     {
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, pillsList)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, pillsList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         pillsSpinner.adapter = adapter
     }
 
     private fun medicineNameSpinner()
     {
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, MedicinesList)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, MedicinesList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         medicinesSpinner.adapter = adapter
 
         medicinesSpinner.onItemSelectedListener = this
     }
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
     {
         val text: String = parent?.getItemAtPosition(position).toString()
@@ -257,7 +248,7 @@ class MaliaActivity : AppCompatActivity(),
     private fun populateInstructionsRecycleView()
     {
         instructionsRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MaliaActivity, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = instructionsAdapter
             instructionsAdapter.updateList(instructionsList)
         }
@@ -266,7 +257,7 @@ class MaliaActivity : AppCompatActivity(),
     private fun populateTypeRecycleView()
     {
         medicationTypeRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MaliaActivity, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = medicationTypeAdapter
             medicationTypeAdapter.updateList(medicationTypeList)
         }
@@ -275,7 +266,7 @@ class MaliaActivity : AppCompatActivity(),
     private fun populateAlarmCountRecycleView()
     {
         alarmRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MaliaActivity, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
             adapter = alarmCountAdapter
         }
     }
@@ -284,7 +275,7 @@ class MaliaActivity : AppCompatActivity(),
     private fun populateTimeSpinner()
     {
         val times = alarmsCountList.map { item -> item.text }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, times)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, times)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         timesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
         {
@@ -293,7 +284,7 @@ class MaliaActivity : AppCompatActivity(),
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
-                id: Long
+                id: Long,
             )
             {
                 val timeClickedText = times[position]
@@ -337,7 +328,7 @@ class MaliaActivity : AppCompatActivity(),
     private fun popRecyclerView()
     {
         dayRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MaliaActivity, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
             adapter = daynameAdapter
             daynameAdapter.updateList(dayNameList)
         }
@@ -438,7 +429,7 @@ class MaliaActivity : AppCompatActivity(),
     private fun setOnButtonClicked()
     {
         confirmButton.setOnClickListener {
-            startActivity(Intent(this, Medications::class.java))
+            startActivity(Intent(requireContext(), Medications::class.java))
         }
     }
 
@@ -468,8 +459,10 @@ class MaliaActivity : AppCompatActivity(),
         btn1Date.setOnClickListener {
             getSDateTimeCalendar()
 
-            DatePickerDialog(this, fromListener, sYear, sMonth, sDay)
-                .show()
+            activity?.let { it1 ->
+                DatePickerDialog(it1, fromListener, sYear, sMonth, sDay)
+                    .show()
+            }
         }
     }
 
@@ -478,12 +471,14 @@ class MaliaActivity : AppCompatActivity(),
         btn2Date.setOnClickListener {
             getFDateTimeCalendar()
 
-            DatePickerDialog(this, toListener, fYear, fMonth, fDay)
-                .show()
+            activity?.let { it1 ->
+                DatePickerDialog(it1, toListener, fYear, fMonth, fDay)
+                    .show()
+            }
         }
     }
 
-    val fromListener = OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+    val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
 
         sSavedDay = dayOfMonth
         sSavedMonth = month
@@ -491,18 +486,18 @@ class MaliaActivity : AppCompatActivity(),
 
         getSDateTimeCalendar()
 
-        TimePickerDialog(this, this, sHour, sMinute, true).show()
+        TimePickerDialog(activity, this, sHour, sMinute, true).show()
 
     }
 
-    val toListener = OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+    val toListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
         fSavedDay = dayOfMonth
         fSavedMonth = month
         fSavedYear = year
 
         getFDateTimeCalendar()
 
-        TimePickerDialog(this, this, fHour, fMinute, true).show()
+        TimePickerDialog(activity, this, fHour, fMinute, true).show()
 
     }
 
@@ -520,13 +515,7 @@ class MaliaActivity : AppCompatActivity(),
         textDate2.text = "Starting Date: \n$fSavedDay - $fSavedMonth - $fSavedYear \nHour: $fSavedHour Minute: $fSavedMinute"
 
 
-
     }
 
 
-
-
 }
-
-
-
