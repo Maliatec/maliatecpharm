@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <item
-        android:id="@+id/FirstFragment"
+        android:id="@+id/HomeFragment"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Add Medication"
-
-        >
-    </item>
+        android:title="Home"
+        ></item>
 
     <item
-        android:id="@+id/SecondFragment"
-        android:icon="@drawable/ic_baseline_medical_services_24"
+        android:id="@+id/MedicationsFragment"
+        android:icon="@drawable/ic_baseline_local_pharmacy_24"
         android:title="Medications">
     </item>
 
     <item
-        android:id="@+id/ThirdFragment"
-        android:icon="@drawable/ic_baseline_close_fullscreen_24"
-        android:title="Personal Info"
-        >
+        android:id="@+id/doctorsFragment"
+        android:icon="@drawable/ic_baseline_local_hospital_24"
+        android:title="MyDoctors">
     </item>
+
+    <item
+        android:id="@+id/MoreFragment"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title="More">
+    </item>
+
 
 </menu>

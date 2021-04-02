@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InventoryManagement">
+
         <activity
-            android:name=".activity.mainmenu.MainMenuActivity"
+            android:name=".activity.LogInActivity"
             android:label="@string/title_activity_main_menu"
             android:theme="@style/Theme.InventoryManagement.NoActionBar">
             <intent-filter>
@@ -22,12 +23,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".activity.Medications"
+            android:name=".activity.Profile"
             android:label="My first App"
             android:theme="@style/Theme.InventoryManagement.NoActionBar" />
-        <activity android:name=".activity.MaliaActivity" />
-        <activity android:name=".activity.Infos" />
+
+        <activity
+            android:name=".activity.mainmenu.MainMenuActivity"
+            android:label="@string/title_activity_main_menu"
+            android:theme="@style/Theme.InventoryManagement.NoActionBar">
+        </activity>
+
+        <fragment
+            android:name =".fragment.HomeFragment"
+            android:label ="MainActivity"
+
+            ></fragment>
+
+        <activity android:name=".activity.Medications" />
+        <activity android:name=".activity.mainmenu.Home" />
+        <activity android:name=".activity.More" />
+        <activity android:name=".activity.mainmenu.Doctors" />
+        <activity android:name=".activity.mainmenu.RegisterPage" />
+        <activity android:name=".activity.mainmenu.AddMedications" />
+
+
     </application>
 
 </manifest>
