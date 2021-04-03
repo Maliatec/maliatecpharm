@@ -9,40 +9,31 @@
         android:id="@+id/HomeFragment"
         android:name="com.maliatecpharm.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_HomeFragment_to_MedicationsFragment"
-            app:destination="@id/MedicationsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/MedicationsFragment"
         android:name="com.maliatecpharm.activity.mainmenu.AddMedicationsFragment"
         android:label="Add Medications"
-        tools:layout="@layout/add_fragment_medication">
-        <action
-            android:id="@+id/action_MedicationsFragment_to_doctorsFragment"
-            app:destination="@id/doctorsFragment" />
-    </fragment>
+        tools:layout="@layout/add_fragment_medication"/>
 
     <fragment
         android:id="@+id/doctorsFragment"
         android:name="com.maliatecpharm.DoctorsFragment"
         android:label="Doctors"
-        tools:layout="@layout/fragment_doctors" >
-        <action
-            android:id="@+id/action_doctorsFragment_to_MoreFragment"
-            app:destination="@id/MoreFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_doctors" />
 
     <fragment
         android:id="@+id/MoreFragment"
         android:name="com.maliatecpharm.MoreFragment"
         android:label="More"
         tools:layout="@layout/fragment_more" />
-    <action
-        android:id="@+id/action_MoreFragment_to_HomeFragment"
-        app:destination="@id/HomeFragment" />
+
+    <fragment
+        android:id="@+id/vitalSignsFragment"
+        android:name="com.maliatecpharm.VitalSignsFragment"
+        android:label="fragment_vital_signs"
+        tools:layout="@layout/fragment_vital_signs" />
 
 
 </navigation>

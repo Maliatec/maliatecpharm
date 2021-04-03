@@ -98,13 +98,23 @@ class Medications : AppCompatActivity(),
     )
 
     private val MedicinesList = arrayOf(
+        "Cyclophosphamide",
         "Panadol", "Paracetamol", "Aspirin",
         "Aspicot", "Prozac", "Dareq", "Oradus",
         "Advil", "EuroFer", "Other"
     )
 
+    private val ConditionsList = arrayOf(
+        "Cancer", "Heart Disease", "Kidney problems",
+        "Pulmonary Disease", "Rhumatism", "Bone Problems", "Immunity Problems",
+        "Eyes Problems"
+    )
+
+
     private lateinit var pillsSpinner: Spinner
-    private lateinit var medicationName: TextView
+     private lateinit var medicationName: TextView
+     private lateinit var conditionsSpinner: Spinner
+    private lateinit var condition: TextView
     private lateinit var dosage: TextView
     private lateinit var medicationTypeTv: TextView
     private lateinit var instructionsTv: TextView
@@ -165,6 +175,8 @@ class Medications : AppCompatActivity(),
         setupViews()
         setupTextViews()
         medSpinner()
+        conditionSpinner()
+        condition()
         populateInstructionsRecycleView()
         populateTypeRecycleView()
         populateAlarmCountRecycleView()
@@ -183,6 +195,8 @@ class Medications : AppCompatActivity(),
     {
         pillsSpinner = findViewById(R.id.spinner_pills)
         medicationName = findViewById(R.id.textview_medication_name)
+        conditionsSpinner= findViewById(R.id.conditionsSpinner)
+        condition = findViewById(R.id.nameOfCondition)
         dosage = findViewById(R.id.textview_dosage)
         instructionsTv = findViewById(R.id.textview_instructions)
         medicationTypeTv = findViewById(R.id.textview_medication_type)
@@ -238,6 +252,7 @@ class Medications : AppCompatActivity(),
 
         medicinesSpinner.onItemSelectedListener = this
     }
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
     {
         val text: String = parent?.getItemAtPosition(position).toString()
@@ -249,6 +264,28 @@ class Medications : AppCompatActivity(),
 
     }
 
+    private fun conditionSpinner()
+    {
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, ConditionsList)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        conditionsSpinner.adapter = adapter
+    }
+
+private fun condition()
+{
+    conditionsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+    {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+        {
+            condition.text = ConditionsList.get(position)
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?)
+        {
+            condition.text = "Please select a condition"
+        }
+    }
+}
 
     private fun populateInstructionsRecycleView()
     {
@@ -434,7 +471,7 @@ class Medications : AppCompatActivity(),
     private fun setOnButtonClicked()
     {
         confirmButton.setOnClickListener {
-            startActivity(Intent(this, MainMenuActivity::class.java))
+            startActivity(Intent(this, Doctors::class.java))
         }
     }
 
@@ -502,7 +539,6 @@ class Medications : AppCompatActivity(),
 
     }
 
-
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int)
     {
         sSavedHour = hourOfDay
@@ -515,10 +551,7 @@ class Medications : AppCompatActivity(),
 
         textDate2.text = "Starting Date: \n$fSavedDay - $fSavedMonth - $fSavedYear \nHour: $fSavedHour Minute: $fSavedMinute"
 
-
-
     }
-
 
 
 

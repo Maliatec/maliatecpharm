@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.Navigation
+import com.maliatecpharm.activity.mainmenu.AddMedications
 //import com.maliatecpharm.activity.Medications
 import com.maliatecpharm.activity.mainmenu.AddMedicationsFragment
 
@@ -30,14 +31,14 @@ class HomeFragment : Fragment()
 
         setOnBtnClicked()
 
-        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_HomeFragment_to_MedicationsFragment) }
+//        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_HomeFragment_to_MedicationsFragment) }
         return view
     }
 
     private fun setOnBtnClicked()
     {
         emptyBtn.setOnClickListener {
-            startActivity(Intent(requireContext(), AddMedicationsFragment::class.java))
+            startActivity(Intent(requireContext(), AddMedications::class.java))
         }
     }
     

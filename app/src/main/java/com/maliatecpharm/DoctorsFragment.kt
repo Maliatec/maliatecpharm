@@ -4,14 +4,11 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import com.maliatecpharm.activity.Profile
+import androidx.fragment.app.Fragment
 import java.util.*
 
 
@@ -20,10 +17,11 @@ class DoctorsFragment : Fragment(),
 {
 
     private lateinit var doctorsNameSpinner: Spinner
+    private lateinit var resultDoctorName: TextView
+    private lateinit var resultSpecialityName: TextView
     private lateinit var btnTimePicker: Button
     private lateinit var appointmentDate: TextView
-    private lateinit var speciality: EditText
-    private lateinit var specialitySpinner: Spinner
+    private lateinit var doctorsSpecialitySpinner: Spinner
     private lateinit var mobileNbr: EditText
     private lateinit var officeNbr: EditText
     private lateinit var email: EditText
@@ -32,7 +30,7 @@ class DoctorsFragment : Fragment(),
 
 
     private val DoctorsNameList = arrayOf(
-        "Dr X", "Dr Y", "Dr Z", "Other"
+         "Dr X", "Dr Y", "Dr Z", "Other"
     )
 
     private val DoctorsSpecialityList = arrayOf(
@@ -61,11 +59,13 @@ class DoctorsFragment : Fragment(),
     {
         val view = inflater.inflate(R.layout.fragment_doctors, container, false)
 
-        doctorsNameSpinner = view.findViewById(R.id.doctorsSpinner)
+        doctorsNameSpinner = view.findViewById(R.id.doctorsNameSpinner)
         btnTimePicker = view.findViewById(R.id.btn1_timePicker)
         appointmentDate = view.findViewById(R.id.tv_AppointmentTime)
-        speciality=view.findViewById(R.id.speciality_edittext)
-        specialitySpinner = view.findViewById(R.id.specialitySpinner)
+        resultDoctorName =view. findViewById(R.id.resultName_textview)
+
+        doctorsSpecialitySpinner = view.findViewById(R.id.specialitySpinner)
+        resultSpecialityName =view. findViewById(R.id.resultSpeciality_textview)
         mobileNbr = view.findViewById(R.id.mobilePhone)
         officeNbr = view.findViewById(R.id.officePhone)
         email = view.findViewById(R.id.email)
@@ -81,18 +81,37 @@ class DoctorsFragment : Fragment(),
         specialitySpinner()
         setOnBtnClicked()
         pickSDate()
+        getAppointmentDateTimeCalendar()
+        resultNameSpinner()
+        resultSpecialitySpinner()
 
 
-        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_doctorsFragment_to_MoreFragment) }
+//        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_doctorsFragment_to_MoreFragment) }
         return view
 
     }
+
     private fun doctorsNameSpinner()
     {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, DoctorsNameList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         doctorsNameSpinner.adapter = adapter
+    }
 
+    private fun resultNameSpinner()
+    {
+        doctorsNameSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+            {
+                resultDoctorName.text = DoctorsNameList.get(position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?)
+            {
+                resultDoctorName.text = "Please select a name"
+            }
+        }
     }
 
     private fun setOnBtnClicked()
@@ -106,9 +125,24 @@ class DoctorsFragment : Fragment(),
     {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, DoctorsSpecialityList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        specialitySpinner.adapter = adapter
+        doctorsSpecialitySpinner.adapter = adapter
     }
+    private fun resultSpecialitySpinner()
+    {
+        doctorsSpecialitySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+            {
+                resultSpecialityName.text =DoctorsSpecialityList.get(position)
+            }
 
+            override fun onNothingSelected(parent: AdapterView<*>?)
+            {
+                resultSpecialityName.text = "Please select a speciality"
+            }
+        }
+
+    }
 
     private fun getAppointmentDateTimeCalendar()
     {
@@ -127,8 +161,10 @@ class DoctorsFragment : Fragment(),
 
             DatePickerDialog(requireContext(), fromListener, Year, Month, Day)
                 .show()
+
         }
     }
+
 
     val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
 
@@ -138,6 +174,9 @@ class DoctorsFragment : Fragment(),
 
         getAppointmentDateTimeCalendar()
 
+        TimePickerDialog(requireContext(), this, Hour, Minute, true).show()
+
+        //appointmentDate.text = "$SavedDay - $SavedMonth - $SavedYear \nHour: $SavedHour Minute: $SavedMinute"
 
     }
 

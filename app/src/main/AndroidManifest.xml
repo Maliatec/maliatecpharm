@@ -35,11 +35,7 @@
             android:theme="@style/Theme.InventoryManagement.NoActionBar">
         </activity>
 
-        <fragment
-            android:name =".fragment.HomeFragment"
-            android:label ="MainActivity"
 
-            ></fragment>
 
         <activity android:name=".activity.Medications" />
         <activity android:name=".activity.mainmenu.Home" />

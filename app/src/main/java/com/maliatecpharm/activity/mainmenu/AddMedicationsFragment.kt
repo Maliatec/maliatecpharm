@@ -41,13 +41,13 @@ class AddMedicationsFragment : Fragment()
         addButton  = view.findViewById(R.id.addButton)
         setOnButtonClicked()
 
-        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_MedicationsFragment_to_doctorsFragment) }
+//        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_MedicationsFragment_to_doctorsFragment) }
         return view
     }
     private fun setOnButtonClicked()
     {
         addButton.setOnClickListener {
-            startActivity(Intent(requireContext(), DoctorsFragment::class.java))
+            startActivity(Intent(requireContext(), Medications::class.java))
         }
     }
 }

@@ -31,7 +31,7 @@ class MoreFragment : Fragment()
         setOnBtnClicked()
 
 
-        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_MoreFragment_to_HomeFragment)}
+//        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_MoreFragment_to_HomeFragment)}
         return view
 }
 private fun setOnBtnClicked()

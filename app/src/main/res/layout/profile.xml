@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="First Name"
-        android:paddingVertical="8dp">
+        android:paddingVertical="16dp">
 
     </EditText>
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Last Name"
-        android:paddingVertical="8dp">
+        android:paddingVertical="16dp">
 
     </EditText>
     <LinearLayout
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:paddingVertical="8dp"
+        android:paddingVertical="16dp"
         android:text="Choose your gender"></TextView>
 
     <Spinner
@@ -43,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="32dp"
+        android:paddingVertical="16dp"
 
         ></Spinner>
     </LinearLayout>
@@ -57,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Date of Birth"
+        android:paddingVertical="16dp"
         android:inputType="date">
         </TextView>
 
@@ -67,6 +69,7 @@
         android:layout_gravity="center"
         android:textSize="16sp"
       android:paddingLeft="32dp"
+        android:paddingVertical="16dp"
        />
 
         </LinearLayout>
@@ -76,17 +79,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Weight"
+        android:paddingVertical="16dp"
+        ></EditText>
 
-        android:padding="8dp"
-        android:paddingVertical="8dp"></EditText>
 
     <EditText
         android:id="@+id/height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Height"
-        android:padding="8dp"
-        android:paddingVertical="8dp"></EditText>
+        android:padding="16dp"
+        android:paddingVertical="16dp"></EditText>
 
 
 
@@ -96,7 +99,7 @@
         android:layout_height="wrap_content"
         android:hint="Phone number"
         android:inputType="number"
-        android:padding="8dp"></EditText>
+        android:paddingVertical="16dp"></EditText>
 
 
     <EditText
@@ -104,15 +107,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:padding="8dp"
-        android:paddingVertical="8dp"></EditText>
+        android:padding="16dp"
+        android:paddingVertical="16dp"></EditText>
 
 
     <Button
         android:id="@+id/saveButtonn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="8dp"
+        android:paddingVertical="16dp"
         android:text="Save my Profile"
 
         ></Button>

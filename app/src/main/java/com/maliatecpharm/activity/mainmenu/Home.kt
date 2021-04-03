@@ -29,7 +29,7 @@ class Home : AppCompatActivity()
     private fun setOnBtnClicked()
     {
         emptyBtn.setOnClickListener {
-            startActivity(Intent(this, Medications::class.java))
+            startActivity(Intent(this, AddMedications::class.java))
         }
     }
 }
