@@ -27,7 +27,7 @@ class MedicationTypeAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicationTypeViewHolder {
         val type: View =
-            LayoutInflater.from(context).inflate(R.layout.medication_type_viewholder, null, false)
+            LayoutInflater.from(context).inflate(R.layout.viewholder_medicationtype, null, false)
 
         return MedicationTypeViewHolder(type)
     }

@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.mainmenu.Fragments.FragmentMore">
+    android:label="More">
 
     <TextView
         android:id="@+id/textview_more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="EMPTY"
-        tools:ignore="MissingConstraints"></TextView>
+        tools:ignore="MissingConstraints"/>
 
     <Button
         android:id="@+id/button_moreEmptyBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Empty Button"
-        tools:ignore="MissingConstraints"></Button>
+        tools:ignore="MissingConstraints"/>
 
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

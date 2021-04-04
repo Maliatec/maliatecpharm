@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+    <EditText
+        android:id="@+id/edittext_enterCholesterol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:hint="Enter Cholesterol"/>
+
+
+    <EditText
+        android:id="@+id/edittext_enterFitness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:hint="Enter Fitness"/>
+
+
+    <EditText
+        android:id="@+id/edittext_enterGlucose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:hint="Enter Glucose"/>
+
+
+    <EditText
+        android:id="@+id/edittext_enterBloodPressure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:hint="Enter Blood Pressure"/>
+
+    <EditText
+        android:id="@+id/edittext_enterPulse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:hint="Enter Pulse"/>
+
+
+    <EditText
+        android:id="@+id/edittext_qualityOfLife"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:hint="Physical activity, pain, fatigue, nausea"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_btnTakePic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            android:text="Take a picture" />
+
+        <ImageView
+            android:id="@+id/imageview_picture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="64dp"
+            android:paddingVertical="16dp"
+            android:src="@mipmap/ic_launcher" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:text="Save"/>
+
+
+</LinearLayout>
+
+
+
+

@@ -35,7 +35,7 @@ class DayNameAdapter(
     ): DayNameAdapter.DAYNAMEViewHolder
     {
         val type: View =
-            LayoutInflater.from(context).inflate(R.layout.day_name_viewholder, null, false)
+            LayoutInflater.from(context).inflate(R.layout.viewholder_day_name, null, false)
 
         return DAYNAMEViewHolder(type)
     }

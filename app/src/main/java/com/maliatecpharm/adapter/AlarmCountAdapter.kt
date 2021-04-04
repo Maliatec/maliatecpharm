@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
 
@@ -19,7 +20,6 @@ class AlarmCountAdapter(
     fun updateList(alarmCountList: MutableList<String>) {
         this.alarmCountList = alarmCountList
         notifyDataSetChanged()
-
     }
 
     override fun onCreateViewHolder(
@@ -27,7 +27,7 @@ class AlarmCountAdapter(
         viewType: Int
     ): AlarmCountViewHolder {
         val rootView: View =
-            LayoutInflater.from(context).inflate(R.layout.alarm_count, null, false)
+            LayoutInflater.from(context).inflate(R.layout.activity_alarmcount, null, false)
 
         return AlarmCountViewHolder(rootView)
     }
@@ -39,14 +39,14 @@ class AlarmCountAdapter(
 
     override fun getItemCount() = alarmCountList.size
 
-    inner class AlarmCountViewHolder constructor(private val view: View) :
+    inner class AlarmCountViewHolder constructor(view: View) :
         RecyclerView.ViewHolder(view) {
 
-        private val setAnAlarm: EditText = view.findViewById(R.id.textview_time)
+        private val setAnAlarm: TextView = view.findViewById(R.id.textview_time)
 
         fun bindData(time: String, position: Int) {
-            setAnAlarm.setText(time)
-            setAnAlarm.setOnClickListener{
+            setAnAlarm.text = time
+            itemView.setOnClickListener{
                 interactor.onAlarmTimeClicked(position)
             }
         }

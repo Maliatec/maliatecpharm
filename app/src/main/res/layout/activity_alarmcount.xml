@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <Button
-        android:id="@+id/button_emptyBtn"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textview_time"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-android:text="Empty Button"
-        tools:ignore="MissingConstraints"></Button>
+        android:minWidth="92dp"
+        android:textAlignment="center"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

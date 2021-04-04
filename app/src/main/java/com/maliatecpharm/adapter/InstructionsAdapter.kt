@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.TimePicker
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
@@ -29,7 +28,7 @@ class InstructionsAdapter(
         viewType: Int
     ): MedViewHolder {
         val rootView: View =
-            LayoutInflater.from(context).inflate(R.layout.instruction_view_holder, null, false)
+            LayoutInflater.from(context).inflate(R.layout.viewholder_instruction, null, false)
 
         return MedViewHolder(rootView)
     }
