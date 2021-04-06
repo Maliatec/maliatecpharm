@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+    <EditText
+        android:id="@+id/edittext_firstNameEmergencyContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="First Name"
+        android:drawableLeft="@drawable/ic_baseline_perm_identity_24"
+        android:paddingVertical="16dp">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/edittext_lastNameEmergencyContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        android:drawableLeft="@drawable/ic_baseline_perm_identity_24"
+        android:paddingVertical="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textview_genderEmergencyContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            android:text="Choose your gender" />
+
+        <Spinner
+            android:id="@+id/spinner_genderSpinnerEmergencyContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edittext_phoneEmergencyContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Phone number"
+            android:inputType="number"
+            android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+            android:paddingVertical="16dp" />
+
+        <TextView
+            android:id="@+id/textview_validationNumberTextViewEmergencyContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="Valid" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/edittext_emailEmergencyContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:padding="16dp"
+        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:paddingVertical="16dp" />
+
+
+        <TextView
+            android:id="@+id/textview_valdiationEmergencyContactEmailTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="valid"
+            android:enabled="false"
+
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_saveButtonEmergencyContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:text="Save Emergency Contact Profile"
+
+        />
+
+
+</LinearLayout>

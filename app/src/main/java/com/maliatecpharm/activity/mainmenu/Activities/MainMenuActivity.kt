@@ -33,7 +33,7 @@ class MainMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val navController = findNavController(R.id.fragment)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.HomeFragment,R.id.MedicationsFragment,R.id.doctorsFragment,R.id.vitalSignsFragment,R.id.MoreFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.HomeFragment,R.id.MedicationsFragment,R.id.FragmentAppointment,R.id.vitalSignsFragment,R.id.MoreFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
 
@@ -66,21 +66,32 @@ class MainMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.profile -> {
-                startActivity(Intent(this, Activity_Profile::class.java))
+                startActivity(Intent(this, ActivityProfile::class.java))
+
+            }
+
+            R.id.medfriend -> {
+                startActivity(Intent(this, ActivityMedFriend::class.java))
+            }
+
+            R.id.settings -> {
+                startActivity(Intent(this, ActivitySettings::class.java))
             }
 
             R.id.logout -> {
-                startActivity(Intent(this, Activity_LogIn::class.java))
+                startActivity(Intent(this, ActivityLogIn::class.java))
             }
         }
 
         return true
     }
 
-    override fun onBackPressed()
-    {
-        // if drawer is opened, close
-        // else
-        super.onBackPressed()
-    }
+//    override fun onBackPressed() {
+//
+//        if (drawer.isDrawerOpen(GravityCompat.END)) {
+//            drawer.closeDrawer(GravityCompat.END)
+//        } else {
+//            super.onBackPressed()
+//        }
+//    }
 }

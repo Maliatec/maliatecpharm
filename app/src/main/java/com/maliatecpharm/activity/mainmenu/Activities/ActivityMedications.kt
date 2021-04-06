@@ -17,7 +17,7 @@ import com.maliatecpharm.uimodel.InstructionsUIModel
 import com.maliatecpharm.uimodel.MedicationTypeUIModel
 import java.util.*
 
-class Activity_Medications : AppCompatActivity(),
+class ActivityMedications : AppCompatActivity(),
     InstructionsAdapter.InstructionsInteractor,
     MedicationTypeAdapter.MedicationTypeInteractor,
     DayNameAdapter.DayNameInteractor,
@@ -38,7 +38,7 @@ class Activity_Medications : AppCompatActivity(),
     }
 
     private val daynameAdapter by lazy {
-        DayNameAdapter(context = this@Activity_Medications, dayNameInteractor = this@Activity_Medications)
+        DayNameAdapter(context = this@ActivityMedications, dayNameInteractor = this@ActivityMedications)
     }
 
 
@@ -103,6 +103,7 @@ class Activity_Medications : AppCompatActivity(),
 
     private lateinit var pillsSpinner: Spinner
     private lateinit var medicationName: TextView
+    private lateinit var diagnosis: TextView
     private lateinit var conditionsSpinner: Spinner
     private lateinit var condition: TextView
     private lateinit var dosage: TextView
@@ -121,7 +122,6 @@ class Activity_Medications : AppCompatActivity(),
     private lateinit var onText: TextView
     private lateinit var confirmButton: Button
     private lateinit var checkBox: CheckBox
-
     private lateinit var btn1Date: Button
     private lateinit var textDate1: TextView
     private lateinit var btn2Date: Button
@@ -175,6 +175,7 @@ class Activity_Medications : AppCompatActivity(),
     {
         pillsSpinner = findViewById(R.id.spinner_pillsSpinner)
         medicationName = findViewById(R.id.textview_medicationName)
+        diagnosis = findViewById(R.id.textview_nameOfDiseaseTextview)
         conditionsSpinner = findViewById(R.id.spinner_conditionsSpinner)
         condition = findViewById(R.id.textview_nameOfCondition)
         dosage = findViewById(R.id.textview_dosage)
@@ -267,7 +268,7 @@ class Activity_Medications : AppCompatActivity(),
     private fun populateInstructionsRecycleView()
     {
         instructionsRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@Activity_Medications, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(this@ActivityMedications, RecyclerView.HORIZONTAL, false)
             adapter = instructionsAdapter
             instructionsAdapter.updateList(instructionsList)
         }
@@ -276,7 +277,7 @@ class Activity_Medications : AppCompatActivity(),
     private fun populateTypeRecycleView()
     {
         medicationTypeRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@Activity_Medications, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(this@ActivityMedications, RecyclerView.HORIZONTAL, false)
             adapter = medicationTypeAdapter
             medicationTypeAdapter.updateList(medicationTypeList)
         }
@@ -285,7 +286,7 @@ class Activity_Medications : AppCompatActivity(),
     private fun populateAlarmCountRecycleView()
     {
         alarmRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@Activity_Medications, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(this@ActivityMedications, RecyclerView.HORIZONTAL, false)
             adapter = alarmCountAdapter
         }
     }
@@ -347,7 +348,7 @@ class Activity_Medications : AppCompatActivity(),
     private fun popRecyclerView()
     {
         dayRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@Activity_Medications, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(this@ActivityMedications, RecyclerView.HORIZONTAL, false)
             adapter = daynameAdapter
             daynameAdapter.updateList(dayNameList)
         }

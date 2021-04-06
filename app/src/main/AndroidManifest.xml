@@ -14,7 +14,7 @@
         android:theme="@style/Theme.InventoryManagement">
 
         <activity
-            android:name=".activity.mainmenu.Activities.Activity_LogIn"
+            android:name=".activity.mainmenu.Activities.ActivityLogIn"
             android:label="@string/title_activity_main_menu"
             android:theme="@style/Theme.InventoryManagement.NoActionBar">
             <intent-filter>
@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".activity.mainmenu.Activities.Activity_Profile"
+            android:name=".activity.mainmenu.Activities.ActivityProfile"
             android:label="My first App"
             android:theme="@style/Theme.InventoryManagement.NoActionBar" />
 
@@ -37,12 +37,15 @@
 
 
 
-        <activity android:name=".activity.mainmenu.Activities.Activity_Medications" />
+        <activity android:name=".activity.mainmenu.Activities.ActivityMedications" />
         <activity android:name=".activity.mainmenu.Home" />
         <activity android:name=".activity.More" />
         <activity android:name=".activity.mainmenu.Doctors" />
-        <activity android:name=".activity.mainmenu.Activities.Activity_RegisterPage" />
+        <activity android:name=".activity.mainmenu.Activities.ActivityRegisterPage" />
         <activity android:name=".activity.mainmenu.AddMedications" />
+        <activity android:name=".activity.mainmenu.Activities.ActivityMedFriend" />
+        <activity android:name=".activity.mainmenu.Activities.ActivitySettings" />
+        <activity android:name=".activity.mainmenu.Activities.ActivityFeedback" />
 
 
     </application>

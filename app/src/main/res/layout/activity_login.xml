@@ -29,6 +29,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <EditText
         android:id="@+id/edittext_username"
         android:layout_width="match_parent"
@@ -62,6 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:enabled="false"
+        android:layout_marginHorizontal="16dp"
         android:text="Log In" />
 
     <Button
@@ -69,6 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginHorizontal="16dp"
         android:text="REGISTER"/>
 
 
@@ -87,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Forgot my password"
+        android:layout_marginHorizontal="16dp"
         tools:ignore="MissingConstraints"/>
 
     <ProgressBar

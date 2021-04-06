@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -10,15 +12,17 @@
         android:id="@+id/edittext_enterCholesterol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
-        android:hint="Enter Cholesterol"/>
+        android:drawableLeft="@drawable/cholesterol"
+        android:hint="Enter Cholesterol"
 
+        android:paddingVertical="16dp" />
 
     <EditText
         android:id="@+id/edittext_enterFitness"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/fitness"
         android:hint="Enter Fitness"/>
 
 
@@ -27,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/glucose"
         android:hint="Enter Glucose"/>
 
 
@@ -35,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/bloodpressure"
         android:hint="Enter Blood Pressure"/>
 
     <EditText
@@ -42,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/pulseicon"
         android:hint="Enter Pulse"/>
 
 
@@ -50,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/qualoflifeicon"
         android:hint="Physical activity, pain, fatigue, nausea"/>
 
     <LinearLayout
@@ -82,6 +90,25 @@
         android:text="Save"/>
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:id="@+id/button_addButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_baseline_add_24"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/teal_700"
+        android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
 
 

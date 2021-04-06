@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_addmedication"/>
 
     <fragment
-        android:id="@+id/doctorsFragment"
-        android:name="com.maliatecpharm.activity.mainmenu.Fragments.FragmentDoctors"
-        android:label="Doctors"
-        tools:layout="@layout/fragment_doctors" />
+        android:id="@+id/FragmentAppointment"
+        android:name="com.maliatecpharm.activity.mainmenu.Fragments.FragmentAppointment"
+        android:label="Appointments"
+        tools:layout="@layout/fragment_appointment" />
 
     <fragment
         android:id="@+id/MoreFragment"
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/vitalSignsFragment"
         android:name="com.maliatecpharm.activity.mainmenu.Fragments.FragmentVitalSigns"
-        android:label="fragment_vital_signs"
+        android:label="My vital signs"
         tools:layout="@layout/fragment_vitalsigns" />
 
 

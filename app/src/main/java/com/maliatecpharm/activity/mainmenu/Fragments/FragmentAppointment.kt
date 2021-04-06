@@ -1,8 +1,8 @@
 package com.maliatecpharm.activity.mainmenu.Fragments
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,20 +17,19 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
-class FragmentDoctors : Fragment(),
+class FragmentAppointment : Fragment(),
     TimePickerDialog.OnTimeSetListener
 {
 
     private lateinit var doctorsNameSpinner: Spinner
     private lateinit var resultDoctorName: TextView
-    private lateinit var resultSpecialityName: TextView
     private lateinit var btnTimePicker: Button
     private lateinit var appointmentDate: TextView
     private lateinit var doctorsSpecialitySpinner: Spinner
     private lateinit var mobileNbr: EditText
-    private lateinit var validationNumber:Button
+    private lateinit var validationNumber:TextView
     private lateinit var officeNbr: EditText
-    private lateinit var officeNbrValidation: Button
+    private lateinit var officeNbrValidation: TextView
     private lateinit var email: EditText
     private lateinit var location: EditText
     private lateinit var saveBTN: Button
@@ -59,40 +58,35 @@ class FragmentDoctors : Fragment(),
     var SavedHour = 0
     var SavedMinute = 0
 
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View?
     {
-        val view = inflater.inflate(R.layout.fragment_doctors, container, false)
+        val view = inflater.inflate(R.layout.fragment_appointment, container, false)
 
         doctorsNameSpinner = view.findViewById(R.id.spinner_doctorsNameSpinner)
         btnTimePicker = view.findViewById(R.id.button_timePickerBtn1)
         appointmentDate = view.findViewById(R.id.textview_appointmentTime)
         resultDoctorName =view. findViewById(R.id.textview_resultName)
-
         doctorsSpecialitySpinner = view.findViewById(R.id.spinner_specialitySpinner)
-        resultSpecialityName =view. findViewById(R.id.textview_resultSpeciality)
         mobileNbr = view.findViewById(R.id.edittext_mobilePhone)
-        validationNumber = view.findViewById(R.id.button_validationNumberBtn)
+        validationNumber = view.findViewById(R.id.textview_validationNumberTextView)
         officeNbr = view.findViewById(R.id.edittext_officePhone)
-        officeNbrValidation = view.findViewById(R.id.button_validationOfficeNumberBtn)
+        officeNbrValidation = view.findViewById(R.id.textview_validationOfficeNumberTextView)
         email = view.findViewById(R.id.edittext_email)
         location = view.findViewById(R.id.edittext_location)
         saveBTN = view.findViewById(R.id.button_saveButtonn)
 
-        officeNbr.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_phone_enabled_24, 0, 0, 0)
-        mobileNbr.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_contact_phone_24, 0, 0, 0)
-        email.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_contact_mail_24, 0, 0, 0)
-        location.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_add_location_24, 0, 0, 0)
 
         doctorsNameSpinner()
         specialitySpinner()
-        setOnBtnClicked()
+        //setOnBtnClicked()
         pickSDate()
         getAppointmentDateTimeCalendar()
-        resultNameSpinner()
-        resultSpecialitySpinner()
+        //resultNameSpinner()
+      //  resultSpecialitySpinner()
         mobileValidation()
         phoneValidation()
 
@@ -109,28 +103,28 @@ class FragmentDoctors : Fragment(),
         doctorsNameSpinner.adapter = adapter
     }
 
-    private fun resultNameSpinner()
-    {
-        doctorsNameSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-        {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-            {
-                resultDoctorName.text = DoctorsNameList.get(position)
-            }
+//    private fun resultNameSpinner()
+//    {
+//        doctorsNameSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+//        {
+//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+//            {
+//                resultDoctorName.text = DoctorsNameList.get(position)
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?)
+//            {
+//                resultDoctorName.text = "Please select a name"
+//            }
+//        }
+//    }
 
-            override fun onNothingSelected(parent: AdapterView<*>?)
-            {
-                resultDoctorName.text = "Please select a name"
-            }
-        }
-    }
-
-    private fun setOnBtnClicked()
-    {
-        saveBTN.setOnClickListener {
-            startActivity(Intent(requireContext(), FragmentMore::class.java))
-        }
-    }
+//    private fun setOnBtnClicked()
+//    {
+//        saveBTN.setOnClickListener {
+//            startActivity(Intent(requireContext(), FragmentMore::class.java))
+//        }
+//    }
 
     private fun specialitySpinner()
     {
@@ -138,22 +132,22 @@ class FragmentDoctors : Fragment(),
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         doctorsSpecialitySpinner.adapter = adapter
     }
-    private fun resultSpecialitySpinner()
-    {
-        doctorsSpecialitySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-        {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-            {
-                resultSpecialityName.text =DoctorsSpecialityList.get(position)
-            }
+//    private fun resultSpecialitySpinner()
+//    {
+//        doctorsSpecialitySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+//        {
+//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+//            {
+//                resultSpecialityName.text =DoctorsSpecialityList.get(position)
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?)
+//            {
+//                resultSpecialityName.text = "Please select a speciality"
+//            }
+//        }
 
-            override fun onNothingSelected(parent: AdapterView<*>?)
-            {
-                resultSpecialityName.text = "Please select a speciality"
-            }
-        }
-
-    }
+//    }
 
     private fun getAppointmentDateTimeCalendar()
     {
@@ -215,7 +209,7 @@ class FragmentDoctors : Fragment(),
                     validationNumber.isEnabled = true
                 }
                 else
-                    mobileNbr.error = "Invalid mobile number"
+                    validationNumber.isEnabled = false
             }
 
             override fun afterTextChanged(s: Editable?)
@@ -248,7 +242,7 @@ class FragmentDoctors : Fragment(),
                     validationNumber.isEnabled = true
                 }
                 else
-                    officeNbr.error = "Invalid mobile number"
+                    validationNumber.isEnabled = false
             }
 
             override fun afterTextChanged(s: Editable?)

@@ -7,14 +7,6 @@
     android:padding="16dp"
     >
 
-    <TextView
-        android:id="@+id/textview_emailAdress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="E-mail adress"
-        android:paddingVertical="16dp"
-    />
-
     <EditText
         android:id="@+id/edittext_enterEmail"
         android:layout_width="match_parent"

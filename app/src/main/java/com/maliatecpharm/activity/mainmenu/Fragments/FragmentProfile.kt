@@ -15,7 +15,6 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.maliatecpharm.R
 import org.w3c.dom.Text
-import java.io.File
 import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -33,9 +32,10 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
     private lateinit var lastName: EditText
     private lateinit var takePictureBtn: Button
     private lateinit var chooseImage: ImageView
-    private lateinit var Phone: EditText
-    private lateinit var validationNumber: Button
-    private lateinit var Mail: EditText
+    private lateinit var enterPhone: EditText
+    private lateinit var validationNumber: TextView
+    private lateinit var enterMail: EditText
+    private lateinit var saveMail: TextView
     private lateinit var DateOfBirth: TextView
     private lateinit var Height: EditText
     private lateinit var Weight: EditText
@@ -62,28 +62,23 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
         lastName = view.findViewById(R.id.edittext_lastName)
         takePictureBtn = view.findViewById(R.id.button_btnTakePic)
         chooseImage = view.findViewById(R.id.imageview_picture)
-        Phone = view.findViewById(R.id.edittext_phone)
-        validationNumber = view.findViewById(R.id.button_validationNumberBtn)
-        Mail = view.findViewById(R.id.edittext_email)
+        enterPhone = view.findViewById(R.id.edittext_phone)
+        validationNumber = view.findViewById(R.id.textview_validationNumberTextView)
+        enterMail = view.findViewById(R.id.edittext_email)
+        saveMail = view.findViewById(R.id.textview_valdiationEmailTextView)
         DateOfBirth = view.findViewById(R.id.textview_dateOfBirth)
         Height = view.findViewById(R.id.edittext_height)
         Weight = view.findViewById(R.id.edittext_weight)
         saveMyProfileBtn = view.findViewById(R.id.button_saveButtonn)
         textDate1 = view.findViewById(R.id.textview_dateOfBirthday)
 
-        firstName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_perm_identity_24, 0, 0, 0)
-        lastName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_perm_identity_24, 0, 0, 0)
-        Mail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_email_24, 0, 0, 0)
-        Phone.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_phone_android_24, 0, 0, 0)
-        DateOfBirth.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_date_range_24, 0, 0, 0)
-        Height.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_height_24, 0, 0, 0)
-        Weight.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_account_balance_wallet_24, 0, 0, 0)
 
         setOnBtnClicked()
         sexSpinner()
         pickSDate()
         takePicture()
         phoneValidation()
+        emailValidation()
 
         return view
     }
@@ -162,7 +157,7 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
 
     private fun phoneValidation()
     {
-        Phone.addTextChangedListener(object : TextWatcher
+        enterPhone.addTextChangedListener(object : TextWatcher
         {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
             {
@@ -170,12 +165,12 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
             {
-                if (mobileValidate(Phone.text.toString()))
+                if (mobileValidate(enterPhone.text.toString()))
                 {
                     validationNumber.isEnabled = true
                 }
                 else
-                    Phone.error = "Invalid mobile number"
+                    validationNumber.isEnabled = false
             }
 
             override fun afterTextChanged(s: Editable?)
@@ -190,5 +185,24 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
         var m: Matcher = p.matcher(text)
         return m.matches()
 
+    }
+
+    private fun emailValidation(){
+        enterMail.addTextChangedListener(object :TextWatcher
+        {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
+            {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
+            {
+                if(android.util.Patterns.EMAIL_ADDRESS.matcher(enterMail.text.toString()).matches())
+                    saveMail.isEnabled = true
+                else saveMail.isEnabled = false
+                //                username.setError("Invalid Email")
+            }
+            override fun afterTextChanged(s: Editable?)
+            {
+            }
+        })
     }
 }

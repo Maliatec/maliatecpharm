@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.Activities.Activity_Medications
+import com.maliatecpharm.activity.mainmenu.Activities.ActivityMedications
 
 
 class FragmentAddMedication : Fragment()
@@ -32,7 +32,7 @@ class FragmentAddMedication : Fragment()
     private fun setOnButtonClicked()
     {
         addButton.setOnClickListener {
-            startActivity(Intent(requireContext(), Activity_Medications::class.java))
+            startActivity(Intent(requireContext(), ActivityMedications::class.java))
         }
     }
 }

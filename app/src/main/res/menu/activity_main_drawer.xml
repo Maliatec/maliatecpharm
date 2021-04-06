@@ -6,9 +6,9 @@
         android:title="Profile" />
 
     <item
-        android:id="@+id/sync"
-        android:icon="@drawable/ic_baseline_sync_24"
-        android:title="Sync" />
+        android:id="@+id/medfriend"
+        android:icon="@drawable/ic_baseline_contacts_24"
+        android:title="Med Friend" />
 
     <item
         android:id="@+id/settings"

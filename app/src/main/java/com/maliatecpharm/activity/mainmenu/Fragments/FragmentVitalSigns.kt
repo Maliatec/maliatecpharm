@@ -12,7 +12,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
+import com.maliatecpharm.activity.mainmenu.Activities.ActivityMedications
 
 
 class FragmentVitalSigns : Fragment()
@@ -26,6 +28,7 @@ class FragmentVitalSigns : Fragment()
     private lateinit var enterQualityOfLife: EditText
     private lateinit var takePictureBtn: Button
     private lateinit var chooseImage: ImageView
+    private lateinit var addButton: FloatingActionButton
     private val REQUEST_CODE = 42
     private lateinit var saveButton: Button
 
@@ -46,16 +49,17 @@ class FragmentVitalSigns : Fragment()
         enterQualityOfLife = view.findViewById(R.id.edittext_qualityOfLife)
         takePictureBtn = view.findViewById(R.id.button_btnTakePic)
         chooseImage = view.findViewById(R.id.imageview_picture)
+        addButton = view.findViewById(R.id.button_addButton)
 
         saveButton = view.findViewById(R.id.button_saveButton)
-//
-//        enterCholesterol.setCompoundDrawablesWithIntrinsicBounds(R.drawable.cholesterol, 0, 0, 0)
-//        enterFitness.setCompoundDrawablesWithIntrinsicBounds(R.drawable.fitness, 0, 0, 0)
-//        enterGlucose.setCompoundDrawablesWithIntrinsicBounds(R.drawable.glucose, 0, 0, 0)
-//        enterBloodPressure.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bloodpressure, 0, 0, 0)
-//        enterPulse.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pulse, 0, 0, 0)
-//        enterQualityOfLife.setCompoundDrawablesWithIntrinsicBounds(R.drawable.qualoflife, 0, 0, 0)
-//
+        //
+        //        enterCholesterol.setCompoundDrawablesWithIntrinsicBounds(R.drawable.cholesterol, 0, 0, 0)
+        //        enterFitness.setCompoundDrawablesWithIntrinsicBounds(R.drawable.fitness, 0, 0, 0)
+        //        enterGlucose.setCompoundDrawablesWithIntrinsicBounds(R.drawable.glucose, 0, 0, 0)
+        //        enterBloodPressure.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bloodpressure, 0, 0, 0)
+        //        enterPulse.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pulse, 0, 0, 0)
+        //        enterQualityOfLife.setCompoundDrawablesWithIntrinsicBounds(R.drawable.qualoflife, 0, 0, 0)
+        //
 
         takePicture()
 
@@ -83,4 +87,10 @@ class FragmentVitalSigns : Fragment()
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
+
+    //   private fun setOnButtonClicked()
+    //    {
+    //        addButton.setOnClickListener {
+    //            startActivity(Intent(requireContext(), ActivityMedications::class.java))
+    //        }`
 }

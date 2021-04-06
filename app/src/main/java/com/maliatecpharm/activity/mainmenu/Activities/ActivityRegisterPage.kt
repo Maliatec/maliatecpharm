@@ -8,10 +8,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.maliatecpharm.R
 
-class Activity_RegisterPage:AppCompatActivity()
+class ActivityRegisterPage:AppCompatActivity()
 {
 
-    private lateinit var email:TextView
     private lateinit var enterMail:EditText
     private lateinit var firstName: EditText
     private lateinit var lastName: EditText
@@ -25,7 +24,7 @@ class Activity_RegisterPage:AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registerpage)
 
-        email =findViewById(R.id.textview_emailAdress)
+
         enterMail = findViewById(R.id.edittext_enterEmail)
         firstName = findViewById(R.id.edittext_firstNAME)
         lastName = findViewById(R.id.edittext_lastNAME)

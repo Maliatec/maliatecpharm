@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.Activities.Activity_Profile
+import com.maliatecpharm.activity.mainmenu.Activities.ActivityProfile
 
 
 class FragmentMore : Fragment()
@@ -35,7 +35,7 @@ class FragmentMore : Fragment()
 private fun setOnBtnClicked()
 {
     moreemptyBtn.setOnClickListener {
-        startActivity(Intent(requireContext(), Activity_Profile::class.java))
+        startActivity(Intent(requireContext(), ActivityProfile::class.java))
     }
 }
 }

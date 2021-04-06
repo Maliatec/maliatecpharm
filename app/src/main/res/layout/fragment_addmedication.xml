@@ -11,7 +11,7 @@
         android:id="@+id/button_addButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/pulse"
+        android:src="@drawable/ic_baseline_add_24"
         android:layout_margin="16dp"
         android:backgroundTint="@color/teal_700"
         android:layout_height="wrap_content"/>
