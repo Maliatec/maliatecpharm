@@ -22,12 +22,11 @@ class FragmentAppointment : Fragment(),
 {
 
     private lateinit var doctorsNameSpinner: Spinner
-    private lateinit var resultDoctorName: TextView
     private lateinit var btnTimePicker: Button
     private lateinit var appointmentDate: TextView
     private lateinit var doctorsSpecialitySpinner: Spinner
     private lateinit var mobileNbr: EditText
-    private lateinit var validationNumber:TextView
+    private lateinit var validationNumber: TextView
     private lateinit var officeNbr: EditText
     private lateinit var officeNbrValidation: TextView
     private lateinit var email: EditText
@@ -36,7 +35,7 @@ class FragmentAppointment : Fragment(),
 
 
     private val DoctorsNameList = arrayOf(
-         "Dr X", "Dr Y", "Dr Z", "Other"
+        "Dr X", "Dr Y", "Dr Z", "Other"
     )
 
     private val DoctorsSpecialityList = arrayOf(
@@ -69,7 +68,6 @@ class FragmentAppointment : Fragment(),
         doctorsNameSpinner = view.findViewById(R.id.spinner_doctorsNameSpinner)
         btnTimePicker = view.findViewById(R.id.button_timePickerBtn1)
         appointmentDate = view.findViewById(R.id.textview_appointmentTime)
-        resultDoctorName =view. findViewById(R.id.textview_resultName)
         doctorsSpecialitySpinner = view.findViewById(R.id.spinner_specialitySpinner)
         mobileNbr = view.findViewById(R.id.edittext_mobilePhone)
         validationNumber = view.findViewById(R.id.textview_validationNumberTextView)
@@ -86,12 +84,12 @@ class FragmentAppointment : Fragment(),
         pickSDate()
         getAppointmentDateTimeCalendar()
         //resultNameSpinner()
-      //  resultSpecialitySpinner()
+        // resultSpecialitySpinner()
         mobileValidation()
         phoneValidation()
 
 
-//        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_doctorsFragment_to_MoreFragment) }
+        //        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_doctorsFragment_to_MoreFragment) }
         return view
 
     }
@@ -103,28 +101,28 @@ class FragmentAppointment : Fragment(),
         doctorsNameSpinner.adapter = adapter
     }
 
-//    private fun resultNameSpinner()
-//    {
-//        doctorsNameSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-//        {
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-//            {
-//                resultDoctorName.text = DoctorsNameList.get(position)
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>?)
-//            {
-//                resultDoctorName.text = "Please select a name"
-//            }
-//        }
-//    }
+    //    private fun resultNameSpinner()
+    //    {
+    //        doctorsNameSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+    //        {
+    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+    //            {
+    //                resultDoctorName.text = DoctorsNameList.get(position)
+    //            }
+    //
+    //            override fun onNothingSelected(parent: AdapterView<*>?)
+    //            {
+    //                resultDoctorName.text = "Please select a name"
+    //            }
+    //        }
+    //    }
 
-//    private fun setOnBtnClicked()
-//    {
-//        saveBTN.setOnClickListener {
-//            startActivity(Intent(requireContext(), FragmentMore::class.java))
-//        }
-//    }
+    //    private fun setOnBtnClicked()
+    //    {
+    //        saveBTN.setOnClickListener {
+    //            startActivity(Intent(requireContext(), FragmentMore::class.java))
+    //        }
+    //    }
 
     private fun specialitySpinner()
     {
@@ -132,22 +130,22 @@ class FragmentAppointment : Fragment(),
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         doctorsSpecialitySpinner.adapter = adapter
     }
-//    private fun resultSpecialitySpinner()
-//    {
-//        doctorsSpecialitySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-//        {
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-//            {
-//                resultSpecialityName.text =DoctorsSpecialityList.get(position)
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>?)
-//            {
-//                resultSpecialityName.text = "Please select a speciality"
-//            }
-//        }
+    //    private fun resultSpecialitySpinner()
+    //    {
+    //        doctorsSpecialitySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+    //        {
+    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+    //            {
+    //                resultSpecialityName.text =DoctorsSpecialityList.get(position)
+    //            }
+    //
+    //            override fun onNothingSelected(parent: AdapterView<*>?)
+    //            {
+    //                resultSpecialityName.text = "Please select a speciality"
+    //            }
+    //        }
 
-//    }
+    //    }
 
     private fun getAppointmentDateTimeCalendar()
     {

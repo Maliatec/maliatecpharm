@@ -15,22 +15,12 @@ import android.widget.ImageView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.Activities.ActivityMedications
+import com.maliatecpharm.activity.mainmenu.Activities.ActivityVitalSigns
 
 
 class FragmentVitalSigns : Fragment()
 {
-
-    private lateinit var enterCholesterol: EditText
-    private lateinit var enterFitness: EditText
-    private lateinit var enterGlucose: EditText
-    private lateinit var enterBloodPressure: EditText
-    private lateinit var enterPulse: EditText
-    private lateinit var enterQualityOfLife: EditText
-    private lateinit var takePictureBtn: Button
-    private lateinit var chooseImage: ImageView
     private lateinit var addButton: FloatingActionButton
-    private val REQUEST_CODE = 42
-    private lateinit var saveButton: Button
 
 
     override fun onCreateView(
@@ -39,58 +29,17 @@ class FragmentVitalSigns : Fragment()
     ): View?
     {
         val view = inflater.inflate(R.layout.fragment_vitalsigns, container, false)
-
-
-        enterCholesterol = view.findViewById(R.id.edittext_enterCholesterol)
-        enterFitness = view.findViewById(R.id.edittext_enterFitness)
-        enterGlucose = view.findViewById(R.id.edittext_enterGlucose)
-        enterBloodPressure = view.findViewById(R.id.edittext_enterBloodPressure)
-        enterPulse = view.findViewById(R.id.edittext_enterPulse)
-        enterQualityOfLife = view.findViewById(R.id.edittext_qualityOfLife)
-        takePictureBtn = view.findViewById(R.id.button_btnTakePic)
-        chooseImage = view.findViewById(R.id.imageview_picture)
         addButton = view.findViewById(R.id.button_addButton)
-
-        saveButton = view.findViewById(R.id.button_saveButton)
-        //
-        //        enterCholesterol.setCompoundDrawablesWithIntrinsicBounds(R.drawable.cholesterol, 0, 0, 0)
-        //        enterFitness.setCompoundDrawablesWithIntrinsicBounds(R.drawable.fitness, 0, 0, 0)
-        //        enterGlucose.setCompoundDrawablesWithIntrinsicBounds(R.drawable.glucose, 0, 0, 0)
-        //        enterBloodPressure.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bloodpressure, 0, 0, 0)
-        //        enterPulse.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pulse, 0, 0, 0)
-        //        enterQualityOfLife.setCompoundDrawablesWithIntrinsicBounds(R.drawable.qualoflife, 0, 0, 0)
-        //
-
-        takePicture()
+        setOnButtonClicked()
 
         //        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_MoreFragment_to_HomeFragment)}
         return view
     }
 
-    private fun takePicture()
+    private fun setOnButtonClicked()
     {
-        takePictureBtn.setOnClickListener {
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(takePictureIntent, REQUEST_CODE)
+        addButton.setOnClickListener {
+            startActivity(Intent(requireContext(), ActivityVitalSigns::class.java))
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-    {
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
-        {
-            val takenImage = data?.extras?.get("data") as Bitmap
-            chooseImage.setImageBitmap(takenImage)
-        }
-        else
-        {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-
-    //   private fun setOnButtonClicked()
-    //    {
-    //        addButton.setOnClickListener {
-    //            startActivity(Intent(requireContext(), ActivityMedications::class.java))
-    //        }`
 }

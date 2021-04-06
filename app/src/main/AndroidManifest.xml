@@ -46,6 +46,7 @@
         <activity android:name=".activity.mainmenu.Activities.ActivityMedFriend" />
         <activity android:name=".activity.mainmenu.Activities.ActivitySettings" />
         <activity android:name=".activity.mainmenu.Activities.ActivityFeedback" />
+        <activity android:name=".activity.mainmenu.Activities.ActivityVitalSigns" />
 
 
     </application>

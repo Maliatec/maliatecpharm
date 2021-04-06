@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp"
-    >
+    android:padding="16dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:title="Register Page"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/Theme.InventoryManagement.PopupOverlay" />
+
 
     <EditText
         android:id="@+id/edittext_enterEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="E-mail"
+        android:drawableLeft="@drawable/ic_baseline_mail_outline_24"
         android:paddingVertical="16dp"
  />
 
@@ -20,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/ic_baseline_perm_identity_24"
         android:hint="First name"/>
 
     <EditText
@@ -27,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/ic_baseline_perm_identity_24"
         android:hint="Last name"/>
 
     <EditText
@@ -37,6 +49,7 @@
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:paddingVertical="16dp"
         android:selectAllOnFocus="true" />
 
@@ -48,6 +61,7 @@
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:paddingVertical="16dp"
         android:selectAllOnFocus="true" />
 

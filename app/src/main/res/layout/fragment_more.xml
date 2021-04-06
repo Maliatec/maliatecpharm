@@ -6,15 +6,6 @@
 
     tools:context=".activity.mainmenu.Fragments.FragmentMore">
 
-
-
-    <TextView
-        android:id="@+id/textview_more"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="EMPTY"
-        tools:ignore="MissingConstraints"></TextView>
-
     <Button
         android:id="@+id/button_moreEmptyBtn"
         android:layout_width="match_parent"

@@ -32,9 +32,7 @@ class ActivityRegisterPage:AppCompatActivity()
         confirmPassword = findViewById(R.id.edittext_confirmPassword)
         saveButton = findViewById(R.id.button_registerBUTTON)
 
-        enterMail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_contact_mail_24, 0, 0, 0)
-        firstName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_perm_identity_24, 0, 0, 0)
-        lastName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_perm_identity_24, 0, 0, 0)
+
         password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, 0, 0)
         confirmPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, 0, 0)
 

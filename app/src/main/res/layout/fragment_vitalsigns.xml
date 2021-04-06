@@ -1,102 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    android:orientation="vertical"
-    android:padding="16dp">
-
-
-    <EditText
-        android:id="@+id/edittext_enterCholesterol"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/cholesterol"
-        android:hint="Enter Cholesterol"
-
-        android:paddingVertical="16dp" />
-
-    <EditText
-        android:id="@+id/edittext_enterFitness"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
-        android:drawableLeft="@drawable/fitness"
-        android:hint="Enter Fitness"/>
-
-
-    <EditText
-        android:id="@+id/edittext_enterGlucose"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
-        android:drawableLeft="@drawable/glucose"
-        android:hint="Enter Glucose"/>
-
-
-    <EditText
-        android:id="@+id/edittext_enterBloodPressure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
-        android:drawableLeft="@drawable/bloodpressure"
-        android:hint="Enter Blood Pressure"/>
-
-    <EditText
-        android:id="@+id/edittext_enterPulse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
-        android:drawableLeft="@drawable/pulseicon"
-        android:hint="Enter Pulse"/>
-
-
-    <EditText
-        android:id="@+id/edittext_qualityOfLife"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
-        android:drawableLeft="@drawable/qualoflifeicon"
-        android:hint="Physical activity, pain, fatigue, nausea"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_btnTakePic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="16dp"
-            android:text="Take a picture" />
-
-        <ImageView
-            android:id="@+id/imageview_picture"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="64dp"
-            android:paddingVertical="16dp"
-            android:src="@mipmap/ic_launcher" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button_saveButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
-        android:text="Save"/>
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -109,7 +17,7 @@
         android:layout_height="wrap_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+
 
 
 

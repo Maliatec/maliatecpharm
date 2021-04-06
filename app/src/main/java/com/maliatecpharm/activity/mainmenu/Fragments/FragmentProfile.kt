@@ -13,7 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
+import com.maliatecpharm.activity.mainmenu.Activities.ActivityMedications
+import com.maliatecpharm.activity.mainmenu.Activities.ActivityProfile
 import org.w3c.dom.Text
 import java.util.*
 import java.util.regex.Matcher
@@ -40,6 +43,7 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
     private lateinit var Height: EditText
     private lateinit var Weight: EditText
     private lateinit var saveMyProfileBtn: Button
+    private lateinit var addButton: FloatingActionButton
     private lateinit var textDate1: TextView
     private val REQUEST_CODE = 42
 
@@ -70,6 +74,7 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
         Height = view.findViewById(R.id.edittext_height)
         Weight = view.findViewById(R.id.edittext_weight)
         saveMyProfileBtn = view.findViewById(R.id.button_saveButtonn)
+        addButton = view.findViewById(R.id.button_addButton)
         textDate1 = view.findViewById(R.id.textview_dateOfBirthday)
 
 
@@ -79,6 +84,7 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
         takePicture()
         phoneValidation()
         emailValidation()
+        setOnButtonClicked()
 
         return view
     }
@@ -205,4 +211,11 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
             }
         })
     }
+    private fun setOnButtonClicked()
+    {
+        addButton.setOnClickListener {
+            startActivity(Intent(requireContext(), ActivityProfile::class.java))
+        }
+    }
+
 }
