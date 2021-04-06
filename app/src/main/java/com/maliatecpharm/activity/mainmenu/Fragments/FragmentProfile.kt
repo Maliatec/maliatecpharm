@@ -22,7 +22,8 @@ import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
+class FragmentProfile : Fragment(),
+    DatePickerDialog.OnDateSetListener
 {
 
     private val GenderList = arrayOf(
@@ -36,9 +37,7 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
     private lateinit var takePictureBtn: Button
     private lateinit var chooseImage: ImageView
     private lateinit var enterPhone: EditText
-    private lateinit var validationNumber: TextView
     private lateinit var enterMail: EditText
-    private lateinit var saveMail: TextView
     private lateinit var DateOfBirth: TextView
     private lateinit var Height: EditText
     private lateinit var Weight: EditText
@@ -67,9 +66,7 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
         takePictureBtn = view.findViewById(R.id.button_btnTakePic)
         chooseImage = view.findViewById(R.id.imageview_picture)
         enterPhone = view.findViewById(R.id.edittext_phone)
-        validationNumber = view.findViewById(R.id.textview_validationNumberTextView)
         enterMail = view.findViewById(R.id.edittext_email)
-        saveMail = view.findViewById(R.id.textview_valdiationEmailTextView)
         DateOfBirth = view.findViewById(R.id.textview_dateOfBirth)
         Height = view.findViewById(R.id.edittext_height)
         Weight = view.findViewById(R.id.edittext_weight)
@@ -82,8 +79,6 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
         sexSpinner()
         pickSDate()
         takePicture()
-        phoneValidation()
-        emailValidation()
         setOnButtonClicked()
 
         return view
@@ -161,56 +156,6 @@ class FragmentProfile : Fragment(), DatePickerDialog.OnDateSetListener
         textDate1.text = "$sSavedDay - $sSavedMonth - $sSavedYear"
     }
 
-    private fun phoneValidation()
-    {
-        enterPhone.addTextChangedListener(object : TextWatcher
-        {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
-            {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
-            {
-                if (mobileValidate(enterPhone.text.toString()))
-                {
-                    validationNumber.isEnabled = true
-                }
-                else
-                    validationNumber.isEnabled = false
-            }
-
-            override fun afterTextChanged(s: Editable?)
-            {
-            }
-        })
-    }
-
-    private fun mobileValidate(text: String?): Boolean
-    {
-        var p: Pattern = Pattern.compile("[0-8][0-9]{7}")
-        var m: Matcher = p.matcher(text)
-        return m.matches()
-
-    }
-
-    private fun emailValidation(){
-        enterMail.addTextChangedListener(object :TextWatcher
-        {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
-            {
-            }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
-            {
-                if(android.util.Patterns.EMAIL_ADDRESS.matcher(enterMail.text.toString()).matches())
-                    saveMail.isEnabled = true
-                else saveMail.isEnabled = false
-                //                username.setError("Invalid Email")
-            }
-            override fun afterTextChanged(s: Editable?)
-            {
-            }
-        })
-    }
     private fun setOnButtonClicked()
     {
         addButton.setOnClickListener {

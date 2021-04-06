@@ -1,30 +1,25 @@
 package com.maliatecpharm.activity.mainmenu.Fragments
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.maliatecpharm.R
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 import java.util.*
-import java.util.regex.Matcher
-import java.util.regex.Pattern
-
 
 class FragmentAppointment : Fragment(),
     TimePickerDialog.OnTimeSetListener
 {
 
-    private lateinit var doctorsNameSpinner: Spinner
+    private lateinit var doctorsNameSpinner: SearchableSpinner
     private lateinit var btnTimePicker: Button
     private lateinit var appointmentDate: TextView
-    private lateinit var doctorsSpecialitySpinner: Spinner
+    private lateinit var doctorsSpecialitySpinner: SearchableSpinner
     private lateinit var mobileNbr: EditText
     private lateinit var validationNumber: TextView
     private lateinit var officeNbr: EditText
@@ -57,7 +52,7 @@ class FragmentAppointment : Fragment(),
     var SavedHour = 0
     var SavedMinute = 0
 
-    @SuppressLint("ResourceType")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -80,13 +75,9 @@ class FragmentAppointment : Fragment(),
 
         doctorsNameSpinner()
         specialitySpinner()
-        //setOnBtnClicked()
         pickSDate()
         getAppointmentDateTimeCalendar()
-        //resultNameSpinner()
-        // resultSpecialitySpinner()
-        mobileValidation()
-        phoneValidation()
+
 
 
         //        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_doctorsFragment_to_MoreFragment) }
@@ -101,28 +92,7 @@ class FragmentAppointment : Fragment(),
         doctorsNameSpinner.adapter = adapter
     }
 
-    //    private fun resultNameSpinner()
-    //    {
-    //        doctorsNameSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-    //        {
-    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-    //            {
-    //                resultDoctorName.text = DoctorsNameList.get(position)
-    //            }
-    //
-    //            override fun onNothingSelected(parent: AdapterView<*>?)
-    //            {
-    //                resultDoctorName.text = "Please select a name"
-    //            }
-    //        }
-    //    }
 
-    //    private fun setOnBtnClicked()
-    //    {
-    //        saveBTN.setOnClickListener {
-    //            startActivity(Intent(requireContext(), FragmentMore::class.java))
-    //        }
-    //    }
 
     private fun specialitySpinner()
     {
@@ -130,22 +100,7 @@ class FragmentAppointment : Fragment(),
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         doctorsSpecialitySpinner.adapter = adapter
     }
-    //    private fun resultSpecialitySpinner()
-    //    {
-    //        doctorsSpecialitySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-    //        {
-    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-    //            {
-    //                resultSpecialityName.text =DoctorsSpecialityList.get(position)
-    //            }
-    //
-    //            override fun onNothingSelected(parent: AdapterView<*>?)
-    //            {
-    //                resultSpecialityName.text = "Please select a speciality"
-    //            }
-    //        }
 
-    //    }
 
     private fun getAppointmentDateTimeCalendar()
     {
@@ -188,72 +143,8 @@ class FragmentAppointment : Fragment(),
         SavedHour = hourOfDay
         SavedMinute = minute
 
-        appointmentDate.text = "Appointment's Date: \n$SavedDay - $SavedMonth - $SavedYear \nHour: $SavedHour Minute: $SavedMinute"
+        appointmentDate.text = "Appointment's Date: \n$SavedDay - $SavedMonth - $SavedYear \nAt: $SavedHour:$SavedMinute"
 
     }
 
-    private fun mobileValidation()
-    {
-        mobileNbr.addTextChangedListener(object : TextWatcher
-        {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
-            {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
-            {
-                if (mobileValidate(mobileNbr.text.toString()))
-                {
-                    validationNumber.isEnabled = true
-                }
-                else
-                    validationNumber.isEnabled = false
-            }
-
-            override fun afterTextChanged(s: Editable?)
-            {
-            }
-        })
-    }
-
-    private fun mobileValidate(text: String?): Boolean
-    {
-        var p: Pattern = Pattern.compile("[0-8][0-9]{7}")
-        var m: Matcher = p.matcher(text)
-        return m.matches()
-
-    }
-
-
-    private fun phoneValidation()
-    {
-        officeNbr.addTextChangedListener(object : TextWatcher
-        {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
-            {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
-            {
-                if (phoneValidate(officeNbr.text.toString()))
-                {
-                    validationNumber.isEnabled = true
-                }
-                else
-                    validationNumber.isEnabled = false
-            }
-
-            override fun afterTextChanged(s: Editable?)
-            {
-            }
-        })
-    }
-
-    private fun phoneValidate(text: String?): Boolean
-    {
-        var p: Pattern = Pattern.compile("[0][0-9]{7}")
-        var m: Matcher = p.matcher(text)
-        return m.matches()
-
-    }
 }

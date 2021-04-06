@@ -6,14 +6,16 @@
     android:padding="16dp">
 
 
-    <Spinner
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        style="@android:style/Widget.Spinner.DropDown"
         android:id="@+id/spinner_specialitySpinner"
         android:layout_width="match_parent"
         android:paddingVertical="16dp"
         android:layout_height="wrap_content"/>
 
 
-    <Spinner
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        style="@android:style/Widget.Spinner.DropDown"
         android:id="@+id/spinner_doctorsNameSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,8 +65,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Doctor's mobile number"
+        android:drawablePadding="10dp"
         android:inputType="number"
-        android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+        android:drawableLeft="@drawable/mobile"
         android:paddingVertical="16dp"/>
 
        <TextView
@@ -72,6 +75,8 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:enabled="false"
+           android:drawablePadding="10dp"
+           android:visibility="gone"
            android:text="Valid" />
 
    </LinearLayout>
@@ -85,11 +90,12 @@
 
         <EditText
             android:id="@+id/edittext_officePhone"
+            android:drawablePadding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Doctor's office number"
             android:inputType="number"
-            android:drawableLeft="@drawable/ic_baseline_phone_enabled_24"
+            android:drawableLeft="@drawable/officenum"
             android:paddingVertical="16dp"/>
 
         <TextView
@@ -97,6 +103,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="false"
+            android:drawablePadding="10dp"
+            android:visibility="gone"
             android:text="Valid" />
 
     </LinearLayout>
@@ -107,7 +115,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Doctor's e-mail"
-        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/email"
         android:paddingVertical="16dp"/>
 
     <EditText
@@ -116,7 +125,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Clinic location"
-        android:drawableLeft="@drawable/ic_baseline_add_location_24"
+        android:drawableLeft="@drawable/location"
+        android:drawablePadding="10dp"
         android:paddingVertical="16dp"/>
 
     <Button

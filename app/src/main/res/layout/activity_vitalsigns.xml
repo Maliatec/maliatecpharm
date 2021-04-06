@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -11,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/cholesterol"
+        android:drawablePadding="10dp"
         android:hint="Enter Cholesterol"/>
 
 
@@ -19,6 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/fitness"
+        android:drawablePadding="10dp"
         android:hint="Enter Fitness"/>
 
 
@@ -27,6 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/glucose"
+        android:drawablePadding="10dp"
         android:hint="Enter Glucose"/>
 
 
@@ -35,6 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/bloodpressure"
+        android:drawablePadding="10dp"
         android:hint="Enter Blood Pressure"/>
 
 
@@ -42,7 +51,9 @@
         android:id="@+id/edittext_enterPulse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/pulseicon"
         android:hint="Enter Pulse"/>
 
 
@@ -50,7 +61,9 @@
         android:id="@+id/edittext_qualityOfLife"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
         android:paddingVertical="16dp"
+        android:drawableLeft="@drawable/qualoflifeicon"
         android:hint="Physical activity, pain, fatigue, nausea"/>
 
 
@@ -68,8 +81,9 @@
         <ImageView
             android:id="@+id/imageview_picture"
             android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="64dp"
+            android:paddingVertical="8dp"
             android:src="@mipmap/ic_launcher_round" />
     </LinearLayout>
 

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="First Name"
+        android:drawablePadding="10dp"
         android:drawableLeft="@drawable/ic_baseline_perm_identity_24"
         android:paddingVertical="16dp">
 
@@ -21,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Last Name"
+        android:drawablePadding="10dp"
         android:drawableLeft="@drawable/ic_baseline_perm_identity_24"
         android:paddingVertical="16dp" />
 
@@ -34,6 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="16dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/gender"
             android:text="Choose your gender" />
 
         <Spinner
@@ -42,54 +46,26 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
         <EditText
             android:id="@+id/edittext_phoneEmergencyContact"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
             android:hint="Phone number"
             android:inputType="number"
-            android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+            android:drawableLeft="@drawable/mobile"
             android:paddingVertical="16dp" />
-
-        <TextView
-            android:id="@+id/textview_validationNumberTextViewEmergencyContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="Valid" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
     <EditText
         android:id="@+id/edittext_emailEmergencyContact"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:padding="16dp"
-        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/email"
         android:paddingVertical="16dp" />
 
 
-        <TextView
-            android:id="@+id/textview_valdiationEmergencyContactEmailTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="valid"
-            android:enabled="false"
-
-            />
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/button_saveButtonEmergencyContact"

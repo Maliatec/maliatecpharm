@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     package="com.maliatecpharm">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,6 +12,7 @@
         android:label="My First App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        tools:replace = "android:label"
         android:theme="@style/Theme.InventoryManagement">
 
         <activity
@@ -38,11 +40,9 @@
 
 
         <activity android:name=".activity.mainmenu.Activities.ActivityMedications" />
-        <activity android:name=".activity.mainmenu.Home" />
-        <activity android:name=".activity.More" />
-        <activity android:name=".activity.mainmenu.Doctors" />
+
         <activity android:name=".activity.mainmenu.Activities.ActivityRegisterPage" />
-        <activity android:name=".activity.mainmenu.AddMedications" />
+
         <activity android:name=".activity.mainmenu.Activities.ActivityMedFriend" />
         <activity android:name=".activity.mainmenu.Activities.ActivitySettings" />
         <activity android:name=".activity.mainmenu.Activities.ActivityFeedback" />

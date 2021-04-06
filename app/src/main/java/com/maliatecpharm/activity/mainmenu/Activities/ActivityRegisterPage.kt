@@ -33,9 +33,6 @@ class ActivityRegisterPage:AppCompatActivity()
         saveButton = findViewById(R.id.button_registerBUTTON)
 
 
-        password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, 0, 0)
-        confirmPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, 0, 0)
-
 
         setOnButtonClicked()
 

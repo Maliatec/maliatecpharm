@@ -14,7 +14,7 @@ import com.maliatecpharm.activity.mainmenu.Activities.ActivityProfile
 
 class FragmentMore : Fragment()
 {
-    private lateinit var moretv: TextView
+
     private lateinit var moreemptyBtn: Button
 
     override fun onCreateView(
@@ -22,20 +22,21 @@ class FragmentMore : Fragment()
         savedInstanceState: Bundle?,
     ): View?
     {
-        val view= inflater.inflate (R.layout.fragment_more, container, false)
-        moretv = view.findViewById(R.id.textview_more)
+        val view = inflater.inflate(R.layout.fragment_more, container, false)
+
         moreemptyBtn = view.findViewById(R.id.button_moreEmptyBtn)
 
         setOnBtnClicked()
 
 
-//        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_MoreFragment_to_HomeFragment)}
+        //        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_MoreFragment_to_HomeFragment)}
         return view
-}
-private fun setOnBtnClicked()
-{
-    moreemptyBtn.setOnClickListener {
-        startActivity(Intent(requireContext(), ActivityProfile::class.java))
     }
-}
+
+    private fun setOnBtnClicked()
+    {
+        moreemptyBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), ActivityProfile::class.java))
+        }
+    }
 }

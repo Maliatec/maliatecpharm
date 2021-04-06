@@ -48,6 +48,7 @@ class MainMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()
+
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
