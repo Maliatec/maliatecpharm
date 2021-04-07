@@ -127,7 +127,9 @@ class ActivityMedications : AppCompatActivity(),
     private lateinit var btn2Date: Button
     private lateinit var textDate2: TextView
     private lateinit var medicinesSpinner: Spinner
-    private lateinit var medicineName: TextView
+    private lateinit var medicineName: EditText
+    val context = this
+    private lateinit var addBtn: Button
 
 
     var sHour = 0
@@ -150,13 +152,10 @@ class ActivityMedications : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_medications)
 
-
-
         setupViews()
         setupTextViews()
         medSpinner()
         conditionSpinner()
-        condition()
         populateInstructionsRecycleView()
         populateTypeRecycleView()
         populateAlarmCountRecycleView()
@@ -167,6 +166,8 @@ class ActivityMedications : AppCompatActivity(),
         pickSDate()
         pickFDate()
         medicineNameSpinner()
+        onAddBtnClickListener()
+
 
 
     }
@@ -175,6 +176,7 @@ class ActivityMedications : AppCompatActivity(),
     {
         pillsSpinner = findViewById(R.id.spinner_pillsSpinner)
         medicationName = findViewById(R.id.textview_medicationName)
+        addBtn = findViewById(R.id.button_addBtn)
         diagnosis = findViewById(R.id.textview_nameOfDiseaseTextview)
         conditionsSpinner = findViewById(R.id.spinner_conditionsSpinner)
         condition = findViewById(R.id.textview_nameOfCondition)
@@ -199,7 +201,7 @@ class ActivityMedications : AppCompatActivity(),
         btn2Date = findViewById(R.id.button_timePickerbtn2)
         textDate2 = findViewById(R.id.textview_textTime2)
         medicinesSpinner = findViewById(R.id.spinner_medicinesList)
-        medicineName = findViewById(R.id.textview_nameOfMedicine)
+        medicineName = findViewById(R.id.edittext_nameOfMedicine)
 
 
     }
@@ -212,6 +214,21 @@ class ActivityMedications : AppCompatActivity(),
         medicationTypeTv.text = getString(R.string.medication_type)
         medicationName.text = getString(R.string.medication_title)
         reminderSwitch.text = getString(R.string.switch_reminder_text)
+    }
+
+    private fun onAddBtnClickListener()
+    {
+        addBtn.setOnClickListener {
+
+            if (medicineName.text.toString().isNotEmpty())
+            {
+                var user = Medication(medicineName.text.toString())
+                var db = DataBaseHandler(context)
+                db.insertDATA(user)
+
+            }
+            else Toast.makeText(context, "please fill all data", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
@@ -227,14 +244,11 @@ class ActivityMedications : AppCompatActivity(),
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, medicinesList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         medicinesSpinner.adapter = adapter
-
-        medicinesSpinner.onItemSelectedListener = this
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
     {
-        val text: String = parent?.getItemAtPosition(position).toString()
-        medicineName.text = text
+
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?)
@@ -247,22 +261,6 @@ class ActivityMedications : AppCompatActivity(),
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, conditionsList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         conditionsSpinner.adapter = adapter
-    }
-
-    private fun condition()
-    {
-        conditionsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-        {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-            {
-                condition.text = conditionsList.get(position)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?)
-            {
-                condition.text = "Please select a condition"
-            }
-        }
     }
 
     private fun populateInstructionsRecycleView()

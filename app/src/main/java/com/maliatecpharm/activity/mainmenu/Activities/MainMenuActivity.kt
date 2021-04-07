@@ -75,6 +75,10 @@ class MainMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 startActivity(Intent(this, ActivityMedFriend::class.java))
             }
 
+//            R.id.listOfMedecines -> {
+//                startActivity(Intent(this, ActivityListOfMedecines::class.java))
+//            }
+
             R.id.settings -> {
                 startActivity(Intent(this, ActivitySettings::class.java))
             }

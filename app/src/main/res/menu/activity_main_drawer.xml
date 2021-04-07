@@ -11,6 +11,11 @@
         android:title="Med Friend" />
 
     <item
+        android:id="@+id/listOfMedecines"
+        android:icon="@drawable/medecines"
+        android:title="List of medecines" />
+
+    <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="Settings" />
