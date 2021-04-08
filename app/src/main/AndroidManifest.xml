@@ -47,6 +47,8 @@
         <activity android:name=".activity.mainmenu.activities.ActivitySettings" />
         <activity android:name=".activity.mainmenu.activities.ActivityFeedback" />
         <activity android:name=".activity.mainmenu.activities.ActivityVitalSigns" />
+        <activity android:name=".activity.mainmenu.database.RecyclerViewProfiles" />
+        <activity android:name=".activity.mainmenu.activities.ActivityProfiles" />
 
 
     </application>

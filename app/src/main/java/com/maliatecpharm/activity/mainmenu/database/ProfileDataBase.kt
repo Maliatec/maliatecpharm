@@ -5,41 +5,91 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
-
-const val DB_NAME = "ProfilesDB"
-const val Table_NAME = "Profiles"
-const val Column_NAME = "name"
-const val Column_ID = "id"
+import java.lang.Exception
 
 
-class ProfileDataBase(var context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 1)
+class ProfileDataBase
+    (
+    context: Context,
+    name: String?,
+    factory: SQLiteDatabase.CursorFactory?,
+    version: Int
+) :
+    SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION)
 {
+    companion object
+    {
+        private val DATABASE_NAME = "MyData.db"
+        private val DATABASE_VERSION = 1
 
-    override fun onCreate(profileDB: SQLiteDatabase?) {
-        val createTable = "CREATE TABLE " + Table_NAME + " ( " + Column_ID +
-                " INTEGER PRIMARY KEY AUTOINCREMENT, " + Column_NAME + " NVARCHAR(256) "+")"
+        val PROFILES_TABLE_NAME = "Profiles"
+        val COLUMN_PROFILEID = "customerid"
+        val COLUMN_PROFILEFIRSTNAME = "customername"
+        val COLUMN_PROFILELASTNAME = "maxcredit"
+    }
 
-        profileDB?.execSQL(createTable)
+    override fun onCreate(db: SQLiteDatabase?)
+    {
+        val createProfilesTable = ("CREATE TABLE $PROFILES_TABLE_NAME (" +
+                "$COLUMN_PROFILEID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " $COLUMN_PROFILEFIRSTNAME TEXT," +
+                " $COLUMN_PROFILELASTNAME TEXT)")
+
+        db?.execSQL(createProfilesTable)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int)
     {
     }
 
-    fun insertData(profile: Profile)
+    fun getProfiles(mCtx: Context): ArrayList<Profiles>
     {
-        val db = this.writableDatabase
-        var cv = ContentValues()
-        cv.put(Column_NAME, profile.name)
+        val qry = "Select * From $PROFILES_TABLE_NAME"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(qry, null)
+        val profiles = ArrayList<Profiles>()
 
-
-        var result = db.insert(Table_NAME , null,cv)
-
-        if (result == (-1).toLong())
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-
+        if (cursor.count == 0)
+            Toast.makeText(mCtx, "No Profiles Found", Toast.LENGTH_SHORT).show()
         else
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+        {
+            while (cursor.moveToNext())
+            {
+                val profile = Profiles()
+                profile.ID = cursor.getInt(cursor.getColumnIndex(COLUMN_PROFILEID))
+                profile.firstName = cursor.getString(cursor.getColumnIndex(COLUMN_PROFILEFIRSTNAME))
+                profile.lastName = cursor.getString(cursor.getColumnIndex(COLUMN_PROFILEFIRSTNAME))
 
+                profiles.add(profile)
+            }
+            Toast.makeText(mCtx, "${cursor.count} Records Found", Toast.LENGTH_SHORT)
+                .show()
+
+        }
+        cursor.close()
+        db.close()
+        return profiles
     }
+
+    fun addProfile(mCtx: Context, customer: Profiles)
+    {
+        val values = ContentValues()
+
+        values.put(COLUMN_PROFILEFIRSTNAME, customer.firstName)
+        values.put(COLUMN_PROFILELASTNAME, customer.lastName)
+
+        val db = this.writableDatabase
+
+        try
+        {
+            db.insert(PROFILES_TABLE_NAME, null, values)
+            Toast.makeText(mCtx, "Profile Added", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception)
+        {
+            Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
+        }
+        db.close()
+    }
+
 }
