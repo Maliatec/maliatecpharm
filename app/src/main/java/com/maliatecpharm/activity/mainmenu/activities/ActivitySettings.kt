@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Activities
+package com.maliatecpharm.activity.mainmenu.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

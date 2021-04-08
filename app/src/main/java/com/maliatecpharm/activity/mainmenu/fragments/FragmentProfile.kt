@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Fragments
+package com.maliatecpharm.activity.mainmenu.fragments
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -6,8 +6,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +13,9 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.Activities.ActivityMedications
-import com.maliatecpharm.activity.mainmenu.Activities.ActivityProfile
-import org.w3c.dom.Text
+import com.maliatecpharm.activity.mainmenu.database.Profile
+import com.maliatecpharm.activity.mainmenu.database.ProfileDataBase
 import java.util.*
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 class FragmentProfile : Fragment(),
     DatePickerDialog.OnDateSetListener
@@ -44,6 +39,7 @@ class FragmentProfile : Fragment(),
     private lateinit var saveMyProfileBtn: Button
     private lateinit var addButton: FloatingActionButton
     private lateinit var textDate1: TextView
+    val context = this
     private val REQUEST_CODE = 42
 
     var sDay = 0
@@ -159,7 +155,19 @@ class FragmentProfile : Fragment(),
     private fun setOnButtonClicked()
     {
         addButton.setOnClickListener {
-            startActivity(Intent(requireContext(), ActivityProfile::class.java))
+            if (firstName.text.toString().isNotEmpty())
+            {
+                var User = Profile(firstName.text.toString())
+                var DB = ProfileDataBase(requireContext())
+                DB.insertData(User)
+            }
+
+//            else
+//            {
+//                Toast.makeText(context, "please fill all data", Toast.LENGTH_SHORT).show()
+//            }
+
+//            startActivity(Intent(requireContext(), ActivityProfile::class.java))
         }
     }
 

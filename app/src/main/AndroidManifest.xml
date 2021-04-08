@@ -16,7 +16,7 @@
         android:theme="@style/Theme.InventoryManagement">
 
         <activity
-            android:name=".activity.mainmenu.Activities.ActivityLogIn"
+            android:name=".activity.mainmenu.activities.ActivityLogIn"
             android:label="@string/title_activity_main_menu"
             android:theme="@style/Theme.InventoryManagement.NoActionBar">
             <intent-filter>
@@ -27,26 +27,26 @@
         </activity>
 
         <activity
-            android:name=".activity.mainmenu.Activities.ActivityProfile"
+            android:name=".activity.mainmenu.activities.ActivityProfile"
             android:label="My first App"
             android:theme="@style/Theme.InventoryManagement.NoActionBar" />
 
         <activity
-            android:name=".activity.mainmenu.Activities.MainMenuActivity"
+            android:name=".activity.mainmenu.activities.MainMenuActivity"
             android:label="@string/title_activity_main_menu"
             android:theme="@style/Theme.InventoryManagement.NoActionBar">
         </activity>
 
 
 
-        <activity android:name=".activity.mainmenu.Activities.ActivityMedications" />
+        <activity android:name=".activity.mainmenu.activities.ActivityMedications" />
 
-        <activity android:name=".activity.mainmenu.Activities.ActivityRegisterPage" />
+        <activity android:name=".activity.mainmenu.activities.ActivityRegisterPage" />
 
-        <activity android:name=".activity.mainmenu.Activities.ActivityMedFriend" />
-        <activity android:name=".activity.mainmenu.Activities.ActivitySettings" />
-        <activity android:name=".activity.mainmenu.Activities.ActivityFeedback" />
-        <activity android:name=".activity.mainmenu.Activities.ActivityVitalSigns" />
+        <activity android:name=".activity.mainmenu.activities.ActivityMedFriend" />
+        <activity android:name=".activity.mainmenu.activities.ActivitySettings" />
+        <activity android:name=".activity.mainmenu.activities.ActivityFeedback" />
+        <activity android:name=".activity.mainmenu.activities.ActivityVitalSigns" />
 
 
     </application>

@@ -1,21 +1,14 @@
-package com.maliatecpharm.activity.mainmenu.Fragments
+package com.maliatecpharm.activity.mainmenu.fragments
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.Activities.ActivityMedications
-import com.maliatecpharm.activity.mainmenu.Activities.ActivityVitalSigns
+import com.maliatecpharm.activity.mainmenu.activities.ActivityVitalSigns
 
 
 class FragmentVitalSigns : Fragment()

@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Activities
+package com.maliatecpharm.activity.mainmenu.activities
 
 import android.app.Activity
 import android.content.Intent

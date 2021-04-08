@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Fragments
+package com.maliatecpharm.activity.mainmenu.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog

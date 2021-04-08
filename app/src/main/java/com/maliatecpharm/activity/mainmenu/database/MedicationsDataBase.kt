@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Activities
+package com.maliatecpharm.activity.mainmenu.database
 
 import android.content.ContentValues
 import android.content.Context
@@ -12,7 +12,7 @@ const val COL_NAME = "name"
 const val COL_ID = "id"
 
 
-    class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1)
+    class MedicationsDataBase(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1)
     {
 
         override fun onCreate(db: SQLiteDatabase?) {
@@ -26,7 +26,7 @@ const val COL_ID = "id"
         {
         }
 
-        fun insertDATA(medication:Medication)
+        fun insertDATA(medication: Medication)
         {
             val db = this.writableDatabase
             var cv = ContentValues()

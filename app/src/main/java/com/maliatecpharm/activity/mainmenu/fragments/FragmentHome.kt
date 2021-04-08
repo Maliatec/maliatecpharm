@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Fragments
+package com.maliatecpharm.activity.mainmenu.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

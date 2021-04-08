@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Fragments
+package com.maliatecpharm.activity.mainmenu.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.Activities.ActivityFeedback
+import com.maliatecpharm.activity.mainmenu.activities.ActivityFeedback
 
 
 class FragmentSettings: Fragment()

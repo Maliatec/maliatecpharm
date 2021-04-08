@@ -1,16 +1,12 @@
-package com.maliatecpharm.activity.mainmenu.Fragments
+package com.maliatecpharm.activity.mainmenu.fragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.maliatecpharm.R
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 class FragmentMedFriend : Fragment()
 {

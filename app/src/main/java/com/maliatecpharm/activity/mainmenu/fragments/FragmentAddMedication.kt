@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Fragments
+package com.maliatecpharm.activity.mainmenu.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.Activities.ActivityMedications
+import com.maliatecpharm.activity.mainmenu.activities.ActivityMedications
 
 
 class FragmentAddMedication : Fragment()

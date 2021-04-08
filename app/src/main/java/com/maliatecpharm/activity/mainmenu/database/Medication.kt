@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Activities
+package com.maliatecpharm.activity.mainmenu.database
 
 class Medication
 {

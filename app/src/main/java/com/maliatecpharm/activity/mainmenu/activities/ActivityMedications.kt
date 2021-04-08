@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.Activities
+package com.maliatecpharm.activity.mainmenu.activities
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.maliatecpharm.R
+import com.maliatecpharm.activity.mainmenu.database.Medication
+import com.maliatecpharm.activity.mainmenu.database.MedicationsDataBase
 import com.maliatecpharm.adapter.*
 import com.maliatecpharm.uimodel.AlarmCount
 import com.maliatecpharm.uimodel.InstructionsUIModel
@@ -223,7 +225,7 @@ class ActivityMedications : AppCompatActivity(),
             if (medicineName.text.toString().isNotEmpty())
             {
                 var user = Medication(medicineName.text.toString())
-                var db = DataBaseHandler(context)
+                var db = MedicationsDataBase(context)
                 db.insertDATA(user)
 
             }
