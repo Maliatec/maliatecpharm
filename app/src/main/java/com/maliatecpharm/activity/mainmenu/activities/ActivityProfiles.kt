@@ -10,7 +10,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.database.Profiles
+import com.maliatecpharm.uimodel.Profiles
 import com.maliatecpharm.activity.mainmenu.fragments.FragmentProfile
 import java.util.*
 
@@ -20,7 +20,6 @@ class ActivityProfiles : AppCompatActivity(),
     private val GenderList = arrayOf(
         "Male", "Female"
     )
-
     private lateinit var gender: TextView
     private lateinit var genderSpinner: Spinner
     private lateinit var firstName: EditText
@@ -42,17 +41,14 @@ class ActivityProfiles : AppCompatActivity(),
     var sDay = 0
     var sMonth = 0
     var sYear = 0
-
     var sSavedDay = 0
     var sSavedMonth = 0
     var sSavedYear = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profiles)
-
 
         gender = findViewById(R.id.textview_gender)
         genderSpinner = findViewById(R.id.spinner_genderSpinner)
@@ -84,7 +80,8 @@ class ActivityProfiles : AppCompatActivity(),
     private fun onSaveClickListener()
     {
         saveMyProfileBtn.setOnClickListener {
-            if (firstName.text.isEmpty()) {
+            if (firstName.text.isEmpty())
+            {
                 Toast.makeText(this, "Enter customer Name", Toast.LENGTH_SHORT).show()
                 firstName.requestFocus()
             }
@@ -95,19 +92,20 @@ class ActivityProfiles : AppCompatActivity(),
                 profiles.lastName = lastName.text.toString()
 
                 if (lastName.text.isEmpty())
-                    profiles.lastName = "" else profiles.lastName = lastName.text.toString()
-
+                    profiles.lastName = ""
+                else profiles.lastName = lastName.text.toString()
                 FragmentProfile.dbHandler.addProfile(this, profiles)
-                this.finish()
 
+                this.finish()
             }
         }
     }
-    private fun clearEdits() {
+
+    private fun clearEdits()
+    {
         firstName.text.clear()
         lastName.text.clear()
     }
-
 
     private fun sexSpinner()
     {
@@ -137,14 +135,12 @@ class ActivityProfiles : AppCompatActivity(),
         }
     }
 
-
     private fun getSDateCalendar()
     {
         val cal = Calendar.getInstance()
         sDay = cal.get(Calendar.DAY_OF_MONTH)
         sMonth = cal.get(Calendar.MONTH)
         sYear = cal.get(Calendar.YEAR)
-
     }
 
     private fun pickSDate()
@@ -160,10 +156,7 @@ class ActivityProfiles : AppCompatActivity(),
         sSavedDay = dayOfMonth
         sSavedMonth = month
         sSavedYear = year
-
         getSDateCalendar()
-
-        //        TimePickerDialog(this, this, sHour, sMinute, true).show()
         textDate1.text = "$sSavedDay - $sSavedMonth - $sSavedYear"
     }
 

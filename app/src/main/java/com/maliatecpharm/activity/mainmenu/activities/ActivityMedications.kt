@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.database.Medication
-import com.maliatecpharm.activity.mainmenu.database.MedicationsDataBase
 import com.maliatecpharm.adapter.*
 import com.maliatecpharm.uimodel.AlarmCount
 import com.maliatecpharm.uimodel.InstructionsUIModel
@@ -168,7 +166,6 @@ class ActivityMedications : AppCompatActivity(),
         pickSDate()
         pickFDate()
         medicineNameSpinner()
-        onAddBtnClickListener()
 
 
 
@@ -209,6 +206,7 @@ class ActivityMedications : AppCompatActivity(),
     }
 
 
+
     private fun setupTextViews()
     {
         dosage.text = getString(R.string.dosage)
@@ -218,21 +216,6 @@ class ActivityMedications : AppCompatActivity(),
         reminderSwitch.text = getString(R.string.switch_reminder_text)
     }
 
-    private fun onAddBtnClickListener()
-    {
-        addBtn.setOnClickListener {
-
-            if (medicineName.text.toString().isNotEmpty())
-            {
-                var user = Medication(medicineName.text.toString())
-                var db = MedicationsDataBase(context)
-                db.insertDATA(user)
-
-            }
-            else Toast.makeText(context, "please fill all data", Toast.LENGTH_SHORT).show()
-        }
-
-    }
 
     private fun medSpinner()
     {

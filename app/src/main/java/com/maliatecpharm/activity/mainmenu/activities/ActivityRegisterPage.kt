@@ -41,7 +41,7 @@ class ActivityRegisterPage:AppCompatActivity()
     private fun setOnButtonClicked()
     {
         saveButton.setOnClickListener {
-            startActivity(Intent(this, MainMenuActivity::class.java))
+            startActivity(Intent(this, ActivityMainMenu::class.java))
         }
     }
 

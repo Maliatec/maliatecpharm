@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.maliatecpharm.R
 
-class MainMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
+class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
     private lateinit var toolbar: Toolbar
     private lateinit var drawer: DrawerLayout
@@ -75,9 +75,9 @@ class MainMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 startActivity(Intent(this, ActivityMedFriend::class.java))
             }
 
-//            R.id.listOfMedecines -> {
-//                startActivity(Intent(this, ActivityListOfMedecines::class.java))
-//            }
+            R.id.listOfMedecines -> {
+                startActivity(Intent(this, ActivityMedecinesNames::class.java))
+            }
 
             R.id.settings -> {
                 startActivity(Intent(this, ActivitySettings::class.java))

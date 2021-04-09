@@ -45,7 +45,7 @@ class ActivityLogIn:AppCompatActivity()
     private fun setOnButtonClicked()
     {
         logInButton.setOnClickListener {
-            startActivity(Intent(this, MainMenuActivity::class.java))
+            startActivity(Intent(this, ActivityMainMenu::class.java))
         }
     }
 

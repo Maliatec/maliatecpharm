@@ -1,15 +1,15 @@
-package com.maliatecpharm.activity.mainmenu.database
+package com.maliatecpharm.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
+import com.maliatecpharm.uimodel.Profiles
 
-class ProfilesAdapter(mCtx: Context, val profilesList: ArrayList<Profiles>) :
+class ProfilesAdapter(mCtx: Context, private val profilesList: ArrayList<Profiles>) :
     RecyclerView.Adapter<ProfilesAdapter.ViewHolder>()
 {
     val mCtx: Context = mCtx
@@ -18,19 +18,22 @@ class ProfilesAdapter(mCtx: Context, val profilesList: ArrayList<Profiles>) :
     {
         val txtFirstName: TextView = itemView.findViewById(R.id.firstName)
         val txtLastName: TextView = itemView.findViewById(R.id.lastName)
-        val updateBtn: Button = itemView.findViewById(R.id.btnUpdate)
-        val deleteBtn: Button = itemView.findViewById(R.id.btnDelete)
-
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfilesAdapter.ViewHolder
+    fun delete (position: Int)
+    {
+        profilesList.removeAt(position)
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
     {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.profileslayoutas, parent, false)
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: ProfilesAdapter.ViewHolder, position: Int)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
         val profiles: Profiles = profilesList[position]
 
@@ -47,7 +50,6 @@ class ProfilesAdapter(mCtx: Context, val profilesList: ArrayList<Profiles>) :
     {
         profilesList.addAll(lst)
     }
-
 
 }
 

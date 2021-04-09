@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.database
+package com.maliatecpharm.uimodel
 
 import android.widget.*
 

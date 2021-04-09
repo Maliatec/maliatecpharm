@@ -1,15 +1,15 @@
 package com.maliatecpharm.activity.mainmenu.database
 
-import android.content.ClipData.Item
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.EditText
 import android.widget.Toast
-import com.maliatecpharm.uimodel.Profiles
+import com.maliatecpharm.uimodel.Medication
 
 
-class ProfileDataBase
+class MedecineDataBase
     (
     context: Context,
     name: String?,
@@ -23,18 +23,17 @@ class ProfileDataBase
         private val DATABASE_NAME = "MyData.db"
         private val DATABASE_VERSION = 1
 
-        val PROFILES_TABLE_NAME = "Profiles"
-        val COLUMN_PROFILEID = "customerid"
-        val COLUMN_PROFILEFIRSTNAME = "customername"
-        val COLUMN_PROFILELASTNAME = "maxcredit"
+        val MEDECINE_TABLE_NAME = "Profiles"
+        val COLUMN_MEDECINEID = "customerid"
+        val COLUMN_MEDECINENAME = "customername"
+
     }
 
     override fun onCreate(db: SQLiteDatabase?)
     {
-        val createProfilesTable = ("CREATE TABLE $PROFILES_TABLE_NAME (" +
-                "$COLUMN_PROFILEID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " $COLUMN_PROFILEFIRSTNAME TEXT," +
-                " $COLUMN_PROFILELASTNAME TEXT)")
+        val createProfilesTable = ("CREATE TABLE $MEDECINE_TABLE_NAME (" +
+                "$COLUMN_MEDECINEID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " $COLUMN_MEDECINENAME TEXT)")
 
         db?.execSQL(createProfilesTable)
     }
@@ -43,12 +42,12 @@ class ProfileDataBase
     {
     }
 
-    fun getProfiles(mCtx: Context): ArrayList<Profiles>
+    fun getMedications(mCtx: Context): ArrayList<Medication>
     {
-        val qry = "Select * From $PROFILES_TABLE_NAME"
+        val qry = "Select * From $MEDECINE_TABLE_NAME"
         val db = this.readableDatabase
         val cursor = db.rawQuery(qry, null)
-        val profiles = ArrayList<Profiles>()
+        val medications = ArrayList<Medication>()
 
         if (cursor.count == 0)
             Toast.makeText(mCtx, "No Profiles Found", Toast.LENGTH_SHORT).show()
@@ -56,12 +55,12 @@ class ProfileDataBase
         {
             while (cursor.moveToNext())
             {
-                val profile = Profiles()
-                profile.ID = cursor.getInt(cursor.getColumnIndex(COLUMN_PROFILEID))
-                profile.firstName = cursor.getString(cursor.getColumnIndex(COLUMN_PROFILEFIRSTNAME))
-                profile.lastName = cursor.getString(cursor.getColumnIndex(COLUMN_PROFILEFIRSTNAME))
+                val medication =Medication()
+                medication.id= cursor.getInt(cursor.getColumnIndex(COLUMN_MEDECINEID))
+                medication.name = cursor.getString(cursor.getColumnIndex(COLUMN_MEDECINENAME))
 
-                profiles.add(profile)
+
+              medications.add(medication)
             }
             Toast.makeText(mCtx, "${cursor.count} Records Found", Toast.LENGTH_SHORT)
                 .show()
@@ -69,18 +68,18 @@ class ProfileDataBase
         cursor.close()
         db.close()
 
-        return profiles
+        return medications
     }
 
-    fun addProfile(mCtx: Context, profile: Profiles)
+    fun addMedication(mCtx: Context, medication: Medication)
     {
         val values = ContentValues()
-        values.put(COLUMN_PROFILEFIRSTNAME, profile.firstName)
-        values.put(COLUMN_PROFILELASTNAME, profile.lastName)
+        values.put(COLUMN_MEDECINENAME, medication.name)
+
         val db = this.writableDatabase
         try
         {
-            db.insert(PROFILES_TABLE_NAME, null, values)
+            db.insert(MEDECINE_TABLE_NAME, null, values)
             Toast.makeText(mCtx, "Profile Added", Toast.LENGTH_SHORT).show()
         } catch (e: Exception)
         {
