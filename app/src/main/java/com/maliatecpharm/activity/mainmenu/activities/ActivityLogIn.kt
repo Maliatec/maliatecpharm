@@ -80,6 +80,7 @@ class ActivityLogIn:AppCompatActivity()
                     preferences.edit().putString(loggedInKey, user.email).commit()
                     withContext(Dispatchers.Main){
                         startActivity(Intent(this@ActivityLogIn, ActivityMainMenu::class.java))
+                    finish()
                     }
                 }
             }

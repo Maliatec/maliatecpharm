@@ -43,6 +43,7 @@ class SplashActivity : AppCompatActivity()
                 {
                     startActivity(Intent(this@SplashActivity, ActivityMainMenu::class.java))
                 }
+                finish()
             }
         }
     }
