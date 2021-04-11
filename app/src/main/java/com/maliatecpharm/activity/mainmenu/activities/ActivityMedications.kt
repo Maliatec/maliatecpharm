@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.maliatecpharm.R
-import com.maliatecpharm.adapter.*
-import com.maliatecpharm.uimodel.AlarmCount
-import com.maliatecpharm.uimodel.InstructionsUIModel
-import com.maliatecpharm.uimodel.MedicationTypeUIModel
+import com.maliatecpharm.activity.mainmenu.fragments.FragmentAddMedication
+import com.maliatecpharm.activity.mainmenu.adapter.*
+import com.maliatecpharm.activity.mainmenu.uimodel.*
 import java.util.*
 
 class ActivityMedications : AppCompatActivity(),
@@ -168,7 +167,6 @@ class ActivityMedications : AppCompatActivity(),
         medicineNameSpinner()
 
 
-
     }
 
     private fun setupViews()
@@ -202,9 +200,7 @@ class ActivityMedications : AppCompatActivity(),
         medicinesSpinner = findViewById(R.id.spinner_medicinesList)
         medicineName = findViewById(R.id.edittext_nameOfMedicine)
 
-
     }
-
 
 
     private fun setupTextViews()
@@ -215,7 +211,6 @@ class ActivityMedications : AppCompatActivity(),
         medicationName.text = getString(R.string.medication_title)
         reminderSwitch.text = getString(R.string.switch_reminder_text)
     }
-
 
     private fun medSpinner()
     {

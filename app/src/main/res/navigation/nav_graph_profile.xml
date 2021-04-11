@@ -3,12 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentProfile">
+    app:startDestination="@id/fragmentListProfile">
 
     <fragment
-        android:id="@+id/fragmentProfile"
-        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentProfile"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/fragmentListProfile"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentListProfile"
+        android:label="Add Profile"
+        tools:layout="@layout/fragment_list_profile" >
+        <action
+            android:id="@+id/action_fragmentListProfile_to_addFragment"
+            app:destination="@id/addProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addProfileFragment"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add_profile" >
+        <action
+            android:id="@+id/action_addProfileFragment_to_fragmentListProfile"
+            app:destination="@id/fragmentListProfile"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

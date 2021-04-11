@@ -1,4 +1,4 @@
-package com.maliatecpharm.uimodel
+package com.maliatecpharm.activity.mainmenu.uimodel
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes

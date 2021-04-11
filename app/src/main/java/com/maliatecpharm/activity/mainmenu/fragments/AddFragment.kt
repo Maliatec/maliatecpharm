@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.activities
+package com.maliatecpharm.activity.mainmenu.fragments
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -6,17 +6,31 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
-import com.maliatecpharm.uimodel.Profiles
-import com.maliatecpharm.activity.mainmenu.fragments.FragmentProfile
+import com.maliatecpharm.activity.mainmenu.data.AppDataBase
+import com.maliatecpharm.activity.mainmenu.data.UserDao
+import com.maliatecpharm.activity.mainmenu.data.ProfileEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
-class ActivityProfiles : AppCompatActivity(),
+
+class AddFragment : Fragment(),
     DatePickerDialog.OnDateSetListener
 {
+    private val userDao: UserDao by lazy {
+        AppDataBase.getDataBase(requireContext()).userDao()
+    }
+
     private val GenderList = arrayOf(
         "Male", "Female"
     )
@@ -45,71 +59,73 @@ class ActivityProfiles : AppCompatActivity(),
     var sSavedMonth = 0
     var sSavedYear = 0
 
-    override fun onCreate(savedInstanceState: Bundle?)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View?
     {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profiles)
+        val view = inflater.inflate(R.layout.fragment_add_profile, container, false)
 
-        gender = findViewById(R.id.textview_gender)
-        genderSpinner = findViewById(R.id.spinner_genderSpinner)
-        firstName = findViewById(R.id.edittext_firstName)
-        lastName = findViewById(R.id.edittext_lastName)
-        takePictureBtn = findViewById(R.id.button_btnTakePic)
-        chooseImage = findViewById(R.id.imageview_picture)
-        enterPhone = findViewById(R.id.edittext_phone)
-        enterMail = findViewById(R.id.edittext_email)
-        DateOfBirth = findViewById(R.id.textview_dateOfBirth)
-        Height = findViewById(R.id.edittext_height)
-        Weight = findViewById(R.id.edittext_weight)
-        saveMyProfileBtn = findViewById(R.id.button_saveButtonn)
-        plusButton = findViewById(R.id.button_addButton)
-        textDate1 = findViewById(R.id.textview_dateOfBirthday)
-        btnCancel = findViewById(R.id.btnCancel)
+
+        gender = view.findViewById(R.id.textview_gender)
+        genderSpinner = view.findViewById(R.id.spinner_genderSpinner)
+        firstName = view.findViewById(R.id.edittext_firstName)
+        lastName = view.findViewById(R.id.edittext_lastName)
+        takePictureBtn = view.findViewById(R.id.button_btnTakePic)
+        chooseImage = view.findViewById(R.id.imageview_picture)
+        enterPhone = view.findViewById(R.id.edittext_phone)
+        enterMail = view.findViewById(R.id.edittext_email)
+        DateOfBirth = view.findViewById(R.id.textview_dateOfBirth)
+        Height = view.findViewById(R.id.edittext_height)
+        Weight = view.findViewById(R.id.edittext_weight)
+        saveMyProfileBtn = view.findViewById(R.id.button_saveButtonn)
+        plusButton = view.findViewById(R.id.button_addButton)
+        textDate1 = view.findViewById(R.id.textview_dateOfBirthday)
+        btnCancel = view.findViewById(R.id.btnCancel)
 
         sexSpinner()
-        pickSDate()
         takePicture()
+        pickSDate()
         onSaveClickListener()
+        insertDataToDataBase()
 
-        btnCancel.setOnClickListener {
-            clearEdits()
-            finish()
-        }
+        return view
     }
 
     private fun onSaveClickListener()
     {
         saveMyProfileBtn.setOnClickListener {
-            if (firstName.text.isEmpty())
-            {
-                Toast.makeText(this, "Enter customer Name", Toast.LENGTH_SHORT).show()
-                firstName.requestFocus()
-            }
-            else
-            {
-                val profiles = Profiles()
-                profiles.firstName = firstName.text.toString()
-                profiles.lastName = lastName.text.toString()
-
-                if (lastName.text.isEmpty())
-                    profiles.lastName = ""
-                else profiles.lastName = lastName.text.toString()
-                FragmentProfile.dbHandler.addProfile(this, profiles)
-
-                this.finish()
-            }
+            insertDataToDataBase()
         }
     }
 
-    private fun clearEdits()
+    private fun insertDataToDataBase()
     {
-        firstName.text.clear()
-        lastName.text.clear()
+        val firstName = firstName.text.toString()
+        val lastName = lastName.text.toString()
+
+        if (inputCheck(firstName, lastName))
+        {
+            val user = ProfileEntity( firstName, lastName)
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                userDao.addUser(user)
+            }
+
+            findNavController().navigate(R.id.action_addProfileFragment_to_fragmentListProfile)
+        }
+        else
+            Toast.makeText(requireContext(), "Please fill out all fields. ", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun inputCheck(firstName: String, lastName: String): Boolean
+    {
+        return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName))
     }
 
     private fun sexSpinner()
     {
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, GenderList)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, GenderList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         genderSpinner.adapter = adapter
     }
@@ -147,7 +163,7 @@ class ActivityProfiles : AppCompatActivity(),
     {
         DateOfBirth.setOnClickListener {
             getSDateCalendar()
-            DatePickerDialog(this, fromListener, sYear, sMonth, sDay).show()
+            DatePickerDialog(requireContext(), fromListener, sYear, sMonth, sDay).show()
         }
     }
 
@@ -167,6 +183,4 @@ class ActivityProfiles : AppCompatActivity(),
         sSavedYear = year
         textDate1.text = "$sSavedDay - $sSavedMonth - $sSavedYear"
     }
-
-
 }

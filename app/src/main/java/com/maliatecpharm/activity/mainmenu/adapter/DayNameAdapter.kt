@@ -1,4 +1,4 @@
-package com.maliatecpharm.adapter
+package com.maliatecpharm.activity.mainmenu.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

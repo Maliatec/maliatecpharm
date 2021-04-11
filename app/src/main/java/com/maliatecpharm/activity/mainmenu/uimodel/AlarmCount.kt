@@ -1,4 +1,4 @@
-package com.maliatecpharm.uimodel
+package com.maliatecpharm.activity.mainmenu.uimodel
 
 
 

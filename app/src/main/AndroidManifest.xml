@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".activity.mainmenu.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="My First App"
@@ -47,9 +48,7 @@
         <activity android:name=".activity.mainmenu.activities.ActivitySettings" />
         <activity android:name=".activity.mainmenu.activities.ActivityFeedback" />
         <activity android:name=".activity.mainmenu.activities.ActivityVitalSigns" />
-        <activity android:name=".activity.mainmenu.database.RecyclerViewProfiles" />
-        <activity android:name=".activity.mainmenu.activities.ActivityProfiles" />
-        <activity android:name=".activity.mainmenu.activities.ActivityMedecinesNames" />
+
 
 
     </application>

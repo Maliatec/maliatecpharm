@@ -1,4 +1,4 @@
-package com.maliatecpharm.adapter
+package com.maliatecpharm.activity.mainmenu.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
-import com.maliatecpharm.uimodel.InstructionsUIModel
+import com.maliatecpharm.activity.mainmenu.uimodel.InstructionsUIModel
 
 class InstructionsAdapter(
     private val context: Context,
