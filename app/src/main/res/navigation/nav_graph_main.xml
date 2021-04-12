@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/MedicationsFragment"
-        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddMedication"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentListMedication"
         android:label="Add Medications"
         tools:layout="@layout/fragment_addmedication"/>
 

@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.uimodel.InstructionsUIModel
 
-class InstructionsAdapter(
-    private val context: Context,
-    private val instructionsInteractor: InstructionsInteractor
-) :
+class InstructionsAdapter(private val context: Context) :
     RecyclerView.Adapter<InstructionsAdapter.MedViewHolder>() {
+
+    lateinit var onMedicationInstructionClicked: (model: InstructionsUIModel)-> Unit
 
     private var instructionsUIModelList: List<InstructionsUIModel> = emptyList()
 
@@ -51,13 +50,8 @@ class InstructionsAdapter(
             instTv.setBackgroundColor(color)
 
             view.setOnClickListener {
-                instructionsInteractor.onInstructionClicked(instructionsUIModel)
+                onMedicationInstructionClicked(instructionsUIModel)
             }
         }
-    }
-
-    interface InstructionsInteractor {
-        fun onInstructionClicked(instructionsUIModel: InstructionsUIModel)
-
     }
 }

@@ -40,7 +40,7 @@
 
 
 
-        <activity android:name=".activity.mainmenu.activities.ActivityMedications" />
+        <activity android:name=".activity.mainmenu.activities.ActivityAddMedications" />
 
         <activity android:name=".activity.mainmenu.activities.ActivityRegisterPage" />
 

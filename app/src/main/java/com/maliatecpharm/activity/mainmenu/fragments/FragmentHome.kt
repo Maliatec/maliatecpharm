@@ -10,11 +10,7 @@ import com.maliatecpharm.R
 
 class FragmentHome : Fragment()
 {
-
-
     private lateinit var emptyBtn: Button
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +20,6 @@ class FragmentHome : Fragment()
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         emptyBtn = view.findViewById(R.id.button_emptyBtn)
-
         setOnBtnClicked()
 
 //        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_HomeFragment_to_MedicationsFragment) }

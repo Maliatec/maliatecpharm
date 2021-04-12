@@ -13,6 +13,7 @@ data class ProfileEntity(
 {
     fun toUserUiModel() = ProfileUiModel(
         id = id,
-        firstName = firstName
+        firstName = firstName,
+        lastName = lastName
     )
 }

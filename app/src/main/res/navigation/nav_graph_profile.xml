@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/addProfileFragment"
-        android:name="com.maliatecpharm.activity.mainmenu.fragments.AddFragment"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddProfile"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add_profile" >
         <action

@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class AddFragment : Fragment(),
+class FragmentAddProfile : Fragment(),
     DatePickerDialog.OnDateSetListener
 {
     private val userDao: UserDao by lazy {
@@ -106,13 +106,13 @@ class AddFragment : Fragment(),
 
         if (inputCheck(firstName, lastName))
         {
-            val user = ProfileEntity( firstName, lastName)
+            val profile = ProfileEntity( firstName, lastName)
 
             lifecycleScope.launch(Dispatchers.IO) {
-                userDao.addUser(user)
+                userDao.addUser(profile)
             }
 
-            findNavController().navigate(R.id.action_addProfileFragment_to_fragmentListProfile)
+            findNavController().popBackStack()
         }
         else
             Toast.makeText(requireContext(), "Please fill out all fields. ", Toast.LENGTH_SHORT).show()

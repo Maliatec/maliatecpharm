@@ -53,7 +53,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
-   <string name="preference_file_key">health_db</string>
+    <string name="preference_file_key">health_db</string>
     <string name="is_logged_in">is_logged_in</string>
     <string name="wrong_credentials">Wrong Credentials</string>
     <string name="user_already_exists">Already exists</string>

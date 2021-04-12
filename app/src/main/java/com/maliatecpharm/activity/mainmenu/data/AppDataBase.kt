@@ -5,10 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [ProfileEntity::class, UserEntity::class], version = 1, exportSchema = false)
+@Database(entities = [ProfileEntity::class, UserEntity::class,MedicineEntity::class],
+    version = 1, exportSchema = false)
 abstract class AppDataBase : RoomDatabase()
 {
     abstract fun userDao(): UserDao
+    abstract fun medicineDao(): MedicineDao
     companion object
     {
         @Volatile
@@ -27,7 +29,9 @@ abstract class AppDataBase : RoomDatabase()
                     context.applicationContext,
                     AppDataBase::class.java,
                     "user_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 return instance
 

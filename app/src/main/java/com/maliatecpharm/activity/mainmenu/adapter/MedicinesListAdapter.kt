@@ -6,46 +6,48 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.data.ProfileUiModel
+import com.maliatecpharm.activity.mainmenu.data.MedicinesUiModel
 
-class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>()
+class MedicinesListAdapter: RecyclerView.Adapter<MedicinesListAdapter.MyViewHolder>()
 {
-    private var userList = listOf<ProfileUiModel>()
+    private var medicineList = listOf<MedicinesUiModel>()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-         val text: TextView = itemView.findViewById(R.id.txt)
-         val firstName:TextView = itemView.findViewById(R.id.firstNametxt)
+        val medName: TextView = itemView.findViewById(R.id.nameTv)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
     {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row, parent, false))
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_medicine, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        val currentItem = userList[position]
-        holder.firstName.text  = currentItem.firstName
+        val currentItem = medicineList[position]
+        holder.medName.text = currentItem.Name
+
     }
 
     override fun getItemCount(): Int
     {
-        return userList.size
+        return medicineList.size
     }
 
-    fun updateList(profileList: List<ProfileUiModel>)
+    fun updateList(medList: List<MedicinesUiModel>)
     {
-        this.userList = profileList
+        this.medicineList = medList
         notifyDataSetChanged()
     }
 
     fun delete(adapterPosition: Int): Int
     {
         var id = 0
-        val newList = userList.filterIndexed { index, item ->
+        val newList = medicineList.filterIndexed { index, item ->
             if (adapterPosition != index) true
-            else {
+            else
+            {
                 id = item.id
                 false
             }

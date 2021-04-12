@@ -9,6 +9,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -45,7 +46,7 @@ class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val navController = findNavController(R.id.fragment)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.HomeFragment,R.id.MedicationsFragment,R.id.FragmentAppointment,R.id.vitalSignsFragment,R.id.MoreFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.HomeFragment, R.id.MedicationsFragment, R.id.FragmentAppointment, R.id.vitalSignsFragment, R.id.MoreFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
 
@@ -57,41 +58,51 @@ class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
         drawerNavigationView.setNavigationItemSelectedListener(this)
     }
 
-    override fun onPostCreate(savedInstanceState: Bundle?) {
+    override fun onPostCreate(savedInstanceState: Bundle?)
+    {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
+    override fun onConfigurationChanged(newConfig: Configuration)
+    {
         super.onConfigurationChanged(newConfig)
         toggle.onConfigurationChanged(newConfig)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        if (toggle.onOptionsItemSelected(item))
+        {
             return true
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.profile -> {
+    override fun onNavigationItemSelected(item: MenuItem): Boolean
+    {
+        when (item.itemId)
+        {
+            R.id.profile ->
+            {
                 startActivity(Intent(this, ActivityProfile::class.java))
 
             }
 
-            R.id.medfriend -> {
+            R.id.medfriend ->
+            {
                 startActivity(Intent(this, ActivityMedFriend::class.java))
             }
 
 
-            R.id.settings -> {
+            R.id.settings ->
+            {
                 startActivity(Intent(this, ActivitySettings::class.java))
             }
 
-            R.id.logout -> {
+            R.id.logout ->
+            {
                 logoutUser()
             }
         }
@@ -103,20 +114,24 @@ class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
     {
         lifecycleScope.launch(Dispatchers.IO) {
             val loggedInKey = getString(R.string.is_logged_in)
-           preferences.edit().putString(loggedInKey, "").commit()
-            withContext(Dispatchers.Main){
+            preferences.edit().putString(loggedInKey, "").commit()
+            withContext(Dispatchers.Main) {
                 startActivity(Intent(this@ActivityMainMenu, ActivityLogIn::class.java))
                 finish()
             }
         }
     }
 
-    //    override fun onBackPressed() {
-//
-//        if (drawer.isDrawerOpen(GravityCompat.END)) {
-//            drawer.closeDrawer(GravityCompat.END)
-//        } else {
-//            super.onBackPressed()
-//        }
-//    }
+    override fun onBackPressed()
+    {
+        if (!didDrawerClose())
+        super.onBackPressed()
+    }
+
+    private fun didDrawerClose() = if (drawer.isDrawerOpen(GravityCompat.START))
+    {
+        drawer.close()
+        true
+    }
+    else false
 }
