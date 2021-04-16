@@ -13,6 +13,11 @@
         android:paddingVertical="16dp"
         android:layout_height="wrap_content"/>
 
+    <EditText
+        android:id="@+id/enterDrSpec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         style="@android:style/Widget.Spinner.DropDown"
@@ -22,6 +27,11 @@
         android:paddingVertical="16dp"
         />
 
+    <EditText
+        android:id="@+id/enterDrName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,28 +70,26 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/edittext_mobilePhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Doctor's mobile number"
-        android:drawablePadding="10dp"
-        android:inputType="number"
-        android:drawableLeft="@drawable/mobile"
-        android:paddingVertical="16dp"/>
+        <EditText
+            android:id="@+id/edittext_mobilePhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Doctor's mobile number"
+            android:drawablePadding="10dp"
+            android:inputType="number"
+            android:drawableLeft="@drawable/mobile"
+            android:paddingVertical="16dp"/>
 
-       <TextView
-           android:id="@+id/textview_validationNumberTextView"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:enabled="false"
-           android:drawablePadding="10dp"
-           android:visibility="gone"
-           android:text="Valid" />
+        <TextView
+            android:id="@+id/textview_validationNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:drawablePadding="10dp"
+            android:visibility="gone"
+            android:text="Valid" />
 
-   </LinearLayout>
-
-
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

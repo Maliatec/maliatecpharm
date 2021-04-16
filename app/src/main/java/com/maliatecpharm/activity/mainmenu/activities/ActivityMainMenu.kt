@@ -36,6 +36,8 @@ class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var drawerNavigationView: NavigationView
 
+
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -46,7 +48,7 @@ class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val navController = findNavController(R.id.fragment)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.HomeFragment, R.id.MedicationsFragment, R.id.FragmentAppointment, R.id.vitalSignsFragment, R.id.MoreFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.HomeFragment, R.id.MedicationsFragment, R.id.fragmentListDoctors, R.id.vitalSignsFragment, R.id.MoreFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
 

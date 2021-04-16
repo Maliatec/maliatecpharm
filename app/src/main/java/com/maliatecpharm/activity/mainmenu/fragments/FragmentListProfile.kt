@@ -51,11 +51,11 @@ class FragmentListProfile : Fragment()
         return view
     }
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
-        super.onCreate(savedInstanceState)
-        example()
-    }
+//    override fun onCreate(savedInstanceState: Bundle?)
+//    {
+//        super.onCreate(savedInstanceState)
+//        example()
+//    }
 
     private fun setUpSwipeToDelete()
     {
@@ -90,26 +90,26 @@ class FragmentListProfile : Fragment()
         profileRecyclerView.adapter = adapter
     }
 
-    private inline fun applyIfOr(condition: ()->Boolean, ifBlock: () -> Unit, elseBlock: () -> Unit)
-    {
-        if (condition()) ifBlock() else elseBlock()
-    }
-
-    private fun example()
-    {
-
-        lifecycleScope.launch {
-            for (i in 0..10) {
-                applyIfOr({i % 2 == 0}, {
-                    Toast.makeText(requireContext(),"even",Toast.LENGTH_SHORT).show()
-                }, {
-                    Toast.makeText(requireContext(),"odd",Toast.LENGTH_SHORT).show()
-                })
-
-                delay(3000)
-            }
-        }
-    }
+//    private inline fun applyIfOr(condition: ()->Boolean, ifBlock: () -> Unit, elseBlock: () -> Unit)
+//    {
+//        if (condition()) ifBlock() else elseBlock()
+//    }
+//
+//    private fun example()
+//    {
+//
+//        lifecycleScope.launch {
+//            for (i in 0..10) {
+//                applyIfOr({i % 2 == 0}, {
+//                    Toast.makeText(requireContext(),"even",Toast.LENGTH_SHORT).show()
+//                }, {
+//                    Toast.makeText(requireContext(),"odd",Toast.LENGTH_SHORT).show()
+//                })
+//
+//                delay(3000)
+//            }
+//        }
+//    }
 
     private fun showProfiles()
     {
@@ -118,7 +118,6 @@ class FragmentListProfile : Fragment()
             val profileModels: List<ProfileUiModel> = profilesList.map { userEntity ->
                 userEntity.toUserUiModel()
             }
-
             withContext(Dispatchers.Main) {
                 adapter.updateList(profileModels)
             }

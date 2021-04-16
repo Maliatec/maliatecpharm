@@ -3,10 +3,12 @@ package com.maliatecpharm.activity.mainmenu.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.data.MedicinesUiModel
+import org.w3c.dom.Text
 
 class MedicinesListAdapter: RecyclerView.Adapter<MedicinesListAdapter.MyViewHolder>()
 {
@@ -15,7 +17,11 @@ class MedicinesListAdapter: RecyclerView.Adapter<MedicinesListAdapter.MyViewHold
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         val medName: TextView = itemView.findViewById(R.id.nameTv)
-
+        val dosageQtity: TextView = itemView.findViewById(R.id.dosageTv)
+        val diagnosis: TextView = itemView.findViewById(R.id.diagnosisTv)
+        val day: TextView = itemView.findViewById(R.id.dayTv)
+        val startDate: TextView = itemView.findViewById(R.id.startTv)
+        val endDate: TextView = itemView.findViewById(R.id.endTv)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
@@ -26,8 +32,12 @@ class MedicinesListAdapter: RecyclerView.Adapter<MedicinesListAdapter.MyViewHold
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
         val currentItem = medicineList[position]
-        holder.medName.text = currentItem.Name
-
+        holder.medName.text = currentItem.name
+        holder.dosageQtity.text = currentItem.dosage
+        holder.diagnosis.text = currentItem.diagnosis
+        holder.day.text = currentItem.day
+        holder.startDate.text = currentItem.startdate
+        holder.endDate.text = currentItem.enddate
     }
 
     override fun getItemCount(): Int

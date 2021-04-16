@@ -15,13 +15,26 @@
         android:id="@+id/MedicationsFragment"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentListMedication"
         android:label="Add Medications"
-        tools:layout="@layout/fragment_addmedication"/>
+        tools:layout="@layout/fragment_medication_list">
+        <action
+            android:id="@+id/action_MedicationsFragment_to_addMedicationFragment"
+            app:destination="@id/addMedicationFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/FragmentAppointment"
-        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAppointment"
-        android:label="Appointments"
-        tools:layout="@layout/fragment_appointment" />
+        android:id="@+id/fragmentListDoctors"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentListDoctors"
+        android:label="List Doctors">
+        <action
+            android:id="@+id/action_fragmentListDoctors_to_fragmentAddDoctors"
+            app:destination="@id/fragmentAddDoctors" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAddDoctors"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddDoctor"
+        android:label="Add Doctors"/>
+
 
     <fragment
         android:id="@+id/MoreFragment"
@@ -34,6 +47,11 @@
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentVitalSigns"
         android:label="My vital signs"
         tools:layout="@layout/fragment_vitalsigns" />
+    <fragment
+        android:id="@+id/addMedicationFragment"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.Fragment_Add_Medication"
+        android:label="fragment_add_medication"
+        tools:layout="@layout/fragment_add_medication" />
 
 
 </navigation>

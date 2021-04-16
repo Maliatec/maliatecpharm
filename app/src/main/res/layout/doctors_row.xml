@@ -7,9 +7,16 @@
     android:padding="24sp">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+
     <TextView
-        android:id="@+id/firstNametxt"
-        android:layout_width="wrap_content"
+        android:id="@+id/drNametv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -19,15 +26,26 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/lastNametxt"
-        android:layout_width="wrap_content"
+        android:id="@+id/spectv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/nbrtv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

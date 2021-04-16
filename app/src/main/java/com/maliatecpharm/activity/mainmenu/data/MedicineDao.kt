@@ -12,6 +12,9 @@ interface MedicineDao
     suspend fun addMedicine(medicineEntity: MedicineEntity)
 
     @Query("SELECT * FROM medicines ORDER BY id ASC")
-    suspend fun readAll() :List<MedicineEntity>
+    suspend fun readAllMedicins() :List<MedicineEntity>
+
+    @Query("DELETE FROM medicines WHERE id = :medId")
+    suspend fun deleteMedById(medId: Int)
 
 }

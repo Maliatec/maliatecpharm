@@ -1,12 +1,14 @@
-package com.maliatecpharm.activity.mainmenu.activities
+package com.maliatecpharm.activity.mainmenu.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.TextUtils
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +18,6 @@ import com.maliatecpharm.activity.mainmenu.adapter.*
 import com.maliatecpharm.activity.mainmenu.data.AppDataBase
 import com.maliatecpharm.activity.mainmenu.data.MedicineDao
 import com.maliatecpharm.activity.mainmenu.data.MedicineEntity
-import com.maliatecpharm.activity.mainmenu.data.UserDao
 import com.maliatecpharm.activity.mainmenu.uimodel.AlarmCount
 import com.maliatecpharm.activity.mainmenu.uimodel.InstructionsUIModel
 import com.maliatecpharm.activity.mainmenu.uimodel.MedicationTypeUIModel
@@ -24,26 +25,27 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ActivityAddMedications : AppCompatActivity(),
+
+class Fragment_Add_Medication : Fragment(),
     MedicationTypeAdapter.MedicationTypeInteractor,
     DayNameAdapter.DayNameInteractor,
     AlarmCountAdapter.AlarmCountInteractor,
     AdapterView.OnItemSelectedListener
 {
     private val medicineDao: MedicineDao by lazy {
-        AppDataBase.getDataBase(this).medicineDao()
+        AppDataBase.getDataBase(requireContext()).medicineDao()
     }
 
     private val medicationTypeAdapter by lazy {
-        MedicationTypeAdapter(context = this, medicationTypeInteractor = this)
+        MedicationTypeAdapter(context = requireContext(), medicationTypeInteractor = this)
     }
 
     private val alarmCountAdapter by lazy {
-        AlarmCountAdapter(context = this, interactor = this)
+        AlarmCountAdapter(context = requireContext(), interactor = this)
     }
 
     private val instructionsAdapter by lazy {
-        InstructionsAdapter(context = this).apply {
+        InstructionsAdapter(context = requireContext()).apply {
             onMedicationInstructionClicked = { clickedItem ->
                 val updatedList = instructionsList.map { item ->
                     item.copy(colorRes = getColor(selected = item.id == clickedItem.id))
@@ -54,7 +56,7 @@ class ActivityAddMedications : AppCompatActivity(),
     }
 
     private val daynameAdapter by lazy {
-        DayNameAdapter(context = this, dayNameInteractor = this@ActivityAddMedications)
+        DayNameAdapter(context = requireContext(), dayNameInteractor = this)
     }
 
 
@@ -120,9 +122,10 @@ class ActivityAddMedications : AppCompatActivity(),
     private lateinit var pillsSpinner: Spinner
     private lateinit var medicationName: TextView
     private lateinit var diagnosis: TextView
-    private lateinit var conditionsSpinner: Spinner
+    private lateinit var diagnosisSpinner: Spinner
     private lateinit var condition: TextView
     private lateinit var dosage: TextView
+    private lateinit var enterDosage: EditText
     private lateinit var medicationTypeTv: TextView
     private lateinit var instructionsTv: TextView
     private lateinit var instructionsRecyclerView: RecyclerView
@@ -146,6 +149,8 @@ class ActivityAddMedications : AppCompatActivity(),
     private lateinit var medicineName: EditText
     val context = this
     private lateinit var addBtn: Button
+    private lateinit var time1:TextView
+    private lateinit var time2 :TextView
 
 
     var sHour = 0
@@ -163,18 +168,48 @@ class ActivityAddMedications : AppCompatActivity(),
     var fSavedHour = 0
     var fSavedMinute = 0
 
-
-    override fun onCreate(savedInstanceState: Bundle?)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View?
     {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_medications)
+        val view = inflater.inflate(R.layout.fragment_add_medication, container, false)
 
+        pillsSpinner = view.findViewById(R.id.spinner_pillsSpinner)
+        medicationName = view.findViewById(R.id.textview_medicationName)
+        addBtn = view.findViewById(R.id.button_addBtn)
+        diagnosis = view.findViewById(R.id.textview_nameOfDiseaseTextview)
+        diagnosisSpinner = view.findViewById(R.id.spinner_diagnosisSpinner)
+        condition = view.findViewById(R.id.edittext_nameOfDiagnosis)
+        dosage = view.findViewById(R.id.textview_dosage)
+        enterDosage = view.findViewById(R.id.edittext_dosage)
+        instructionsTv = view.findViewById(R.id.textview_instructions)
+        medicationTypeTv = view.findViewById(R.id.textview_medicationType)
+        instructionsRecyclerView = view.findViewById(R.id.recyclerview_instructions)
+        medicationTypeRecyclerView = view.findViewById(R.id.recyclerview_medicationType)
+        reminderSwitch = view.findViewById(R.id.switch_reminder)
+        reminderTv = view.findViewById(R.id.textview_reminder)
+        tvSelectedDays = view.findViewById(R.id.textview_selectedDays)
+        timesSpinner = view.findViewById(R.id.spinner_timeSpinner)
+        atTv = view.findViewById(R.id.textview_At)
+        onText = view.findViewById(R.id.textview_On)
+        confirmButton = view.findViewById(R.id.button_confirmbtn)
+        alarmRecyclerView = view.findViewById(R.id.recyclerview_alarmCount)
+        dayRecyclerView = view.findViewById(R.id.recylerview_day)
+        dayCountRecyclerView = view.findViewById(R.id.recylerview_dayCount)
+        checkBox = view.findViewById(R.id.checkbox_repeat)
+        btn1Date = view.findViewById(R.id.button_timePickerBtn1)
+        textDate1 = view.findViewById(R.id.textview_textTime1)
+        btn2Date = view.findViewById(R.id.button_timePickerbtn2)
+        textDate2 = view.findViewById(R.id.textview_textTime2)
+        medicinesSpinner = view.findViewById(R.id.spinner_medicinesList)
+        medicineName = view.findViewById(R.id.edittext_nameOfMedicine)
+        time1 = view.findViewById(R.id.textview_Time1)
+        time2 = view.findViewById(R.id.textview_Time2)
 
-
-        setupViews()
         setupTextViews()
         medSpinner()
-        conditionSpinner()
+        diagnosisSpinner()
         populateInstructionsRecycleView()
         populateTypeRecycleView()
         populateAlarmCountRecycleView()
@@ -186,39 +221,11 @@ class ActivityAddMedications : AppCompatActivity(),
         pickFDate()
         medicineNameSpinner()
         onSaveClickListener()
+        linkMedicinesSpinnerToEditText()
+        linkDiagnosisSpinnerToEditText()
 
-    }
 
-    private fun setupViews()
-    {
-        pillsSpinner = findViewById(R.id.spinner_pillsSpinner)
-        medicationName = findViewById(R.id.textview_medicationName)
-        addBtn = findViewById(R.id.button_addBtn)
-        diagnosis = findViewById(R.id.textview_nameOfDiseaseTextview)
-        conditionsSpinner = findViewById(R.id.spinner_conditionsSpinner)
-        condition = findViewById(R.id.textview_nameOfCondition)
-        dosage = findViewById(R.id.textview_dosage)
-        instructionsTv = findViewById(R.id.textview_instructions)
-        medicationTypeTv = findViewById(R.id.textview_medicationType)
-        instructionsRecyclerView = findViewById(R.id.recyclerview_instructions)
-        medicationTypeRecyclerView = findViewById(R.id.recyclerview_medicationType)
-        reminderSwitch = findViewById(R.id.switch_reminder)
-        reminderTv = findViewById(R.id.textview_reminder)
-        tvSelectedDays = findViewById(R.id.textview_selectedDays)
-        timesSpinner = findViewById(R.id.spinner_timeSpinner)
-        atTv = findViewById(R.id.textview_At)
-        onText = findViewById(R.id.textview_On)
-        confirmButton = findViewById(R.id.button_confirmbtn)
-        alarmRecyclerView = findViewById(R.id.recyclerview_alarmCount)
-        dayRecyclerView = findViewById(R.id.recylerview_day)
-        dayCountRecyclerView = findViewById(R.id.recylerview_dayCount)
-        checkBox = findViewById(R.id.checkbox_repeat)
-        btn1Date = findViewById(R.id.button_timePickerBtn1)
-        textDate1 = findViewById(R.id.textview_dateOfBirthday)
-        btn2Date = findViewById(R.id.button_timePickerbtn2)
-        textDate2 = findViewById(R.id.textview_textTime2)
-        medicinesSpinner = findViewById(R.id.spinner_medicinesList)
-        medicineName = findViewById(R.id.edittext_nameOfMedicine)
+        return view
     }
 
     private fun onSaveClickListener()
@@ -231,24 +238,31 @@ class ActivityAddMedications : AppCompatActivity(),
     private fun insertDataToDataBase()
     {
         val medicineName = medicineName.text.toString()
+        val dosage = enterDosage.text.toString()
+        val diagnosis = condition.text.toString()
+        val day = tvSelectedDays.text.toString()
+        val start = textDate1.text.toString()
+        val end = textDate2.text.toString()
 
-        if (inputCheck(medicineName))
+        if (inputCheck(medicineName, dosage, diagnosis, day, start, end))
         {
-            val medicine = MedicineEntity(medicineName)
-
+            val medicine = MedicineEntity(medicineName, dosage, diagnosis, day, start, end)
             lifecycleScope.launch(Dispatchers.IO) {
                 medicineDao.addMedicine(medicine)
             }
+            Toast.makeText(requireContext(), "Medicine Added ", Toast.LENGTH_SHORT).show()
 
-           // findNavController().navigate(R.id.action_addProfileFragment_to_fragmentListProfile)
+            // finish()
+            //           findNavController().navigate(R.id.action_MedicationsFragment_to_blankFragment)
         }
         else
-            Toast.makeText(this, "Please fill medicine name ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please fill medicine name ", Toast.LENGTH_SHORT).show()
     }
 
-    private fun inputCheck(Name: String): Boolean
+    private fun inputCheck(name: String, dosage: String, diagnosis: String, day: String, start: String, end: String): Boolean
     {
-        return !(TextUtils.isEmpty(Name))
+        return !(TextUtils.isEmpty(name) && TextUtils.isEmpty(dosage) && TextUtils.isEmpty(diagnosis)
+                && TextUtils.isEmpty(day) && TextUtils.isEmpty(start) && TextUtils.isEmpty(end))
     }
 
     private fun setupTextViews()
@@ -262,39 +276,68 @@ class ActivityAddMedications : AppCompatActivity(),
 
     private fun medSpinner()
     {
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, pillsList)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, pillsList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         pillsSpinner.adapter = adapter
     }
 
     private fun medicineNameSpinner()
     {
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, medicinesList)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, medicinesList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         medicinesSpinner.adapter = adapter
     }
 
+    private fun linkMedicinesSpinnerToEditText()
+    {
+        medicinesSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+            {
+                medicineName.setText(medicinesSpinner.selectedItem.toString())
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?)
+            {
+            }
+        }
+    }
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
     {
-
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?)
     {
-
     }
 
-    private fun conditionSpinner()
+    private fun diagnosisSpinner()
     {
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, conditionsList)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, conditionsList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        conditionsSpinner.adapter = adapter
+        diagnosisSpinner.adapter = adapter
+    }
+
+    private fun linkDiagnosisSpinnerToEditText()
+    {
+        diagnosisSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+            {
+                condition.setText(diagnosisSpinner.selectedItem.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?)
+            {
+            }
+        }
     }
 
     private fun populateInstructionsRecycleView()
     {
         instructionsRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@ActivityAddMedications, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = instructionsAdapter
             instructionsAdapter.updateList(instructionsList)
         }
@@ -303,7 +346,7 @@ class ActivityAddMedications : AppCompatActivity(),
     private fun populateTypeRecycleView()
     {
         medicationTypeRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@ActivityAddMedications, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = medicationTypeAdapter
             medicationTypeAdapter.updateList(medicationTypeList)
         }
@@ -312,7 +355,7 @@ class ActivityAddMedications : AppCompatActivity(),
     private fun populateAlarmCountRecycleView()
     {
         alarmRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@ActivityAddMedications, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = alarmCountAdapter
         }
     }
@@ -321,7 +364,7 @@ class ActivityAddMedications : AppCompatActivity(),
     private fun populateTimeSpinner()
     {
         val times = alarmsCountList.map { item -> item.text }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, times)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, times)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         timesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
         {
@@ -346,7 +389,6 @@ class ActivityAddMedications : AppCompatActivity(),
         }
         timesSpinner.adapter = adapter
     }
-
 
     private fun setReminderSwitchListener()
     {
@@ -374,7 +416,7 @@ class ActivityAddMedications : AppCompatActivity(),
     private fun popRecyclerView()
     {
         dayRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@ActivityAddMedications, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = daynameAdapter
             daynameAdapter.updateList(dayNameList)
         }
@@ -451,7 +493,7 @@ class ActivityAddMedications : AppCompatActivity(),
         }
 
         TimePickerDialog(
-            this,
+            requireContext(),
             { _, hour, minute -> updateList(hour, minute) },
             0,
             0, true
@@ -476,7 +518,7 @@ class ActivityAddMedications : AppCompatActivity(),
             val sMonth = cal.get(Calendar.MONTH)
             val sYear = cal.get(Calendar.YEAR)
 
-            DatePickerDialog(this, fromListener, sYear, sMonth, sDay)
+            DatePickerDialog(requireContext(), fromListener, sYear, sMonth, sDay)
                 .show()
         }
     }
@@ -490,7 +532,7 @@ class ActivityAddMedications : AppCompatActivity(),
             val fMonth = cal.get(Calendar.MONTH)
             val fYear = cal.get(Calendar.YEAR)
 
-            DatePickerDialog(this, toListener, fYear, fMonth, fDay)
+            DatePickerDialog(requireContext(), toListener, fYear, fMonth, fDay)
                 .show()
         }
     }
@@ -504,7 +546,7 @@ class ActivityAddMedications : AppCompatActivity(),
         val cal = Calendar.getInstance()
         sHour = cal.get(Calendar.HOUR)
         sMinute = cal.get(Calendar.MINUTE)
-        TimePickerDialog(this, fromTimeListener, sHour, sMinute, true).show()
+        TimePickerDialog(requireContext(), fromTimeListener, sHour, sMinute, true).show()
     }
 
     val toListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
@@ -517,20 +559,22 @@ class ActivityAddMedications : AppCompatActivity(),
         val fHour = cal.get(Calendar.HOUR)
         val fMinute = cal.get(Calendar.MINUTE)
 
-        TimePickerDialog(this, toTimeListener, fHour, fMinute, true).show()
+        TimePickerDialog(requireContext(), toTimeListener, fHour, fMinute, true).show()
 
     }
 
     val fromTimeListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
         sSavedHour = hourOfDay
         sSavedMinute = minute
-        textDate1.text = "Starting Date: \n$sSavedDay - $sSavedMonth - $sSavedYear \nHour: $sSavedHour Minute: $sSavedMinute"
+        textDate1.text = "Starting Date: \n$sSavedDay - $sSavedMonth - $sSavedYear \n "
+        time1.text = "$sSavedHour: $sSavedMinute"
     }
 
     val toTimeListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
         fSavedHour = hourOfDay
         fSavedMinute = minute
-        textDate2.text = "Starting Date: \n$fSavedDay - $fSavedMonth - $fSavedYear \nHour: $fSavedHour Minute: $fSavedMinute"
+        textDate2.text = "End Date: \n$fSavedDay - $fSavedMonth - $fSavedYear \n $fSavedHour: $fSavedMinute"
+        time2.text = "$sSavedHour: $sSavedMinute"
     }
 }
 
@@ -546,3 +590,4 @@ class ActivityAddMedications : AppCompatActivity(),
 //// Extension funtion
 //fun String.isEmailValid(): Boolean = matches(Regex(emailRegex))
 //fun isValidEmail(email: String): Boolean = email.matches(Regex(emailRegex))
+

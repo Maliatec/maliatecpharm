@@ -7,44 +7,49 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.data.ProfileUiModel
+import com.maliatecpharm.activity.mainmenu.uimodel.DoctorsUiModel
+import org.w3c.dom.Text
 
-class ProfileListAdapter : RecyclerView.Adapter<ProfileListAdapter.MyViewHolder>()
+class DoctorsAdapter: RecyclerView.Adapter<DoctorsAdapter.MyViewHolder>()
 {
-    private var userList = listOf<ProfileUiModel>()
+    private var doctorsList = listOf<DoctorsUiModel>()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-         val firstName:TextView = itemView.findViewById(R.id.firstNametxt)
-         val lastName:TextView = itemView.findViewById(R.id.lastNametxt)
+        val drName: TextView = itemView.findViewById(R.id.drNametv)
+        val spec: TextView = itemView.findViewById(R.id.spectv)
+        val nbr :TextView = itemView.findViewById(R.id.nbrtv)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
     {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.profile_row, parent, false))
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.doctors_row, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        val currentItem = userList[position]
-        holder.firstName.text  = currentItem.firstName
-        holder.lastName.text = currentItem.lastName
+        val currentItem = doctorsList[position]
+        holder.drName.text  = currentItem.doctorsName
+        holder.spec.text = currentItem.spec
+        holder.nbr.text = currentItem.nbr
     }
 
     override fun getItemCount(): Int
     {
-        return userList.size
+        return doctorsList.size
     }
 
-    fun updateList(profileList: List<ProfileUiModel>)
+    fun updateList(doctorList: List<DoctorsUiModel>)
     {
-        this.userList = profileList
+        this.doctorsList = doctorList
         notifyDataSetChanged()
     }
 
     fun delete(adapterPosition: Int): Int
     {
         var id = 0
-        val newList = userList.filterIndexed { index, item ->
+        val newList = doctorsList.filterIndexed { index, item ->
             if (adapterPosition != index) true
             else {
                 id = item.id

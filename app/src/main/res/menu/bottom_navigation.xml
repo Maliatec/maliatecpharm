@@ -16,7 +16,7 @@
     </item>
 
     <item
-        android:id="@+id/FragmentAppointment"
+        android:id="@+id/fragmentListDoctors"
         android:icon="@drawable/ic_baseline_edit_calendar_24"
         android:title="Appointments">
     </item>

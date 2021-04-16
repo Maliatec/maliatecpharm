@@ -1,3 +1,6 @@
 package com.maliatecpharm.activity.mainmenu.data
 
-class MedicinesUiModel(val id: Int, val Name: String)
+
+
+class MedicinesUiModel(val id: Int, val name: String, val dosage:String, val diagnosis : String, val day: String,
+val startdate: String, val enddate: String)

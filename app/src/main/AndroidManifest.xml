@@ -51,7 +51,7 @@
         <activity
             android:name=".activity.mainmenu.activities.ActivityLogIn"
            android:theme="@style/Theme.InventoryManagement.NoActionBar"/>
-
+        <activity android:name=".activity.mainmenu.activities.ActivityDoctors" />
 
 
     </application>

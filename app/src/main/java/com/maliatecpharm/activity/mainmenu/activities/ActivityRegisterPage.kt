@@ -1,11 +1,17 @@
 package com.maliatecpharm.activity.mainmenu.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.basgeekball.awesomevalidation.AwesomeValidation
+import com.basgeekball.awesomevalidation.ValidationStyle
+import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.data.AppDataBase
 import com.maliatecpharm.activity.mainmenu.data.UserDao
@@ -28,17 +34,31 @@ class ActivityRegisterPage:AppCompatActivity()
     private lateinit var confirmPassword: EditText
     private lateinit var saveButton :Button
 
+  private lateinit var  awesomeValdiation: AwesomeValidation
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registerpage)
+
         enterMail = findViewById(R.id.edittext_enterEmail)
         firstName = findViewById(R.id.edittext_firstNAME)
         lastName = findViewById(R.id.edittext_lastNAME)
         password = findViewById(R.id.edittext_Password)
         confirmPassword = findViewById(R.id.edittext_confirmPassword)
         saveButton = findViewById(R.id.button_registerBUTTON)
-        setOnButtonClicked()
+     setOnButtonClicked()
+
+        awesomeValdiation = AwesomeValidation(ValidationStyle.BASIC)
+        awesomeValdiation.addValidation(this, R.id.edittext_enterEmail,
+            RegexTemplate.NOT_EMPTY,R.string.invalid_username)
+
+        awesomeValdiation.addValidation(this, R.id.edittext_Password,
+            RegexTemplate.NOT_EMPTY,R.string.invalid_password)
+
+        awesomeValdiation.addValidation(this, R.id.edittext_confirmPassword,
+            RegexTemplate.NOT_EMPTY,R.string.invalid_password)
+
     }
 
     private fun saveUserToDb(email: String, password: String){
@@ -62,9 +82,19 @@ class ActivityRegisterPage:AppCompatActivity()
     private fun setOnButtonClicked()
     {
         saveButton.setOnClickListener {
-            val email = enterMail.text.toString()
-            val pass = password.text.toString()
-            saveUserToDb(email = email, password = pass)
+            if (awesomeValdiation.validate())
+            { Toast.makeText(this, "Form validate", Toast.LENGTH_SHORT).show()
+
+
+                    val email = enterMail.text.toString()
+                    val pass = password.text.toString()
+                    saveUserToDb(email = email, password = pass)
+                    startActivity(Intent(this@ActivityRegisterPage, ActivityMainMenu::class.java))
+
+            }
+            else
+                Toast.makeText(this, "Validation failed", Toast.LENGTH_SHORT).show()
+        }
         }
     }
-}
+

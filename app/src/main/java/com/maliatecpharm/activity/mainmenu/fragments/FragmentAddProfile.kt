@@ -80,7 +80,7 @@ class FragmentAddProfile : Fragment(),
         Weight = view.findViewById(R.id.edittext_weight)
         saveMyProfileBtn = view.findViewById(R.id.button_saveButtonn)
         plusButton = view.findViewById(R.id.button_addButton)
-        textDate1 = view.findViewById(R.id.textview_dateOfBirthday)
+        textDate1 = view.findViewById(R.id.textview_textTime1)
         btnCancel = view.findViewById(R.id.btnCancel)
 
         sexSpinner()
