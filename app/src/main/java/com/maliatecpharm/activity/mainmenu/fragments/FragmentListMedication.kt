@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.activities.AdapterItemInteraction
+import com.maliatecpharm.activity.mainmenu.adapter.AdapterItemInteraction
 import com.maliatecpharm.activity.mainmenu.activities.MainActivityViewModel
 import com.maliatecpharm.activity.mainmenu.adapter.MedicinesListAdapter
 import com.maliatecpharm.activity.mainmenu.data.*
@@ -35,7 +35,7 @@ class FragmentListMedication : Fragment()
 
     private lateinit var addButton: FloatingActionButton
     private lateinit var medicinsrv: RecyclerView
-    private lateinit var nbr: TextView
+
 
 
     override fun onCreateView(
@@ -47,15 +47,7 @@ class FragmentListMedication : Fragment()
 
         addButton = view.findViewById(R.id.floatingBtn)
         medicinsrv = view.findViewById(R.id.recyclerView_Medicins)
-        nbr = view.findViewById(R.id.number)
 
-        val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-
-        viewModel.start()
-
-        viewModel.seconds().observe(requireActivity(), Observer {
-            nbr.text = it.toString()
-        })
 
         listRecyclerView()
         onBtnClicked()

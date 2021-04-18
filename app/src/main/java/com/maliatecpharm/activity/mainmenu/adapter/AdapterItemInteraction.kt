@@ -1,4 +1,4 @@
-package com.maliatecpharm.activity.mainmenu.activities
+package com.maliatecpharm.activity.mainmenu.adapter
 
 import android.content.Context
 import androidx.recyclerview.widget.ItemTouchHelper

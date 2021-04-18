@@ -14,6 +14,9 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.basgeekball.awesomevalidation.AwesomeValidation
+import com.basgeekball.awesomevalidation.ValidationStyle
+import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.data.AppDataBase
@@ -46,9 +49,7 @@ class FragmentAddProfile : Fragment(),
     private lateinit var Height: EditText
     private lateinit var Weight: EditText
     private lateinit var saveMyProfileBtn: Button
-    private lateinit var plusButton: FloatingActionButton
     private lateinit var textDate1: TextView
-    private lateinit var btnCancel: Button
     val context = this
     private val REQUEST_CODE = 42
 
@@ -79,9 +80,9 @@ class FragmentAddProfile : Fragment(),
         Height = view.findViewById(R.id.edittext_height)
         Weight = view.findViewById(R.id.edittext_weight)
         saveMyProfileBtn = view.findViewById(R.id.button_saveButtonn)
-        plusButton = view.findViewById(R.id.button_addButton)
         textDate1 = view.findViewById(R.id.textview_textTime1)
-        btnCancel = view.findViewById(R.id.btnCancel)
+
+
 
         sexSpinner()
         takePicture()
@@ -95,28 +96,29 @@ class FragmentAddProfile : Fragment(),
     private fun onSaveClickListener()
     {
         saveMyProfileBtn.setOnClickListener {
-            insertDataToDataBase()
+                insertDataToDataBase()
         }
     }
 
     private fun insertDataToDataBase()
     {
-        val firstName = firstName.text.toString()
-        val lastName = lastName.text.toString()
 
-        if (inputCheck(firstName, lastName))
-        {
-            val profile = ProfileEntity( firstName, lastName)
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                userDao.addUser(profile)
+            val firstName = firstName.text.toString()
+            val lastName = lastName.text.toString()
+
+            if (inputCheck(firstName, lastName))
+            {
+                    Toast.makeText(requireContext(), "Form validate", Toast.LENGTH_SHORT).show()
+                val profile = ProfileEntity(firstName, lastName)
+
+                lifecycleScope.launch(Dispatchers.IO) {
+                    userDao.addUser(profile)
+                }
+                findNavController().popBackStack()
             }
-
-            findNavController().popBackStack()
         }
-        else
-            Toast.makeText(requireContext(), "Please fill out all fields. ", Toast.LENGTH_SHORT).show()
-    }
+
 
     private fun inputCheck(firstName: String, lastName: String): Boolean
     {

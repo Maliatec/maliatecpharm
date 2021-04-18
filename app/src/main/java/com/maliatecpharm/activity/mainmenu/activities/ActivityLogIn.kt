@@ -46,10 +46,10 @@ class ActivityLogIn:AppCompatActivity()
         username = findViewById(R.id.edittext_username)
         password = findViewById(R.id.edittext_password)
         logInButton = findViewById(R.id.button_loginBtn)
-        registerButton = findViewById(R.id.button_registerButton)
-        remember = findViewById(R.id.checkbox_remember)
-        forgotMyPass = findViewById(R.id.button_forgotMyPassBtn)
-        loading = findViewById(R.id.progressbar_loading)
+        registerButton = findViewById(R.id.bt_signup)
+//        remember = findViewById(R.id.checkbox_remember)
+//        forgotMyPass = findViewById(R.id.button_forgotMyPassBtn)
+//        loading = findViewById(R.id.progressbar_loading)
 
         setOnButtonClicked()
         setOnBtnClicked()
@@ -60,6 +60,8 @@ class ActivityLogIn:AppCompatActivity()
     private fun setOnButtonClicked()
     {
         logInButton.setOnClickListener {
+
+
             val email = username.text.toString()
             val pass = password.text.toString()
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -232,6 +233,7 @@ class Fragment_Add_Medication : Fragment(),
     {
         addBtn.setOnClickListener {
             insertDataToDataBase()
+
         }
     }
 
@@ -251,7 +253,7 @@ class Fragment_Add_Medication : Fragment(),
                 medicineDao.addMedicine(medicine)
             }
             Toast.makeText(requireContext(), "Medicine Added ", Toast.LENGTH_SHORT).show()
-
+            findNavController().popBackStack()
             // finish()
             //           findNavController().navigate(R.id.action_MedicationsFragment_to_blankFragment)
         }

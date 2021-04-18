@@ -20,21 +20,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ActivityRegisterPage:AppCompatActivity()
+class ActivityRegisterPage : AppCompatActivity()
 {
 
     private val userDao: UserDao by lazy {
         AppDataBase.getDataBase(this).userDao()
     }
 
-    private lateinit var enterMail:EditText
+    private lateinit var enterMail: EditText
     private lateinit var firstName: EditText
     private lateinit var lastName: EditText
     private lateinit var password: EditText
     private lateinit var confirmPassword: EditText
-    private lateinit var saveButton :Button
+    private lateinit var saveButton: Button
 
-  private lateinit var  awesomeValdiation: AwesomeValidation
+    private lateinit var awesomeValdiation: AwesomeValidation
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -47,32 +47,40 @@ class ActivityRegisterPage:AppCompatActivity()
         password = findViewById(R.id.edittext_Password)
         confirmPassword = findViewById(R.id.edittext_confirmPassword)
         saveButton = findViewById(R.id.button_registerBUTTON)
-     setOnButtonClicked()
+
 
         awesomeValdiation = AwesomeValidation(ValidationStyle.BASIC)
-        awesomeValdiation.addValidation(this, R.id.edittext_enterEmail,
-            RegexTemplate.NOT_EMPTY,R.string.invalid_username)
+        awesomeValdiation.addValidation(
+            this, R.id.edittext_enterEmail,
+            RegexTemplate.NOT_EMPTY, R.string.invalid_username
+        )
 
-        awesomeValdiation.addValidation(this, R.id.edittext_Password,
-            RegexTemplate.NOT_EMPTY,R.string.invalid_password)
+        awesomeValdiation.addValidation(
+            this, R.id.edittext_Password,
+            RegexTemplate.NOT_EMPTY, R.string.invalid_password
+        )
 
-        awesomeValdiation.addValidation(this, R.id.edittext_confirmPassword,
-            RegexTemplate.NOT_EMPTY,R.string.invalid_password)
-
+        awesomeValdiation.addValidation(
+            this, R.id.edittext_confirmPassword,
+            RegexTemplate.NOT_EMPTY, R.string.invalid_password
+        )
+        setOnButtonClicked()
     }
 
-    private fun saveUserToDb(email: String, password: String){
+    private fun saveUserToDb(email: String, password: String)
+    {
         val userEntity = UserEntity(email = email, password = password)
-        lifecycleScope.launch(Dispatchers.IO){
+        lifecycleScope.launch(Dispatchers.IO) {
 
             val userExists = userDao.getUserByEmail(email).firstOrNull() != null
-            if (userExists){
-                withContext(Dispatchers.Main){
+            if (userExists)
+            {
+                withContext(Dispatchers.Main) {
                     Toast.makeText(this@ActivityRegisterPage, R.string.user_already_exists, Toast.LENGTH_SHORT).show()
                 }
             }
-
-            else {
+            else
+            {
                 userDao.registerUser(userEntity)
                 finish()
             }
@@ -83,18 +91,19 @@ class ActivityRegisterPage:AppCompatActivity()
     {
         saveButton.setOnClickListener {
             if (awesomeValdiation.validate())
-            { Toast.makeText(this, "Form validate", Toast.LENGTH_SHORT).show()
+            {
+                Toast.makeText(this, "Form validate", Toast.LENGTH_SHORT).show()
 
 
-                    val email = enterMail.text.toString()
-                    val pass = password.text.toString()
-                    saveUserToDb(email = email, password = pass)
-                    startActivity(Intent(this@ActivityRegisterPage, ActivityMainMenu::class.java))
+                val email = enterMail.text.toString()
+                val pass = password.text.toString()
+                saveUserToDb(email = email, password = pass)
+                startActivity(Intent(this@ActivityRegisterPage, ActivityMainMenu::class.java))
 
             }
             else
                 Toast.makeText(this, "Validation failed", Toast.LENGTH_SHORT).show()
         }
-        }
     }
+}
 

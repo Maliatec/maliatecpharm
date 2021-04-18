@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
-import com.maliatecpharm.activity.mainmenu.activities.AdapterItemInteraction
+import com.maliatecpharm.activity.mainmenu.adapter.AdapterItemInteraction
 import com.maliatecpharm.activity.mainmenu.adapter.DoctorsAdapter
 import com.maliatecpharm.activity.mainmenu.data.*
 import com.maliatecpharm.activity.mainmenu.uimodel.DoctorsUiModel
