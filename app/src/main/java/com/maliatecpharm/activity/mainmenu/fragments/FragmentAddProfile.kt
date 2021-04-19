@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -72,8 +73,8 @@ class FragmentAddProfile : Fragment(),
         genderSpinner = view.findViewById(R.id.spinner_genderSpinner)
         firstName = view.findViewById(R.id.edittext_firstName)
         lastName = view.findViewById(R.id.edittext_lastName)
-        takePictureBtn = view.findViewById(R.id.button_btnTakePic)
-        chooseImage = view.findViewById(R.id.imageview_picture)
+//        takePictureBtn = view.findViewById(R.id.layout_image)
+//        chooseImage = view.findViewById(R.id.imageview_picture)
         enterPhone = view.findViewById(R.id.edittext_phone)
         enterMail = view.findViewById(R.id.edittext_email)
         DateOfBirth = view.findViewById(R.id.textview_dateOfBirth)
@@ -83,9 +84,8 @@ class FragmentAddProfile : Fragment(),
         textDate1 = view.findViewById(R.id.textview_textTime1)
 
 
-
         sexSpinner()
-        takePicture()
+        //takePicture()
         pickSDate()
         onSaveClickListener()
         insertDataToDataBase()
@@ -102,14 +102,15 @@ class FragmentAddProfile : Fragment(),
 
     private fun insertDataToDataBase()
     {
-
+        if (validateInput())
+        {
 
             val firstName = firstName.text.toString()
             val lastName = lastName.text.toString()
 
             if (inputCheck(firstName, lastName))
             {
-                    Toast.makeText(requireContext(), "Form validate", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Form validate", Toast.LENGTH_SHORT).show()
                 val profile = ProfileEntity(firstName, lastName)
 
                 lifecycleScope.launch(Dispatchers.IO) {
@@ -118,11 +119,43 @@ class FragmentAddProfile : Fragment(),
                 findNavController().popBackStack()
             }
         }
-
+    }
 
     private fun inputCheck(firstName: String, lastName: String): Boolean
     {
         return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName))
+    }
+
+    fun validateInput(): Boolean {
+        if (firstName.text.toString().equals("")) {
+            firstName.setError("Please Enter First Name")
+            return false
+        }
+        if (lastName.text.toString().equals("")) {
+            lastName.setError("Please Enter Last Name")
+            return false
+        }
+        if (enterMail.text.toString().equals("")) {
+            enterMail.setError("Please Enter Email")
+            return false
+        }
+
+        if (enterPhone.text.toString().equals("")) {
+            enterPhone.setError("Please Enter Contact No")
+            return false
+        }
+
+        // checking the proper email format
+        if (!isEmailValid(enterMail.text.toString())) {
+            enterMail.setError("Please Enter Valid Email")
+            return false
+        }
+
+        return true
+    }
+
+    fun isEmailValid(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun sexSpinner()
@@ -132,13 +165,13 @@ class FragmentAddProfile : Fragment(),
         genderSpinner.adapter = adapter
     }
 
-    private fun takePicture()
-    {
-        takePictureBtn.setOnClickListener {
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(takePictureIntent, REQUEST_CODE)
-        }
-    }
+//    private fun takePicture()
+//    {
+//        takePictureBtn.setOnClickListener {
+//            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//            startActivityForResult(takePictureIntent, REQUEST_CODE)
+//        }
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     {

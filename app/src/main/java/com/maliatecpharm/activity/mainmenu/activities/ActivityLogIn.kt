@@ -4,22 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.util.Patterns
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.PatternsCompat.EMAIL_ADDRESS
 import androidx.lifecycle.lifecycleScope
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.data.AppDataBase
 import com.maliatecpharm.activity.mainmenu.data.UserDao
-import com.maliatecpharm.activity.mainmenu.data.UserEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class ActivityLogIn:AppCompatActivity()
+class ActivityLogIn : AppCompatActivity()
 {
 
     private val preferences: SharedPreferences by lazy {
@@ -33,9 +30,9 @@ class ActivityLogIn:AppCompatActivity()
     private lateinit var password: EditText
     private lateinit var logInButton: Button
     private lateinit var registerButton: Button
-    private lateinit var remember: CheckBox
+    val MIN_PASSWORD_LENGTH = 6
+    private lateinit var resetMyPass: Button
     private lateinit var forgotMyPass: Button
-    private lateinit var loading: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -47,42 +44,44 @@ class ActivityLogIn:AppCompatActivity()
         password = findViewById(R.id.edittext_password)
         logInButton = findViewById(R.id.button_loginBtn)
         registerButton = findViewById(R.id.bt_signup)
-//        remember = findViewById(R.id.checkbox_remember)
-//        forgotMyPass = findViewById(R.id.button_forgotMyPassBtn)
-//        loading = findViewById(R.id.progressbar_loading)
+        resetMyPass = findViewById(R.id.button_resetMyPassBtn)
+        forgotMyPass = findViewById(R.id.button_forgotMyPassBtn)
 
         setOnButtonClicked()
         setOnBtnClicked()
-        emailValidation()
+        setOnResetClicked()
+        setOnForgotClicked()
 
     }
 
     private fun setOnButtonClicked()
     {
         logInButton.setOnClickListener {
+            if (validateInput())
+            {
 
+                val email = username.text.toString()
+                val pass = password.text.toString()
 
-            val email = username.text.toString()
-            val pass = password.text.toString()
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val user = userDao.getUserByEmailAndPass(
+                        email = email, password = pass
+                    ).firstOrNull()
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                val user = userDao.getUserByEmailAndPass(
-                    email = email, password = pass
-                ).firstOrNull()
-
-                if (user == null)
-                {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@ActivityLogIn, getString(R.string.wrong_credentials), Toast.LENGTH_SHORT).show()
+                    if (user == null)
+                    {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@ActivityLogIn, getString(R.string.wrong_credentials), Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
-
-                else {
-                    val loggedInKey = getString(R.string.is_logged_in)
-                    preferences.edit().putString(loggedInKey, user.email).commit()
-                    withContext(Dispatchers.Main){
-                        startActivity(Intent(this@ActivityLogIn, ActivityMainMenu::class.java))
-                    finish()
+                    else
+                    {
+                        val loggedInKey = getString(R.string.is_logged_in)
+                        preferences.edit().putString(loggedInKey, user.email).commit()
+                        withContext(Dispatchers.Main) {
+                            startActivity(Intent(this@ActivityLogIn, ActivityMainMenu::class.java))
+                            finish()
+                        }
                     }
                 }
             }
@@ -96,21 +95,67 @@ class ActivityLogIn:AppCompatActivity()
         }
     }
 
-    private fun emailValidation(){
-        username.addTextChangedListener(object :TextWatcher
+    //    private fun emailValidation(){
+    //        username.addTextChangedListener(object :TextWatcher
+    //        {
+    //            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
+    //            {
+    //            }
+    //            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
+    //            {
+    //                logInButton.isEnabled = EMAIL_ADDRESS.matcher(username.text.toString()).matches()
+    ////                username.setError("Invalid Email")
+    //            }
+    //            override fun afterTextChanged(s: Editable?)
+    //            {
+    //            }
+    //        })
+    //    }
+
+    fun validateInput(): Boolean
+    {
+        if (username.text.toString() == "")
         {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
-            {
-            }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
-            {
-                logInButton.isEnabled = EMAIL_ADDRESS.matcher(username.text.toString()).matches()
-//                username.setError("Invalid Email")
-            }
-            override fun afterTextChanged(s: Editable?)
-            {
-            }
-        })
+            username.error = "Please Enter Email"
+            return false
+        }
+        if (password.text.toString() == "")
+        {
+            password.error = "Please Enter Password"
+            return false
+        }
+
+        if (!isEmailValid(username.text.toString()))
+        {
+            username.error = "Please Enter Valid Email"
+            return false
+        }
+
+        if (password.text.length < MIN_PASSWORD_LENGTH)
+        {
+            password.error = "Password Length must be more than " + MIN_PASSWORD_LENGTH + "characters"
+            return false
+        }
+        return true
+    }
+
+    fun isEmailValid(email: String?): Boolean
+    {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun setOnResetClicked()
+    {
+        resetMyPass.setOnClickListener {
+            startActivity(Intent(this, ActivityResetPassword::class.java))
+        }
+    }
+
+    private fun setOnForgotClicked()
+    {
+        forgotMyPass.setOnClickListener {
+            startActivity(Intent(this, ActivityForgotMyPass::class.java))
+        }
     }
 
 }

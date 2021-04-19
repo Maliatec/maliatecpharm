@@ -3,6 +3,8 @@ package com.maliatecpharm.activity.mainmenu.activities
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -19,6 +21,7 @@ import com.maliatecpharm.activity.mainmenu.data.UserEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.regex.Pattern
 
 class ActivityRegisterPage : AppCompatActivity()
 {
@@ -33,8 +36,20 @@ class ActivityRegisterPage : AppCompatActivity()
     private lateinit var password: EditText
     private lateinit var confirmPassword: EditText
     private lateinit var saveButton: Button
+    val MIN_PASSWORD_LENGTH = 6
 
-    private lateinit var awesomeValdiation: AwesomeValidation
+    val EMAIL_ADDRESS_PATTERN = Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" +
+                "\\." +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                ")+"
+    )
+
+
+    //  private lateinit var awesomeValdiation: AwesomeValidation
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -48,23 +63,34 @@ class ActivityRegisterPage : AppCompatActivity()
         confirmPassword = findViewById(R.id.edittext_confirmPassword)
         saveButton = findViewById(R.id.button_registerBUTTON)
 
+        val emails = arrayOf<String>("hello@gmail.com", "one.com", "")
+        emails.forEach {
+            Log.d("ActivityRegisterPage", "is valid email $it => ${isValidString(it)}")
+        }
 
-        awesomeValdiation = AwesomeValidation(ValidationStyle.BASIC)
-        awesomeValdiation.addValidation(
-            this, R.id.edittext_enterEmail,
-            RegexTemplate.NOT_EMPTY, R.string.invalid_username
-        )
 
-        awesomeValdiation.addValidation(
-            this, R.id.edittext_Password,
-            RegexTemplate.NOT_EMPTY, R.string.invalid_password
-        )
 
-        awesomeValdiation.addValidation(
-            this, R.id.edittext_confirmPassword,
-            RegexTemplate.NOT_EMPTY, R.string.invalid_password
-        )
+
+//        awesomeValdiation = AwesomeValidation(ValidationStyle.BASIC)
+//        awesomeValdiation.addValidation(
+//            this, R.id.edittext_enterEmail,
+//            RegexTemplate.NOT_EMPTY, R.string.invalid_username
+//        )
+//
+//        awesomeValdiation.addValidation(
+//            this, R.id.edittext_Password,
+//            RegexTemplate.NOT_EMPTY, R.string.invalid_password
+//        )
+//
+//        awesomeValdiation.addValidation(
+//            this, R.id.edittext_confirmPassword,
+//            RegexTemplate.NOT_EMPTY, R.string.invalid_password
+//        )
         setOnButtonClicked()
+
+    }
+    fun isValidString(str: String): Boolean{
+        return EMAIL_ADDRESS_PATTERN.matcher(str).matches()
     }
 
     private fun saveUserToDb(email: String, password: String)
@@ -90,20 +116,68 @@ class ActivityRegisterPage : AppCompatActivity()
     private fun setOnButtonClicked()
     {
         saveButton.setOnClickListener {
-            if (awesomeValdiation.validate())
+            if (validateInput())
             {
-                Toast.makeText(this, "Form validate", Toast.LENGTH_SHORT).show()
-
-
+                //            if (awesomeValdiation.validate())
+                //            {
+                //                Toast.makeText(this, "Form validate", Toast.LENGTH_SHORT).show()
                 val email = enterMail.text.toString()
                 val pass = password.text.toString()
                 saveUserToDb(email = email, password = pass)
                 startActivity(Intent(this@ActivityRegisterPage, ActivityMainMenu::class.java))
 
+                //            }
+                //            else
+                //                Toast.makeText(this, "Validation failed", Toast.LENGTH_SHORT).show()
             }
-            else
-                Toast.makeText(this, "Validation failed", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun validateInput(): Boolean {
+        if (firstName.text.toString().equals("")) {
+            firstName.setError("Please Enter First Name")
+            return false
+        }
+        if (lastName.text.toString().equals("")) {
+            lastName.setError("Please Enter Last Name")
+            return false
+        }
+        if (enterMail.text.toString().equals("")) {
+            enterMail.setError("Please Enter Email")
+            return false
+        }
+        if (password.text.toString().equals("")) {
+            password.setError("Please Enter Password")
+            return false
+        }
+        if (confirmPassword.text.toString().equals("")) {
+            confirmPassword.setError("Please Enter Repeat Password")
+            return false
+        }
+
+        // checking the proper email format
+        if (!isEmailValid(enterMail.text.toString())) {
+            enterMail.setError("Please Enter Valid Email")
+            return false
+        }
+
+        // checking minimum password Length
+        if (password.text.length < MIN_PASSWORD_LENGTH) {
+            password.setError("Password Length must be more than " + MIN_PASSWORD_LENGTH + "characters")
+            return false
+        }
+
+        // Checking if repeat password is same
+        if (!password.text.toString().equals(confirmPassword.text.toString())) {
+            confirmPassword.setError("Password does not match")
+            return false
+        }
+        return true
+    }
+
+    fun isEmailValid(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
 }
 
