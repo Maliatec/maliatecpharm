@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:label="Add Doctor">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:id="@+id/tv_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Doctor Information"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="24dp"
+        />
+
+    <TextView
+        android:id="@+id/layout_spec"
+        android:layout_width="match_parent"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="14dp"
+        android:text="Speciality"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColorHint="#808080"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:id="@+id/enterDrSpec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="First Name"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textColorHint="#808080"
+        android:background="#00000000"
+        android:textSize="15sp"
+
+        />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         style="@android:style/Widget.Spinner.DropDown"
@@ -13,10 +65,33 @@
         android:paddingVertical="16dp"
         android:layout_height="wrap_content"/>
 
+
+    <TextView
+        android:id="@+id/layout_first_name"
+        android:layout_width="match_parent"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="14dp"
+        android:text="Doctor's name"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColorHint="#808080"
+        android:textSize="16sp"
+        />
+
     <EditText
-        android:id="@+id/enterDrSpec"
+        android:id="@+id/enterDrName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="First Name"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textColorHint="#808080"
+        android:background="#00000000"
+        android:textSize="15sp"
         />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -27,11 +102,7 @@
         android:paddingVertical="16dp"
         />
 
-    <EditText
-        android:id="@+id/enterDrName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,57 +136,81 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/layout_mobileNbr"
+            android:layout_width="match_parent"
+            app:layout_constraintWidth_percent="0.7"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Mobile Number"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColorHint="#808080"
+            android:textSize="16sp"
+            />
 
         <EditText
             android:id="@+id/edittext_mobilePhone"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Doctor's mobile number"
             android:drawablePadding="10dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="#808080"
+            android:background="#00000000"
+            android:textSize="15sp"
             android:inputType="number"
             android:drawableLeft="@drawable/mobile"
-            android:paddingVertical="16dp"/>
+       />
 
-        <TextView
-            android:id="@+id/textview_validationNumberTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:drawablePadding="10dp"
-            android:visibility="gone"
-            android:text="Valid" />
 
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/layout_officeNbr"
         android:layout_width="match_parent"
+        app:layout_constraintWidth_percent="0.7"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Office Number"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColorHint="#808080"
+        android:textSize="16sp"
+        />
 
         <EditText
             android:id="@+id/edittext_officePhone"
             android:drawablePadding="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+          android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="#808080"
+            android:background="#00000000"
+            android:textSize="15sp"
             android:hint="Doctor's office number"
             android:inputType="number"
             android:drawableLeft="@drawable/officenum"
-            android:paddingVertical="16dp"/>
+            />
 
-        <TextView
-            android:id="@+id/textview_validationOfficeNumberTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:drawablePadding="10dp"
-            android:visibility="gone"
-            android:text="Valid" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/layout_email"
+        android:layout_width="match_parent"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Doctor's email"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColorHint="#808080"
+        android:textSize="16sp"
+        />
 
     <EditText
 
@@ -123,15 +218,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Doctor's e-mail"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textColorHint="#808080"
+        android:background="#00000000"
+        android:textSize="15sp"
         android:drawablePadding="10dp"
-        android:drawableLeft="@drawable/email"
-        android:paddingVertical="16dp"/>
+        android:drawableLeft="@drawable/email" />
+
+    <TextView
+        android:id="@+id/layout_location"
+        android:layout_width="match_parent"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Clinic location"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColorHint="#808080"
+        android:textSize="16sp"
+        />
 
     <EditText
 
         android:id="@+id/edittext_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textColorHint="#808080"
+        android:background="#00000000"
+        android:textSize="15sp"
         android:hint="Clinic location"
         android:drawableLeft="@drawable/location"
         android:drawablePadding="10dp"
@@ -148,3 +268,4 @@
 </LinearLayout>
 
 
+</androidx.core.widget.NestedScrollView>

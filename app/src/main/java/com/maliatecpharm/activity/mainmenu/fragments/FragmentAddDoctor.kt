@@ -32,9 +32,7 @@ class FragmentAddDoctor : Fragment(),
         private lateinit var appointmentDate: TextView
         private lateinit var doctorsSpecialitySpinner: SearchableSpinner
         private lateinit var mobileNbr: EditText
-        private lateinit var validationNumber: TextView
         private lateinit var officeNbr: EditText
-        private lateinit var officeNbrValidation: TextView
         private lateinit var email: EditText
         private lateinit var location: EditText
         private lateinit var saveBTN: Button
@@ -78,9 +76,7 @@ class FragmentAddDoctor : Fragment(),
         appointmentDate =  view.findViewById(R.id.textview_appointmentTime)
         doctorsSpecialitySpinner =  view.findViewById(R.id.spinner_specialitySpinner)
         mobileNbr =  view.findViewById(R.id.edittext_mobilePhone)
-        validationNumber =  view.findViewById(R.id.textview_validationNumberTextView)
         officeNbr =  view.findViewById(R.id.edittext_officePhone)
-        officeNbrValidation =  view.findViewById(R.id.textview_validationOfficeNumberTextView)
         email =  view.findViewById(R.id.edittext_email)
         location = view.findViewById(R.id.edittext_location)
         saveBTN =  view.findViewById(R.id.button_saveButtonn)
