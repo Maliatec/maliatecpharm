@@ -46,12 +46,23 @@
         android:id="@+id/vitalSignsFragment"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentVitalSigns"
         android:label="My vital signs"
-        tools:layout="@layout/fragment_vitalsigns" />
+        tools:layout="@layout/fragment_vitalsigns" >
+        <action
+            android:id="@+id/action_vitalSignsFragment_to_addVitalSignsFragment"
+            app:destination="@id/addVitalSignsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addVitalSignsFragment"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddVitalSigns"
+        android:label="Add Vital Signs"
+        tools:layout="@layout/fragment_vital_signs" />
+
     <fragment
         android:id="@+id/addMedicationFragment"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.Fragment_Add_Medication"
         android:label="fragment_add_medication"
         tools:layout="@layout/fragment_add_medication" />
+
 
 
 </navigation>

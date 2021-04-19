@@ -1,7 +1,9 @@
 package com.maliatecpharm.activity.mainmenu.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns.EMAIL_ADDRESS
+import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.maliatecpharm.R
@@ -9,6 +11,7 @@ import com.maliatecpharm.R
 class ActivityForgotMyPass: AppCompatActivity()
 {
     lateinit var etEmail: EditText
+    private lateinit var login: Button
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -17,17 +20,18 @@ class ActivityForgotMyPass: AppCompatActivity()
 
         viewInitializations()
         validateInput()
+        setOnBtnClicked()
     }
 
     fun viewInitializations()
     {
         etEmail = findViewById(R.id.et_email)
+        login = findViewById(R.id.bt_signup)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun validateInput(): Boolean
     {
-
         if (etEmail.text.toString().equals(""))
         {
             etEmail.setError("Please Enter Email")
@@ -46,4 +50,10 @@ class ActivityForgotMyPass: AppCompatActivity()
         return EMAIL_ADDRESS.matcher(email).matches()
     }
 
+    private fun setOnBtnClicked()
+    {
+        login.setOnClickListener {
+            startActivity(Intent(this, ActivityMainMenu::class.java))
+        }
+    }
 }

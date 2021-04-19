@@ -1,6 +1,5 @@
 package com.maliatecpharm.activity.mainmenu.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,49 +13,41 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.adapter.AdapterItemInteraction
-import com.maliatecpharm.activity.mainmenu.adapter.VitalSignsAdapter
+import com.maliatecpharm.activity.mainmenu.adapter.MedFriendAdapter
 import com.maliatecpharm.activity.mainmenu.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
-class FragmentVitalSigns : Fragment()
+class FragmentListOfFriends : Fragment()
 {
     val adapter by lazy {
-        VitalSignsAdapter()
+        MedFriendAdapter()
     }
 
-    private val vitalDao: VitalSignsDao by lazy {
-        AppDataBase.getDataBase(requireContext()).vitalDao()
+    private val friendDao: FriendDao by lazy {
+        AppDataBase.getDataBase(requireContext()).friendDao()
     }
 
-    private lateinit var addButton: FloatingActionButton
-    private lateinit var vitalRecyclerView: RecyclerView
+    private lateinit var actionBtn: FloatingActionButton
+    private lateinit var friendRecyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View?
     {
-        val view = inflater.inflate(R.layout.fragment_vitalsigns, container, false)
-        addButton = view.findViewById(R.id.button_addButton)
-        vitalRecyclerView = view.findViewById(R.id.recyclerView_Vitalsigns)
+        val view = inflater.inflate(R.layout.fragment_list_friends, container, false)
 
-        setOnButtonClicked()
+        actionBtn = view.findViewById(R.id.fab)
+        friendRecyclerView = view.findViewById(R.id.recyclerView_medfriend)
+
         setUpSwipeToDelete()
-        vitalRecyclerView()
-        showVitals()
+        onBtnClicked()
+        friendlistRecyclerView()
+        showFriends()
 
-        //        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_MoreFragment_to_HomeFragment)}
         return view
-    }
-
-    private fun setOnButtonClicked()
-    {
-        addButton.setOnClickListener {
-            findNavController().navigate(R.id.action_vitalSignsFragment_to_addVitalSignsFragment)
-        }
     }
 
     private fun setUpSwipeToDelete()
@@ -69,30 +60,38 @@ class FragmentVitalSigns : Fragment()
         {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int)
             {
-                val vitalId = adapter.delete(viewHolder.adapterPosition)
+                val friendId = adapter.delete(viewHolder.adapterPosition)
                 lifecycleScope.launch(Dispatchers.IO) {
-                    vitalDao.deleteVitalById(vitalId)
+                    friendDao.deleteFriendById(friendId)
                 }
             }
         }
         val itemTouchHelper = ItemTouchHelper(item)
-        itemTouchHelper.attachToRecyclerView(vitalRecyclerView)
-    }
-    private fun vitalRecyclerView()
-    {
-        vitalRecyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        vitalRecyclerView.adapter = adapter
+        itemTouchHelper.attachToRecyclerView(friendRecyclerView)
     }
 
-    private fun showVitals()
+    private fun onBtnClicked()
+    {
+        actionBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentlistfriend_to_fragmentMedFriend)
+        }
+    }
+
+    private fun friendlistRecyclerView()
+    {
+        friendRecyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        friendRecyclerView.adapter = adapter
+    }
+
+    private fun showFriends()
     {
         lifecycleScope.launch(Dispatchers.IO) {
-            val vitalList: List<VitalEntity> = vitalDao.readAllData()
-            val vitalModels: List<VitalUiModel> = vitalList.map { vitalEntity ->
-                vitalEntity.toUserUiModel()
+            val friendsList: List<FriendEntity> = friendDao.readAllData()
+            val profileModels: List<FriendUiModel> = friendsList.map { friendEntity ->
+                friendEntity.toUserUiModel()
             }
             withContext(Dispatchers.Main) {
-                adapter.updateList(vitalModels)
+                adapter.updateList(profileModels)
             }
         }
     }

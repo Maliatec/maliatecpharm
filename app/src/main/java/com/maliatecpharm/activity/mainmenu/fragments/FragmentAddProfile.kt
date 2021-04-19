@@ -139,18 +139,14 @@ class FragmentAddProfile : Fragment(),
             enterMail.setError("Please Enter Email")
             return false
         }
-
         if (enterPhone.text.toString().equals("")) {
             enterPhone.setError("Please Enter Contact No")
             return false
         }
-
-        // checking the proper email format
         if (!isEmailValid(enterMail.text.toString())) {
             enterMail.setError("Please Enter Valid Email")
             return false
         }
-
         return true
     }
 

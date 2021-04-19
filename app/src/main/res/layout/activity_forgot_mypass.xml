@@ -78,7 +78,6 @@
                 app:layout_constraintWidth_percent="0.7"
                 style="?android:attr/borderlessButtonStyle"
                 android:elevation="2dp"
-                android:onClick="performForgetPassword"
                 />
 
             <LinearLayout
@@ -116,7 +115,6 @@
                     android:background="@android:color/transparent"
                     android:textAllCaps="false"
                     android:text="Login"
-                    android:onClick="goToLogin"
 
                     />
 

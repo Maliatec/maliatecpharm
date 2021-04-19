@@ -162,11 +162,11 @@ class FragmentAddDoctor : Fragment(),
                 lifecycleScope.launch(Dispatchers.IO) {
                     doctorDao.addDoctor(doctor)
                 }
-                Toast.makeText(requireContext(), "Doctor name added. ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Doctor info added. ", Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
             }
             else
-                Toast.makeText(requireContext(), "Please enter a doctor name. ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please enter doctor info. ", Toast.LENGTH_SHORT).show()
         }
 
         private fun inputCheck(DrName: String, spec:String, nbr:String): Boolean

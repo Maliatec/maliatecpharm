@@ -57,8 +57,7 @@ class ActivityLogIn : AppCompatActivity()
     private fun setOnButtonClicked()
     {
         logInButton.setOnClickListener {
-            if (validateInput())
-            {
+
 
                 val email = username.text.toString()
                 val pass = password.text.toString()
@@ -85,7 +84,7 @@ class ActivityLogIn : AppCompatActivity()
                     }
                 }
             }
-        }
+
     }
 
     private fun setOnBtnClicked()

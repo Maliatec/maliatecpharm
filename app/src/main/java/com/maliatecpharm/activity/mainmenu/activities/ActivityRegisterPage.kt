@@ -25,7 +25,6 @@ import java.util.regex.Pattern
 
 class ActivityRegisterPage : AppCompatActivity()
 {
-
     private val userDao: UserDao by lazy {
         AppDataBase.getDataBase(this).userDao()
     }
@@ -67,9 +66,6 @@ class ActivityRegisterPage : AppCompatActivity()
         emails.forEach {
             Log.d("ActivityRegisterPage", "is valid email $it => ${isValidString(it)}")
         }
-
-
-
 
 //        awesomeValdiation = AwesomeValidation(ValidationStyle.BASIC)
 //        awesomeValdiation.addValidation(
@@ -116,8 +112,7 @@ class ActivityRegisterPage : AppCompatActivity()
     private fun setOnButtonClicked()
     {
         saveButton.setOnClickListener {
-            if (validateInput())
-            {
+
                 //            if (awesomeValdiation.validate())
                 //            {
                 //                Toast.makeText(this, "Form validate", Toast.LENGTH_SHORT).show()
@@ -130,7 +125,7 @@ class ActivityRegisterPage : AppCompatActivity()
                 //            else
                 //                Toast.makeText(this, "Validation failed", Toast.LENGTH_SHORT).show()
             }
-        }
+
     }
 
     fun validateInput(): Boolean {
@@ -142,32 +137,32 @@ class ActivityRegisterPage : AppCompatActivity()
             lastName.setError("Please Enter Last Name")
             return false
         }
+        if (password.text.toString().equals(""))
+        {
+            password.setError("Please Enter Password")
+            return false
+        }
+
         if (enterMail.text.toString().equals("")) {
             enterMail.setError("Please Enter Email")
             return false
         }
-        if (password.text.toString().equals("")) {
-            password.setError("Please Enter Password")
-            return false
-        }
+
         if (confirmPassword.text.toString().equals("")) {
             confirmPassword.setError("Please Enter Repeat Password")
             return false
         }
 
-        // checking the proper email format
         if (!isEmailValid(enterMail.text.toString())) {
             enterMail.setError("Please Enter Valid Email")
             return false
         }
 
-        // checking minimum password Length
         if (password.text.length < MIN_PASSWORD_LENGTH) {
             password.setError("Password Length must be more than " + MIN_PASSWORD_LENGTH + "characters")
             return false
         }
 
-        // Checking if repeat password is same
         if (!password.text.toString().equals(confirmPassword.text.toString())) {
             confirmPassword.setError("Password does not match")
             return false

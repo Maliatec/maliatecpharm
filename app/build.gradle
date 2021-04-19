@@ -76,6 +76,5 @@ dependencies {
     implementation 'com.basgeekball:awesome-validation:4.2'
     implementation "androidx.cardview:cardview:1.0.0"
     //noinspection GradleCompatible
-    implementation 'com.android.support:design:27.1.1'
-
-}
+    compile 'devs.mulham.horizontalcalendar:horizontalcalendar:1.0.0'
+    }

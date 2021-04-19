@@ -6,13 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [ProfileEntity::class, UserEntity::class,
-    MedicineEntity::class,DoctorsEntity::class],
+    MedicineEntity::class,DoctorsEntity::class, FriendEntity::class
+    , VitalEntity::class],
     version = 1, exportSchema = false)
 abstract class AppDataBase : RoomDatabase()
 {
     abstract fun userDao(): UserDao
     abstract fun medicineDao(): MedicineDao
     abstract fun doctorDao(): DoctorsDao
+    abstract fun friendDao(): FriendDao
+    abstract fun vitalDao(): VitalSignsDao
 
     companion object
     {
