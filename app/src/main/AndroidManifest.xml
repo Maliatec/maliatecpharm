@@ -54,6 +54,7 @@
         <activity android:name=".activity.mainmenu.activities.ActivityDoctors" />
         <activity android:name=".activity.mainmenu.activities.ActivityResetPassword" />
         <activity android:name=".activity.mainmenu.activities.ActivityForgotMyPass" />
+        <activity android:name=".activity.mainmenu.activities.ActivityAddDiagnosis" />
 
 
     </application>

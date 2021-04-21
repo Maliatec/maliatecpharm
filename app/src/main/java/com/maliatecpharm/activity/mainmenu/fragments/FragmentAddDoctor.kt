@@ -4,208 +4,266 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.data.AppDataBase
 import com.maliatecpharm.activity.mainmenu.data.DoctorsDao
 import com.maliatecpharm.activity.mainmenu.data.DoctorsEntity
+import com.maliatecpharm.activity.mainmenu.uimodel.DoctorsUiModel
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
+
 
 class FragmentAddDoctor : Fragment(),
     TimePickerDialog.OnTimeSetListener
-    {
-        private val doctorDao: DoctorsDao by lazy {
-            AppDataBase.getDataBase(requireContext()).doctorDao()
-        }
+{
+    private val doctorDao: DoctorsDao by lazy {
+        AppDataBase.getDataBase(requireContext()).doctorDao()
+    }
 
-        private lateinit var doctorsNameSpinner: SearchableSpinner
-        private lateinit var btnTimePicker: Button
-        private lateinit var appointmentDate: TextView
-        private lateinit var doctorsSpecialitySpinner: SearchableSpinner
-        private lateinit var mobileNbr: EditText
-        private lateinit var officeNbr: EditText
-        private lateinit var email: EditText
-        private lateinit var location: EditText
-        private lateinit var saveBTN: Button
-        private lateinit var enterDrName: EditText
-        private lateinit var drSpec: EditText
+    private lateinit var doctorsNameSpinner: SearchableSpinner
+    private lateinit var btnTimePicker: Button
+    private lateinit var appointmentDate: TextView
+    private lateinit var doctorsSpecialitySpinner: SearchableSpinner
+    private lateinit var mobileNbr: EditText
+    private lateinit var officeNbr: EditText
+    private lateinit var email: EditText
+    private lateinit var location: EditText
+    private lateinit var saveBTN: Button
+    private lateinit var enterDrName: EditText
+    private lateinit var drSpec: EditText
+    private lateinit var addDrNameBtn: Button
+    private lateinit var getDrSpec: String
+    private lateinit var addDrSpecBtn: Button
 
-        private val DoctorsNameList = arrayOf(
-            "Dr X", "Dr Y", "Dr Z", "Other"
-        )
+    private lateinit var doctorLiveData: LiveData<List<DoctorsEntity>>
 
-        private val DoctorsSpecialityList = arrayOf(
-            "Allergy and Immunology",
-            "Anesthesiology", "Dermatology", "Diagnostic radiology",
-            "Emergency medicine", "Family medicine",
-            "Internal medicine", "Medical genetics"
-        )
+    private val DoctorsSpecialityList = mutableListOf<String>(
+        "Allergy and Immunology",
+        "Anesthesiology", "Dermatology", "Diagnostic radiology",
+        "Emergency medicine", "Family medicine",
+        "Internal medicine", "Medical genetics"
+    )
 
-        var Day = 0
-        var Month = 0
-        var Year = 0
-        var Hour = 0
-        var Minute = 0
+    var Day = 0
+    var Month = 0
+    var Year = 0
+    var Hour = 0
+    var Minute = 0
 
-        var SavedDay = 0
-        var SavedMonth = 0
-        var SavedYear = 0
-        var SavedHour = 0
-        var SavedMinute = 0
+    var pickedSpeciality = ""
+    var SavedDay = 0
+    var SavedMonth = 0
+    var SavedYear = 0
+    var SavedHour = 0
+    var SavedMinute = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View?
     {
-       val view =  inflater.inflate(R.layout.fragment_add_doctor, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_doctor, container, false)
 
         enterDrName = view.findViewById(R.id.enterDrName)
-        doctorsNameSpinner =  view.findViewById(R.id.spinner_doctorsNameSpinner)
+        doctorsNameSpinner = view.findViewById(R.id.spinner_doctorsNameSpinner)
         drSpec = view.findViewById(R.id.enterDrSpec)
-        btnTimePicker =  view.findViewById(R.id.button_timePickerBtn1)
-        appointmentDate =  view.findViewById(R.id.textview_appointmentTime)
-        doctorsSpecialitySpinner =  view.findViewById(R.id.spinner_specialitySpinner)
-        mobileNbr =  view.findViewById(R.id.edittext_mobilePhone)
-        officeNbr =  view.findViewById(R.id.edittext_officePhone)
-        email =  view.findViewById(R.id.edittext_email)
+        btnTimePicker = view.findViewById(R.id.button_timePickerBtn1)
+        appointmentDate = view.findViewById(R.id.textview_appointmentTime)
+        doctorsSpecialitySpinner = view.findViewById(R.id.spinner_specialitySpinner)
+        mobileNbr = view.findViewById(R.id.edittext_mobilePhone)
+        officeNbr = view.findViewById(R.id.edittext_officePhone)
+        email = view.findViewById(R.id.edittext_email)
         location = view.findViewById(R.id.edittext_location)
-        saveBTN =  view.findViewById(R.id.button_saveButtonn)
+        saveBTN = view.findViewById(R.id.button_saveButtonn)
+        addDrNameBtn = view.findViewById(R.id.AddDrName)
+        addDrSpecBtn = view.findViewById(R.id.AddDrSpec)
 
-        doctorsNameSpinner()
         specialitySpinner()
         pickSDate()
         onSaveClickListener()
         getAppointmentDateTimeCalendar()
         linkSpecsSpinnerToEditText()
         linkNamesSpinnerToEditText()
-    return view
+        addNewSpecDr()
+
+        return view
     }
 
-        private fun doctorsNameSpinner()
-        {
-            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, DoctorsNameList)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            doctorsNameSpinner.adapter = adapter
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
+        super.onViewCreated(view, savedInstanceState)
+        linkSpinnerToDoctorsDb()
+        addNewDr()
+    }
 
-        private fun specialitySpinner()
-        {
-            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, DoctorsSpecialityList)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            doctorsSpecialitySpinner.adapter = adapter
-        }
-
-        private fun getAppointmentDateTimeCalendar()
-        {
-            val cal = Calendar.getInstance()
-            Day = cal.get(Calendar.DAY_OF_MONTH)
-            Month = cal.get(Calendar.MONTH)
-            Year = cal.get(Calendar.YEAR)
-            Hour = cal.get(Calendar.HOUR)
-            Minute = cal.get(Calendar.MINUTE)
-        }
-        private fun pickSDate()
-        {
-            btnTimePicker.setOnClickListener {
-                getAppointmentDateTimeCalendar()
-
-                DatePickerDialog(requireContext(), fromListener, Year, Month, Day)
-                    .show()
+    private fun linkSpinnerToDoctorsDb()
+    {
+        doctorLiveData = doctorDao.readAllDoctors()
+        doctorLiveData.observe(viewLifecycleOwner, { dbDoctors ->
+            val drUpdatedList = dbDoctors.map { doctorsEntity ->
+                doctorsEntity.drName
             }
-        }
 
-        val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+            val doctorsAdapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                drUpdatedList
+            ).apply {
+                setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
+            doctorsNameSpinner.adapter = doctorsAdapter
+        })
+    }
 
-            SavedDay = dayOfMonth
-            SavedMonth = month
-            SavedYear = year
+    private fun specialitySpinner()
+    {
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, DoctorsSpecialityList)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        doctorsSpecialitySpinner.adapter = adapter
+    }
 
+    private fun getAppointmentDateTimeCalendar()
+    {
+        val cal = Calendar.getInstance()
+        Day = cal.get(Calendar.DAY_OF_MONTH)
+        Month = cal.get(Calendar.MONTH)
+        Year = cal.get(Calendar.YEAR)
+        Hour = cal.get(Calendar.HOUR)
+        Minute = cal.get(Calendar.MINUTE)
+    }
+
+    private fun pickSDate()
+    {
+        btnTimePicker.setOnClickListener {
             getAppointmentDateTimeCalendar()
 
-            TimePickerDialog(requireContext(), this, Hour, Minute, true).show()
+            DatePickerDialog(requireContext(), fromListener, Year, Month, Day)
+                .show()
         }
-
-        override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int)
-        {
-            SavedHour = hourOfDay
-            SavedMinute = minute
-
-            appointmentDate.text = "Appointment's Date: \n$SavedDay - $SavedMonth - $SavedYear \nAt: $SavedHour:$SavedMinute"
-        }
-
-        private fun onSaveClickListener()
-        {
-            saveBTN.setOnClickListener {
-                insertDrDataToDataBase()
-            }
-        }
-
-        private fun insertDrDataToDataBase()
-        {
-            val doctorName = enterDrName.text.toString()
-            val spec =drSpec.text.toString()
-            val nbr = mobileNbr.text.toString()
-
-            if (inputCheck(doctorName, spec,nbr))
-            {
-                val doctor = DoctorsEntity(doctorName, spec,nbr)
-                lifecycleScope.launch(Dispatchers.IO) {
-                    doctorDao.addDoctor(doctor)
-                }
-                Toast.makeText(requireContext(), "Doctor info added. ", Toast.LENGTH_SHORT).show()
-                findNavController().popBackStack()
-            }
-            else
-                Toast.makeText(requireContext(), "Please enter doctor info. ", Toast.LENGTH_SHORT).show()
-        }
-
-        private fun inputCheck(DrName: String, spec:String, nbr:String): Boolean
-        {
-            return !(TextUtils.isEmpty(DrName) && TextUtils.isEmpty(spec) && TextUtils.isEmpty(nbr))
-        }
-
-        private fun linkNamesSpinnerToEditText()
-        {
-            doctorsNameSpinner.onItemSelectedListener = object :
-                AdapterView.OnItemSelectedListener
-            {
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-                {
-                    enterDrName.setText(doctorsNameSpinner.selectedItem.toString())
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?)
-                {
-                }
-            }
-        }
-
-        private fun linkSpecsSpinnerToEditText()
-        {
-            doctorsSpecialitySpinner.onItemSelectedListener = object :
-                AdapterView.OnItemSelectedListener
-            {
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-                {
-                    drSpec.setText(doctorsSpecialitySpinner.selectedItem.toString())
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?)
-                {
-                }
-            }
-        }
-
     }
+
+    val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+        SavedDay = dayOfMonth
+        SavedMonth = month
+        SavedYear = year
+        getAppointmentDateTimeCalendar()
+        TimePickerDialog(requireContext(), this, Hour, Minute, true).show()
+    }
+
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int)
+    {
+        SavedHour = hourOfDay
+        SavedMinute = minute
+
+        appointmentDate.text = "Appointment's Date: \n$SavedDay - $SavedMonth - $SavedYear \nAt: $SavedHour:$SavedMinute"
+    }
+
+    private fun onSaveClickListener()
+    {
+        saveBTN.setOnClickListener {
+            insertDrDataToDataBase()
+        }
+    }
+
+    private fun insertDrDataToDataBase()
+    {
+        val doctorName = enterDrName.text.toString()
+        val spec = drSpec.text.toString()
+        val nbr = mobileNbr.text.toString()
+        val app = appointmentDate.text.toString()
+
+        if (inputCheck(doctorName, spec, nbr, app))
+        {
+            val doctor = DoctorsEntity(doctorName, spec, nbr, app)
+            lifecycleScope.launch(Dispatchers.IO) {
+                doctorDao.addDoctor(doctor)
+                withContext(Dispatchers.Main) {
+                    findNavController().popBackStack()
+                }
+            }
+        }
+        else
+            Toast.makeText(requireContext(), "Please enter doctor info. ", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun inputCheck(
+        DrName: String, spec: String, nbr: String, app: String
+    ): Boolean
+    {
+        return !(TextUtils.isEmpty(DrName) && TextUtils.isEmpty(spec)
+                && TextUtils.isEmpty(nbr) && TextUtils.isEmpty(app))
+    }
+
+    private fun linkNamesSpinnerToEditText()
+    {
+        doctorsNameSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+            {
+                enterDrName.setText(doctorsNameSpinner.selectedItem.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?)
+            {
+            }
+        }
+    }
+
+    private fun linkSpecsSpinnerToEditText()
+    {
+        doctorsSpecialitySpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+            {
+                pickedSpeciality = DoctorsSpecialityList.get(position)
+                drSpec.setText(pickedSpeciality)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?)
+            {
+            }
+        }
+    }
+
+    private fun addNewDr()
+    {
+        addDrNameBtn.setOnClickListener {
+            val doctorName = enterDrName.text.toString()
+
+            val doctorEntity = DoctorsEntity(
+                spec = pickedSpeciality,
+                drName = doctorName
+                )
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                doctorDao.addDoctor(doctorEntity)
+                withContext(Dispatchers.Main){
+                    Toast.makeText(requireContext(), "Doctor Added", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun addNewSpecDr()
+    {
+        addDrSpecBtn.setOnClickListener {
+            getDrSpec = drSpec.toString()
+            Toast.makeText(requireContext(), "Speciality Added", Toast.LENGTH_LONG).show()
+        }
+    }
+
+}

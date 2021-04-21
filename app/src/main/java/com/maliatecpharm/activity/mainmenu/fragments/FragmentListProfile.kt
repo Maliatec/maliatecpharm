@@ -1,11 +1,17 @@
 package com.maliatecpharm.activity.mainmenu.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.adapter.AdapterItemInteraction
+import com.maliatecpharm.activity.mainmenu.adapter.OnProfileClickListener
 import com.maliatecpharm.activity.mainmenu.adapter.ProfileListAdapter
 import com.maliatecpharm.activity.mainmenu.data.AppDataBase
 import com.maliatecpharm.activity.mainmenu.data.UserDao
@@ -22,23 +29,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FragmentListProfile : Fragment()
+class FragmentListProfile : Fragment(), OnProfileClickListener
 {
     val adapter by lazy {
-        ProfileListAdapter()
+        ProfileListAdapter(this)
     }
 
     private val userDao: UserDao by lazy {
         AppDataBase.getDataBase(requireContext()).userDao()
     }
-
     private lateinit var actionBtn: FloatingActionButton
     private lateinit var profileRecyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val view = inflater.inflate(R.layout.fragment_list_profile, container, false)
-
         actionBtn = view.findViewById(R.id.fab)
         profileRecyclerView = view.findViewById(R.id.recyclerView_Profile)
 
@@ -48,13 +53,11 @@ class FragmentListProfile : Fragment()
         showProfiles()
         return view
     }
-
-//    override fun onCreate(savedInstanceState: Bundle?)
-//    {
-//        super.onCreate(savedInstanceState)
-//        example()
-//    }
-
+    //    override fun onCreate(savedInstanceState: Bundle?)
+    //    {
+    //        super.onCreate(savedInstanceState)
+    //        example()
+    //    }
     private fun setUpSwipeToDelete()
     {
         val item = object : AdapterItemInteraction(
@@ -74,40 +77,37 @@ class FragmentListProfile : Fragment()
         val itemTouchHelper = ItemTouchHelper(item)
         itemTouchHelper.attachToRecyclerView(profileRecyclerView)
     }
-
     private fun onBtnClicked()
     {
         actionBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_fragmentListProfile_to_addFragment)
+            findNavController().navigate(R.id.action_fragmentListProfile_to_addProfileFragment)
         }
     }
-
     private fun listRecyclerView()
     {
         profileRecyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         profileRecyclerView.adapter = adapter
     }
-
-//    private inline fun applyIfOr(condition: ()->Boolean, ifBlock: () -> Unit, elseBlock: () -> Unit)
-//    {
-//        if (condition()) ifBlock() else elseBlock()
-//    }
-//
-//    private fun example()
-//    {
-//
-//        lifecycleScope.launch {
-//            for (i in 0..10) {
-//                applyIfOr({i % 2 == 0}, {
-//                    Toast.makeText(requireContext(),"even",Toast.LENGTH_SHORT).show()
-//                }, {
-//                    Toast.makeText(requireContext(),"odd",Toast.LENGTH_SHORT).show()
-//                })
-//
-//                delay(3000)
-//            }
-//        }
-//    }
+    //    private inline fun applyIfOr(condition: ()->Boolean, ifBlock: () -> Unit, elseBlock: () -> Unit)
+    //    {
+    //        if (condition()) ifBlock() else elseBlock()
+    //    }
+    //
+    //    private fun example()
+    //    {
+    //
+    //        lifecycleScope.launch {
+    //            for (i in 0..10) {
+    //                applyIfOr({i % 2 == 0}, {
+    //                    Toast.makeText(requireContext(),"even",Toast.LENGTH_SHORT).show()
+    //                }, {
+    //                    Toast.makeText(requireContext(),"odd",Toast.LENGTH_SHORT).show()
+    //                })
+    //
+    //                delay(3000)
+    //            }
+    //        }
+    //    }
 
     private fun showProfiles()
     {
@@ -120,6 +120,12 @@ class FragmentListProfile : Fragment()
                 adapter.updateList(profileModels)
             }
         }
+    }
+
+    override fun onItemClick(profile: ProfileUiModel, position: Int)
+    {
+        val bundle = bundleOf("profileId" to profile.id)
+        findNavController().navigate(R.id.action_fragmentListProfile_to_addProfileFragment,bundle)
     }
 }
 

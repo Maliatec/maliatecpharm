@@ -1,5 +1,6 @@
 package com.maliatecpharm.activity.mainmenu.data
 
+import android.text.Editable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -7,6 +8,13 @@ import androidx.room.PrimaryKey
 data class ProfileEntity(
     val firstName: String,
     val lastName: String,
+    val mail: String,
+    val phone: String,
+    val weight:String,
+    val height:String,
+    val age:String,
+    val gender:String,
+
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 )
@@ -14,6 +22,12 @@ data class ProfileEntity(
     fun toUserUiModel() = ProfileUiModel(
         id = id,
         firstName = firstName,
-        lastName = lastName
+        lastName = lastName,
+        mail = mail,
+        phone = phone,
+        height = height,
+        weight = weight,
+        age = age,
+        gender = gender,
     )
 }

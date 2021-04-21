@@ -58,7 +58,6 @@ class ActivityLogIn : AppCompatActivity()
     {
         logInButton.setOnClickListener {
 
-
                 val email = username.text.toString()
                 val pass = password.text.toString()
 

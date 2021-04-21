@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,13 +24,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FragmentListDoctors : Fragment()
+class FragmentListDoctors : Fragment(), DoctorsAdapter.OnDoctorClickListener
 {
     private lateinit var addButton: FloatingActionButton
     private lateinit var doctorsrv: RecyclerView
 
     val adapter by lazy {
-        DoctorsAdapter()
+        DoctorsAdapter(this)
     }
 
     private val doctorDao: DoctorsDao by lazy {
@@ -44,10 +48,15 @@ class FragmentListDoctors : Fragment()
 
         onBtnClicked()
         doctorsListRecyclerView()
-        showDoctors()
         setUpSwipeToDelete()
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
+        super.onViewCreated(view, savedInstanceState)
+        showDoctors()
     }
     //    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     //    {
@@ -67,7 +76,7 @@ class FragmentListDoctors : Fragment()
         addButton.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentListDoctors_to_fragmentAddDoctors)
         }
-        }
+    }
 
     private fun doctorsListRecyclerView()
     {
@@ -77,16 +86,13 @@ class FragmentListDoctors : Fragment()
 
     private fun showDoctors()
     {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val drList: List<DoctorsEntity> = doctorDao.readAllDoctors()
-            val drUpdatedList: List<DoctorsUiModel> = drList.map { doctorsEntity ->
+        val doctorsLiveData: LiveData<List<DoctorsEntity>> = doctorDao.readAllDoctors()
+        doctorsLiveData.observe(viewLifecycleOwner, {
+            val drUpdatedList: List<DoctorsUiModel> = it.map { doctorsEntity ->
                 doctorsEntity.toUserUiModel()
             }
-
-            withContext(Dispatchers.Main) {
-                adapter.updateList(drUpdatedList)
-            }
-        }
+            adapter.updateList(drUpdatedList)
+        })
     }
 
     private fun setUpSwipeToDelete()
@@ -107,5 +113,11 @@ class FragmentListDoctors : Fragment()
         }
         val itemTouchHelper = ItemTouchHelper(item)
         itemTouchHelper.attachToRecyclerView(doctorsrv)
+    }
+
+    override fun onItemClick(doctor: DoctorsUiModel, position: Int)
+    {
+        val bundle = bundleOf("doctorId" to doctor.id)
+        findNavController().navigate(R.id.action_fragmentListDoctors_to_fragmentAddDoctors,bundle)
     }
 }

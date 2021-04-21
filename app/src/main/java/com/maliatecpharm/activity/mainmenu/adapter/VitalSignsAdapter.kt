@@ -6,16 +6,25 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
+import com.maliatecpharm.activity.mainmenu.data.ProfileUiModel
 import com.maliatecpharm.activity.mainmenu.data.VitalUiModel
 
-class VitalSignsAdapter: RecyclerView.Adapter<VitalSignsAdapter.MyViewHolder>()
+class VitalSignsAdapter (var clickListener: OnVitalClickListener): RecyclerView.Adapter<VitalSignsAdapter.MyViewHolder>()
 {
     private var vitalList = listOf<VitalUiModel>()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-        val firstName: TextView = itemView.findViewById(R.id.firstNametxt)
+        val time: TextView = itemView.findViewById(R.id.firstNametxt)
 
+        fun initialize(vitalList:VitalUiModel, action:OnVitalClickListener)
+        {
+            time.text = vitalList.time
+
+            itemView.setOnClickListener {
+                action.onItemClick(vitalList,adapterPosition)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
@@ -25,9 +34,10 @@ class VitalSignsAdapter: RecyclerView.Adapter<VitalSignsAdapter.MyViewHolder>()
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        val currentItem = vitalList[position]
-        holder.firstName.text = currentItem.firstName
+//        val currentItem = vitalList[position]
+  //      holder.firstName.text = currentItem.firstName
 
+        holder.initialize(vitalList.get(position), clickListener)
     }
     override fun getItemCount(): Int
     {
@@ -55,5 +65,13 @@ class VitalSignsAdapter: RecyclerView.Adapter<VitalSignsAdapter.MyViewHolder>()
         updateList(newList)
         return id
     }
+
+
+
+}
+
+interface OnVitalClickListener
+{
+    fun onItemClick(vital: VitalUiModel, position: Int)
 
 }

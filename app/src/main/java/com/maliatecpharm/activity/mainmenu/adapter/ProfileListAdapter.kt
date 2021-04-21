@@ -8,14 +8,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.data.ProfileUiModel
 
-class ProfileListAdapter : RecyclerView.Adapter<ProfileListAdapter.MyViewHolder>()
+class ProfileListAdapter( var clickListener: OnProfileClickListener) : RecyclerView.Adapter<ProfileListAdapter.MyViewHolder>()
 {
-    private var userList = listOf<ProfileUiModel>()
+    private var profileList = listOf<ProfileUiModel>()
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class MyViewHolder(itemView: View)
+        : RecyclerView.ViewHolder(itemView)
     {
          val firstName:TextView = itemView.findViewById(R.id.firstNametxt)
          val lastName:TextView = itemView.findViewById(R.id.lastNametxt)
+
+        fun initialize(userList:ProfileUiModel, action:OnProfileClickListener)
+        {
+            firstName.text = userList.firstName
+            lastName.text = userList.lastName
+
+            itemView.setOnClickListener {
+                action.onItemClick(userList,adapterPosition)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
@@ -23,28 +34,31 @@ class ProfileListAdapter : RecyclerView.Adapter<ProfileListAdapter.MyViewHolder>
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.profile_row, parent, false))
     }
 
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        val currentItem = userList[position]
-        holder.firstName.text  = currentItem.firstName
-        holder.lastName.text = currentItem.lastName
+//        val currentItem = userList[position]
+//        holder.firstName.text  = currentItem.firstName
+//        holder.lastName.text = currentItem.lastName
+
+        holder.initialize(profileList.get(position), clickListener)
     }
 
     override fun getItemCount(): Int
     {
-        return userList.size
+        return profileList.size
     }
 
     fun updateList(profileList: List<ProfileUiModel>)
     {
-        this.userList = profileList
+        this.profileList = profileList
         notifyDataSetChanged()
     }
 
     fun delete(adapterPosition: Int): Int
     {
         var id = 0
-        val newList = userList.filterIndexed { index, item ->
+        val newList = profileList.filterIndexed { index, item ->
             if (adapterPosition != index) true
             else {
                 id = item.id
@@ -55,4 +69,10 @@ class ProfileListAdapter : RecyclerView.Adapter<ProfileListAdapter.MyViewHolder>
         updateList(newList)
         return id
     }
+}
+
+interface OnProfileClickListener
+{
+fun onItemClick(profile:ProfileUiModel, position: Int)
+
 }

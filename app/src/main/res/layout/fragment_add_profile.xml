@@ -47,20 +47,20 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <TextView
-            android:id="@+id/layout_first_name"
-            android:layout_width="match_parent"
-            app:layout_constraintWidth_percent="0.7"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="14dp"
-            android:text="First name"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColorHint="#808080"
-            android:textSize="16sp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/layout_first_name"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:layout_constraintWidth_percent="0.7"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:text="First name"-->
+<!--            android:gravity="center"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColorHint="#808080"-->
+<!--            android:textSize="16sp"-->
+<!--            />-->
 
         <EditText
             android:id="@+id/edittext_firstName"
@@ -78,20 +78,20 @@
           >
         </EditText>
 
-        <TextView
-            android:id="@+id/layout_last_name"
-            android:layout_width="match_parent"
-            app:layout_constraintWidth_percent="0.7"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="14dp"
-            android:text="Last name"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColorHint="#808080"
-            android:textSize="16sp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/layout_last_name"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:layout_constraintWidth_percent="0.7"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:text="Last name"-->
+<!--            android:gravity="center"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColorHint="#808080"-->
+<!--            android:textSize="16sp"-->
+<!--            />-->
 
         <EditText
             android:id="@+id/edittext_lastName"
@@ -154,6 +154,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="70dp" />
+
+            <EditText
+                android:id="@+id/etgender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -182,20 +189,21 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/textview_Weight"
-            android:layout_width="match_parent"
-            app:layout_constraintWidth_percent="0.7"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="14dp"
-            android:text="Weight"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColorHint="#808080"
-            android:textSize="16sp"
-            />
+
+<!--        <TextView-->
+<!--            android:id="@+id/textview_Weight"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:layout_constraintWidth_percent="0.7"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:text="Weight"-->
+<!--            android:gravity="center"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColorHint="#808080"-->
+<!--            android:textSize="16sp"-->
+<!--            />-->
 
         <EditText
             android:id="@+id/edittext_weight"
@@ -212,20 +220,20 @@
             android:textSize="15sp"
              />
 
-        <TextView
-            android:id="@+id/textview_Height"
-            android:layout_width="match_parent"
-            app:layout_constraintWidth_percent="0.7"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="14dp"
-            android:text="Weight"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColorHint="#808080"
-            android:textSize="16sp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/textview_Height"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:layout_constraintWidth_percent="0.7"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:text="Weight"-->
+<!--            android:gravity="center"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColorHint="#808080"-->
+<!--            android:textSize="16sp"-->
+<!--            />-->
 
 
         <EditText
@@ -243,20 +251,20 @@
             android:textSize="15sp"
             />
 
-        <TextView
-            android:id="@+id/textview_phoneNbr"
-            android:layout_width="match_parent"
-            app:layout_constraintWidth_percent="0.7"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="14dp"
-            android:text="Phone number"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColorHint="#808080"
-            android:textSize="16sp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/textview_phoneNbr"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:layout_constraintWidth_percent="0.7"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:text="Phone number"-->
+<!--            android:gravity="center"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColorHint="#808080"-->
+<!--            android:textSize="16sp"-->
+<!--            />-->
 
         <EditText
             android:id="@+id/edittext_phone"
@@ -274,20 +282,20 @@
             android:textSize="15sp"
             />
 
-        <TextView
-            android:id="@+id/textview_mail"
-            android:layout_width="match_parent"
-            app:layout_constraintWidth_percent="0.7"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="14dp"
-            android:text="Phone number"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColorHint="#808080"
-            android:textSize="16sp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/textview_mail"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:layout_constraintWidth_percent="0.7"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:text="Phone number"-->
+<!--            android:gravity="center"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColorHint="#808080"-->
+<!--            android:textSize="16sp"-->
+<!--            />-->
 
 
         <EditText

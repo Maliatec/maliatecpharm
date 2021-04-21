@@ -1,5 +1,6 @@
 package com.maliatecpharm.activity.mainmenu.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,7 +13,7 @@ interface DoctorsDao
     suspend fun addDoctor(doctorsEntity: DoctorsEntity)
 
     @Query("SELECT * FROM doctors ORDER BY id ASC")
-    suspend fun readAllDoctors() :List<DoctorsEntity>
+    fun readAllDoctors() : LiveData<List<DoctorsEntity>>
 
     @Query("DELETE FROM doctors WHERE id = :drId")
     suspend fun deleteDoctorById(drId: Int)

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.adapter.AdapterItemInteraction
+import com.maliatecpharm.activity.mainmenu.adapter.OnProfileClickListener
+import com.maliatecpharm.activity.mainmenu.adapter.OnVitalClickListener
 import com.maliatecpharm.activity.mainmenu.adapter.VitalSignsAdapter
 import com.maliatecpharm.activity.mainmenu.data.*
 import kotlinx.coroutines.Dispatchers
@@ -21,11 +24,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class FragmentVitalSigns : Fragment()
+class FragmentVitalSigns : Fragment(), OnVitalClickListener
 {
     val adapter by lazy {
-        VitalSignsAdapter()
+        VitalSignsAdapter(this)
     }
+
 
     private val vitalDao: VitalSignsDao by lazy {
         AppDataBase.getDataBase(requireContext()).vitalDao()
@@ -96,5 +100,9 @@ class FragmentVitalSigns : Fragment()
             }
         }
     }
-
+    override fun onItemClick(vital: VitalUiModel, position: Int)
+    {
+        val bundle = bundleOf("vitalId" to vital.id)
+        findNavController().navigate(R.id.action_vitalSignsFragment_to_addVitalSignsFragment,bundle)
+    }
 }

@@ -113,22 +113,30 @@ class ActivityRegisterPage : AppCompatActivity()
     {
         saveButton.setOnClickListener {
 
-                //            if (awesomeValdiation.validate())
-                //            {
-                //                Toast.makeText(this, "Form validate", Toast.LENGTH_SHORT).show()
+                            if (validateInput())
+                            {
+                                Toast.makeText(this, "Form validate", Toast.LENGTH_SHORT).show()
                 val email = enterMail.text.toString()
                 val pass = password.text.toString()
                 saveUserToDb(email = email, password = pass)
                 startActivity(Intent(this@ActivityRegisterPage, ActivityMainMenu::class.java))
 
-                //            }
-                //            else
-                //                Toast.makeText(this, "Validation failed", Toast.LENGTH_SHORT).show()
+                            }
+                            else
+                                Toast.makeText(this, "Validation failed", Toast.LENGTH_SHORT).show()
             }
 
     }
 
     fun validateInput(): Boolean {
+        if (enterMail.text.toString().equals("")) {
+            enterMail.setError("Please Enter Email")
+            return false
+        }
+        if (!isEmailValid(enterMail.text.toString())) {
+            enterMail.setError("Please Enter Valid Email")
+            return false
+        }
         if (firstName.text.toString().equals("")) {
             firstName.setError("Please Enter First Name")
             return false
@@ -142,27 +150,14 @@ class ActivityRegisterPage : AppCompatActivity()
             password.setError("Please Enter Password")
             return false
         }
-
-        if (enterMail.text.toString().equals("")) {
-            enterMail.setError("Please Enter Email")
-            return false
-        }
-
-        if (confirmPassword.text.toString().equals("")) {
-            confirmPassword.setError("Please Enter Repeat Password")
-            return false
-        }
-
-        if (!isEmailValid(enterMail.text.toString())) {
-            enterMail.setError("Please Enter Valid Email")
-            return false
-        }
-
         if (password.text.length < MIN_PASSWORD_LENGTH) {
             password.setError("Password Length must be more than " + MIN_PASSWORD_LENGTH + "characters")
             return false
         }
-
+        if (confirmPassword.text.toString().equals("")) {
+            confirmPassword.setError("Please Enter Repeat Password")
+            return false
+        }
         if (!password.text.toString().equals(confirmPassword.text.toString())) {
             confirmPassword.setError("Password does not match")
             return false

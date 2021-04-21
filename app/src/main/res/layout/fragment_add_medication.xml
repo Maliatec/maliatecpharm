@@ -18,31 +18,32 @@
             android:layout_height="wrap_content"
             tools:text="Medication Name" />
 
-            <Spinner
-                android:id="@+id/spinner_medicinesList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="8dp">
+            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edittext_nameOfMedicine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/button_addBtn"
+            <Spinner
+                android:id="@+id/spinner_medicinesList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:text="Add" />
+                />
+
+        <ImageView
+            android:id="@+id/addImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/addicon"/>
+
+            <EditText
+                android:id="@+id/medicineName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"/>
 
         </LinearLayout>
+
 
         <TextView
             android:id="@+id/textview_nameOfDiseaseTextview"
@@ -50,22 +51,30 @@
             android:layout_height="wrap_content"
             android:text="Diagnosis" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="8dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
             <Spinner
                 android:id="@+id/spinner_diagnosisSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/edittext_nameOfDiagnosis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/addDiagnosisImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/addicon"/>
+
+        <EditText
+            android:id="@+id/diagnosis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
 
         <TextView
             android:id="@+id/textview_dosage"

@@ -1,7 +1,10 @@
 package com.maliatecpharm.activity.mainmenu.fragments
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -15,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.maliatecpharm.R
+import com.maliatecpharm.activity.mainmenu.activities.ActivityAddDiagnosis
+import com.maliatecpharm.activity.mainmenu.activities.ActivityMainMenu
 import com.maliatecpharm.activity.mainmenu.adapter.*
 import com.maliatecpharm.activity.mainmenu.data.AppDataBase
 import com.maliatecpharm.activity.mainmenu.data.MedicineDao
@@ -31,7 +36,8 @@ class Fragment_Add_Medication : Fragment(),
     MedicationTypeAdapter.MedicationTypeInteractor,
     DayNameAdapter.DayNameInteractor,
     AlarmCountAdapter.AlarmCountInteractor,
-    AdapterView.OnItemSelectedListener
+    AdapterView.OnItemSelectedListener,
+    DatePickerDialog.OnDateSetListener
 {
     private val medicineDao: MedicineDao by lazy {
         AppDataBase.getDataBase(requireContext()).medicineDao()
@@ -106,19 +112,18 @@ class Fragment_Add_Medication : Fragment(),
         Day(id = 7, name = "Saturday")
     )
 
-    private val medicinesList = arrayOf(
+    private val medicinesList = mutableListOf<String>(
         "Cyclophosphamide",
         "Panadol", "Paracetamol", "Aspirin",
         "Aspicot", "Prozac", "Dareq", "Oradus",
         "Advil", "EuroFer", "Other"
     )
 
-    private val conditionsList = arrayOf(
+    private val conditionsList = mutableListOf<String>(
         "Cancer", "Heart Disease", "Kidney problems",
         "Pulmonary Disease", "Rhumatism", "Bone Problems", "Immunity Problems",
         "Eyes Problems"
     )
-
 
     private lateinit var pillsSpinner: Spinner
     private lateinit var medicationName: TextView
@@ -149,25 +154,28 @@ class Fragment_Add_Medication : Fragment(),
     private lateinit var medicinesSpinner: Spinner
     private lateinit var medicineName: EditText
     val context = this
-    private lateinit var addBtn: Button
-    private lateinit var time1:TextView
-    private lateinit var time2 :TextView
 
+    private lateinit var time1: TextView
+    private lateinit var time2: TextView
+    private lateinit var getMedName: String
+    private lateinit var getDiagnosis: String
+    private lateinit var addImage: ImageView
+    private lateinit var addDiagImage: ImageView
 
-    var sHour = 0
-    var sMinute = 0
-
+    var sDay = 0
+    var sMonth = 0
+    var sYear = 0
+    var fDay = 0
+    var fMonth = 0
+    var fYear = 0
     var sSavedDay = 0
     var sSavedMonth = 0
     var sSavedYear = 0
-    var sSavedHour = 0
-    var sSavedMinute = 0
 
     var fSavedDay = 0
     var fSavedMonth = 0
     var fSavedYear = 0
-    var fSavedHour = 0
-    var fSavedMinute = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -178,10 +186,9 @@ class Fragment_Add_Medication : Fragment(),
 
         pillsSpinner = view.findViewById(R.id.spinner_pillsSpinner)
         medicationName = view.findViewById(R.id.textview_medicationName)
-        addBtn = view.findViewById(R.id.button_addBtn)
         diagnosis = view.findViewById(R.id.textview_nameOfDiseaseTextview)
         diagnosisSpinner = view.findViewById(R.id.spinner_diagnosisSpinner)
-        condition = view.findViewById(R.id.edittext_nameOfDiagnosis)
+        condition = view.findViewById(R.id.diagnosis)
         dosage = view.findViewById(R.id.textview_dosage)
         enterDosage = view.findViewById(R.id.edittext_dosage)
         instructionsTv = view.findViewById(R.id.textview_instructions)
@@ -204,9 +211,11 @@ class Fragment_Add_Medication : Fragment(),
         btn2Date = view.findViewById(R.id.button_timePickerbtn2)
         textDate2 = view.findViewById(R.id.textview_textTime2)
         medicinesSpinner = view.findViewById(R.id.spinner_medicinesList)
-        medicineName = view.findViewById(R.id.edittext_nameOfMedicine)
+        medicineName = view.findViewById(R.id.medicineName)
         time1 = view.findViewById(R.id.textview_Time1)
         time2 = view.findViewById(R.id.textview_Time2)
+        addImage = view.findViewById(R.id.addImage)
+        addDiagImage = view.findViewById(R.id.addDiagnosisImage)
 
         setupTextViews()
         medSpinner()
@@ -217,23 +226,61 @@ class Fragment_Add_Medication : Fragment(),
         populateTimeSpinner()
         setReminderSwitchListener()
         popRecyclerView()
-        setOnButtonClicked()
+      //  setOnButtonClicked()
         pickSDate()
         pickFDate()
         medicineNameSpinner()
         onSaveClickListener()
-        linkMedicinesSpinnerToEditText()
-        linkDiagnosisSpinnerToEditText()
+        onImageClickListener()
+        onImageeClickListener()
+
+
+        //  linkMedicinesSpinnerToEditText()
+        //   linkDiagnosisSpinnerToEditText()
+        //        addNewMedication()
+        //        addDiagnosis()
 
 
         return view
     }
 
+
+    private fun onImageClickListener()
+    {
+        addImage.setOnClickListener {
+            findNavController().navigate(R.id.action_addMedicationFragment_to_fragmentAddMedicine)
+        }
+    }
+
+    private fun onImageeClickListener()
+    {
+        addDiagImage.setOnClickListener {
+            startActivity(Intent(requireContext(), ActivityAddDiagnosis::class.java))
+        }
+    }
+
+    //    private fun addNewMedication()
+    //    {
+    //        addMedication.setOnClickListener {
+    //            getMedName = medicineName.toString()
+    //            medicinesList.add(getMedName)
+    //            Toast.makeText(requireContext(), "Medication Added", Toast.LENGTH_LONG).show()
+    //        }
+    //    }
+    //
+    //    private fun addDiagnosis()
+    //    {
+    //        addDiagnosis.setOnClickListener {
+    //            getDiagnosis = condition.toString()
+    //            conditionsList.add(getDiagnosis)
+    //            Toast.makeText(requireContext(), "Diagnosis Added", Toast.LENGTH_LONG).show()
+    //        }
+    //    }
+
     private fun onSaveClickListener()
     {
-        addBtn.setOnClickListener {
+        confirmButton.setOnClickListener {
             insertDataToDataBase()
-
         }
     }
 
@@ -290,20 +337,21 @@ class Fragment_Add_Medication : Fragment(),
         medicinesSpinner.adapter = adapter
     }
 
-    private fun linkMedicinesSpinnerToEditText()
-    {
-        medicinesSpinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener
-        {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-            {
-                medicineName.setText(medicinesSpinner.selectedItem.toString())
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?)
-            {
-            }
-        }
-    }
+    //    private fun linkMedicinesSpinnerToEditText()
+    //    {
+    //        medicinesSpinner.onItemSelectedListener = object :
+    //            AdapterView.OnItemSelectedListener
+    //        {
+    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+    //            {
+    //                medicineName.setText(medicinesSpinner.selectedItem.toString())
+    //            }
+    //
+    //            override fun onNothingSelected(parent: AdapterView<*>?)
+    //            {
+    //            }
+    //        }
+    //    }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
     {
@@ -320,21 +368,21 @@ class Fragment_Add_Medication : Fragment(),
         diagnosisSpinner.adapter = adapter
     }
 
-    private fun linkDiagnosisSpinnerToEditText()
-    {
-        diagnosisSpinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener
-        {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-            {
-                condition.setText(diagnosisSpinner.selectedItem.toString())
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?)
-            {
-            }
-        }
-    }
+    //    private fun linkDiagnosisSpinnerToEditText()
+    //    {
+    //        diagnosisSpinner.onItemSelectedListener = object :
+    //            AdapterView.OnItemSelectedListener
+    //        {
+    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+    //            {
+    //                condition.setText(diagnosisSpinner.selectedItem.toString())
+    //            }
+    //
+    //            override fun onNothingSelected(parent: AdapterView<*>?)
+    //            {
+    //            }
+    //        }
+    //    }
 
     private fun populateInstructionsRecycleView()
     {
@@ -362,7 +410,6 @@ class Fragment_Add_Medication : Fragment(),
         }
     }
 
-
     private fun populateTimeSpinner()
     {
         val times = alarmsCountList.map { item -> item.text }
@@ -370,7 +417,6 @@ class Fragment_Add_Medication : Fragment(),
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         timesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
         {
-
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -384,7 +430,6 @@ class Fragment_Add_Medication : Fragment(),
                 lastClickedAlarmCount = itemClicked.id
                 alarmCountAdapter.updateList(itemClicked.timeList)
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?)
             {
             }
@@ -410,8 +455,6 @@ class Fragment_Add_Medication : Fragment(),
             textDate1.visibility = visibility
             btn2Date.visibility = visibility
             textDate2.visibility = visibility
-
-
         }
     }
 
@@ -460,7 +503,6 @@ class Fragment_Add_Medication : Fragment(),
         tvSelectedDays.text = selectedDaysText
     }
 
-
     //        dayNameList.forEach { item ->
     //            if (item.id == day.id)
     //            {
@@ -502,94 +544,71 @@ class Fragment_Add_Medication : Fragment(),
         )
             .show()
     }
+//    private fun setOnButtonClicked()
+//    {
+//        confirmButton.setOnClickListener {
+//            //startActivity(Intent(this, Doctors::class.java))
+//        }
+//    }
 
-
-    private fun setOnButtonClicked()
+    private fun getSDateCalendar()
     {
-        confirmButton.setOnClickListener {
-            //startActivity(Intent(this, Doctors::class.java))
-        }
+        val cal = Calendar.getInstance()
+        sDay = cal.get(Calendar.DAY_OF_MONTH)
+        sMonth = cal.get(Calendar.MONTH)
+        sYear = cal.get(Calendar.YEAR)
     }
+
+    private fun getFDateCalendar()
+    {
+        val cal = Calendar.getInstance()
+        fDay = cal.get(Calendar.DAY_OF_MONTH)
+        fMonth = cal.get(Calendar.MONTH)
+        fYear = cal.get(Calendar.YEAR)
+    }
+
 
     private fun pickSDate()
     {
         btn1Date.setOnClickListener {
-
-            val cal = Calendar.getInstance()
-            val sDay = cal.get(Calendar.DAY_OF_MONTH)
-            val sMonth = cal.get(Calendar.MONTH)
-            val sYear = cal.get(Calendar.YEAR)
-
-            DatePickerDialog(requireContext(), fromListener, sYear, sMonth, sDay)
-                .show()
+            getSDateCalendar()
+            DatePickerDialog(requireContext(), fromListener, sYear, sMonth, sDay).show()
         }
     }
 
     private fun pickFDate()
     {
         btn2Date.setOnClickListener {
-
-            val cal = Calendar.getInstance()
-            val fDay = cal.get(Calendar.DAY_OF_MONTH)
-            val fMonth = cal.get(Calendar.MONTH)
-            val fYear = cal.get(Calendar.YEAR)
-
-            DatePickerDialog(requireContext(), toListener, fYear, fMonth, fDay)
-                .show()
+            getSDateCalendar()
+            DatePickerDialog(requireContext(), toListener, sYear, sMonth, sDay).show()
         }
     }
 
-    val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+    private val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
 
         sSavedDay = dayOfMonth
         sSavedMonth = month
         sSavedYear = year
-
-        val cal = Calendar.getInstance()
-        sHour = cal.get(Calendar.HOUR)
-        sMinute = cal.get(Calendar.MINUTE)
-        TimePickerDialog(requireContext(), fromTimeListener, sHour, sMinute, true).show()
+        getSDateCalendar()
+        textDate1.text = "From $sSavedDay - $sSavedMonth - $sSavedYear"
     }
 
-    val toListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+    private val toListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+
         fSavedDay = dayOfMonth
         fSavedMonth = month
         fSavedYear = year
-
-
-        val cal = Calendar.getInstance()
-        val fHour = cal.get(Calendar.HOUR)
-        val fMinute = cal.get(Calendar.MINUTE)
-
-        TimePickerDialog(requireContext(), toTimeListener, fHour, fMinute, true).show()
-
+        getFDateCalendar()
+        textDate2.text = "To $fSavedDay - $fSavedMonth - $fSavedYear"
     }
 
-    val fromTimeListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-        sSavedHour = hourOfDay
-        sSavedMinute = minute
-        textDate1.text = "Starting Date: \n$sSavedDay - $sSavedMonth - $sSavedYear \n "
-        time1.text = "$sSavedHour: $sSavedMinute"
+    override fun onDateSet(datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int)
+    {
+        sSavedDay = dayOfMonth
+        sSavedMonth = month
+        sSavedYear = year
+        textDate2.text = "$fSavedDay - $fSavedMonth - $fSavedYear"
     }
 
-    val toTimeListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-        fSavedHour = hourOfDay
-        fSavedMinute = minute
-        textDate2.text = "End Date: \n$fSavedDay - $fSavedMonth - $fSavedYear \n $fSavedHour: $fSavedMinute"
-        time2.text = "$sSavedHour: $sSavedMinute"
-    }
 }
-
-
-/// Regex
-
-//val emailRegex = "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
-//val elieEmail = "Elie@gmail.com"
-//
-//val valid = elieEmail.isEmailValid()
-//val valid2 = isValidEmail(elieEmail)
-//
-//// Extension funtion
-//fun String.isEmailValid(): Boolean = matches(Regex(emailRegex))
-//fun isValidEmail(email: String): Boolean = email.matches(Regex(emailRegex))
 

@@ -10,9 +10,15 @@
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentListProfile"
         android:label="Add Profile"
         tools:layout="@layout/fragment_list_profile" >
+
         <action
-            android:id="@+id/action_fragmentListProfile_to_addFragment"
-            app:destination="@id/addProfileFragment" />
+            android:id="@+id/action_fragmentListProfile_to_addProfileFragment"
+            app:destination="@id/addProfileFragment">
+        <argument
+            android:name="profileId"
+            app:argType="integer"
+            android:defaultValue="1" />
+        </action>
     </fragment>
 
     <fragment

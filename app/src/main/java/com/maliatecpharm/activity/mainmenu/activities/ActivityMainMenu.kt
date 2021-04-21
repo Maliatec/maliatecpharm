@@ -25,18 +25,13 @@ import kotlinx.coroutines.withContext
 
 class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
-
-
     private val preferences: SharedPreferences by lazy {
         getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
     }
-
     private lateinit var toolbar: Toolbar
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var drawerNavigationView: NavigationView
-
-
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -59,26 +54,22 @@ class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
         drawerNavigationView = findViewById(R.id.nav_view)
         drawerNavigationView.setNavigationItemSelectedListener(this)
     }
-
     override fun onPostCreate(savedInstanceState: Bundle?)
     {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()
     }
-
     override fun onConfigurationChanged(newConfig: Configuration)
     {
         super.onConfigurationChanged(newConfig)
         toggle.onConfigurationChanged(newConfig)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
         if (toggle.onOptionsItemSelected(item))
         {
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -91,27 +82,21 @@ class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 startActivity(Intent(this, ActivityProfile::class.java))
 
             }
-
             R.id.medfriend ->
             {
                 startActivity(Intent(this, ActivityMedFriend::class.java))
             }
-
-
             R.id.settings ->
             {
                 startActivity(Intent(this, ActivitySettings::class.java))
             }
-
             R.id.logout ->
             {
                 logoutUser()
             }
         }
-
         return true
     }
-
     private fun logoutUser()
     {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -123,13 +108,11 @@ class ActivityMainMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
             }
         }
     }
-
     override fun onBackPressed()
     {
         if (!didDrawerClose())
         super.onBackPressed()
     }
-
     private fun didDrawerClose() = if (drawer.isDrawerOpen(GravityCompat.START))
     {
         drawer.close()

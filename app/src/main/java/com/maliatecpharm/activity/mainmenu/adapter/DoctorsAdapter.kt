@@ -10,7 +10,7 @@ import com.maliatecpharm.activity.mainmenu.data.ProfileUiModel
 import com.maliatecpharm.activity.mainmenu.uimodel.DoctorsUiModel
 import org.w3c.dom.Text
 
-class DoctorsAdapter: RecyclerView.Adapter<DoctorsAdapter.MyViewHolder>()
+class DoctorsAdapter(var clickListener: OnDoctorClickListener): RecyclerView.Adapter<DoctorsAdapter.MyViewHolder>()
 {
     private var doctorsList = listOf<DoctorsUiModel>()
 
@@ -19,7 +19,19 @@ class DoctorsAdapter: RecyclerView.Adapter<DoctorsAdapter.MyViewHolder>()
         val drName: TextView = itemView.findViewById(R.id.drNametv)
         val spec: TextView = itemView.findViewById(R.id.spectv)
         val nbr :TextView = itemView.findViewById(R.id.nbrtv)
+        val app :TextView = itemView.findViewById(R.id.apptv)
 
+        fun initialize(doctorList:DoctorsUiModel, action:OnDoctorClickListener)
+        {
+            drName.text = doctorList.doctorsName
+            spec.text = doctorList.spec
+            nbr.text = doctorList.nbr
+            app.text = doctorList.app
+
+            itemView.setOnClickListener {
+                action.onItemClick(doctorList,adapterPosition)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
@@ -29,10 +41,15 @@ class DoctorsAdapter: RecyclerView.Adapter<DoctorsAdapter.MyViewHolder>()
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        val currentItem = doctorsList[position]
-        holder.drName.text  = currentItem.doctorsName
-        holder.spec.text = currentItem.spec
-        holder.nbr.text = currentItem.nbr
+//        val currentItem = doctorsList[position]
+//        holder.drName.text  = currentItem.doctorsName
+//        holder.spec.text = currentItem.spec
+//        holder.nbr.text = currentItem.nbr
+//        holder.app.text = currentItem.app
+
+
+        holder.initialize(doctorsList.get(position), clickListener)
+
     }
 
     override fun getItemCount(): Int
@@ -60,4 +77,15 @@ class DoctorsAdapter: RecyclerView.Adapter<DoctorsAdapter.MyViewHolder>()
         updateList(newList)
         return id
     }
+
+    interface OnDoctorClickListener
+    {
+        fun onItemClick(doctor:DoctorsUiModel, position: Int)
+
+    }
+
+
+
+
+
 }

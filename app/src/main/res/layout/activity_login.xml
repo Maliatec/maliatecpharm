@@ -50,21 +50,21 @@
             android:layout_marginTop="24dp"
             />
 
-        <TextView
-            android:id="@+id/layout_email"
-            android:layout_width="match_parent"
-            app:layout_constraintWidth_percent="0.7"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Email"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:layout_marginTop="50dp"
-            android:textColorHint="#808080"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/layout_email"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:layout_constraintWidth_percent="0.7"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:text="Email"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="16sp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:textColorHint="#808080"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            />-->
 
     <EditText
         android:id="@+id/edittext_username"
@@ -85,21 +85,21 @@
         android:selectAllOnFocus="true"
   />
         
-        <TextView
-            android:id="@+id/layout_password"
-            android:layout_width="match_parent"
-            app:layout_constraintWidth_percent="0.7"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:text="Password"
-            android:textColorHint="#808080"
-            app:layout_constraintTop_toBottomOf="@+id/layout_email"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/layout_password"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:layout_constraintWidth_percent="0.7"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="16sp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Password"-->
+<!--            android:textColorHint="#808080"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/layout_email"-->
+<!--            />-->
 
     <EditText
         android:id="@+id/edittext_password"
@@ -123,22 +123,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <Button
-        android:id="@+id/button_loginBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Login"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        android:textAllCaps="false"
-        android:layout_marginTop="40dp"
-        app:layout_constraintWidth_percent="0.7"
-        style="?android:attr/borderlessButtonStyle"
-        android:elevation="2dp"
-        android:layout_marginHorizontal="16dp"
-        android:background="@color/teal_700"
-       />
+        <Button
+            android:id="@+id/button_loginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Login"
+            android:elevation="2dp"
+            android:layout_marginHorizontal="16dp"
+            tools:ignore="MissingConstraints"/>
 
         <Button
             android:id="@+id/button_resetMyPassBtn"
