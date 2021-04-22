@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [ProfileEntity::class, UserEntity::class,
     MedicineEntity::class,DoctorsEntity::class, FriendEntity::class
-    , VitalEntity::class],
+    , VitalEntity::class, CalendarEntity::class],
     version = 1, exportSchema = false)
 abstract class AppDataBase : RoomDatabase()
 {
@@ -16,6 +16,7 @@ abstract class AppDataBase : RoomDatabase()
     abstract fun doctorDao(): DoctorsDao
     abstract fun friendDao(): FriendDao
     abstract fun vitalDao(): VitalSignsDao
+    abstract fun calendarDao(): CalendarDao
 
     companion object
     {

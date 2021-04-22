@@ -13,7 +13,7 @@ data class ProfileEntity(
     val weight:String,
     val height:String,
     val age:String,
-    val gender:String,
+
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
@@ -28,6 +28,6 @@ data class ProfileEntity(
         height = height,
         weight = weight,
         age = age,
-        gender = gender,
+
     )
 }

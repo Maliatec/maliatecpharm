@@ -77,7 +77,6 @@ class FragmentListDoctors : Fragment(), DoctorsAdapter.OnDoctorClickListener
             findNavController().navigate(R.id.action_fragmentListDoctors_to_fragmentAddDoctors)
         }
     }
-
     private fun doctorsListRecyclerView()
     {
         doctorsrv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)

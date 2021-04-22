@@ -15,11 +15,20 @@ class VitalSignsAdapter (var clickListener: OnVitalClickListener): RecyclerView.
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-        val time: TextView = itemView.findViewById(R.id.firstNametxt)
+        val time: TextView = itemView.findViewById(R.id.timetxt)
+        val cholesterol: TextView = itemView.findViewById(R.id.cholesterol)
+        val fitness: TextView = itemView.findViewById(R.id.fitness)
+        val glucose: TextView = itemView.findViewById(R.id.glucose)
+        val bloodpressure: TextView = itemView.findViewById(R.id.bloodpressure)
+
 
         fun initialize(vitalList:VitalUiModel, action:OnVitalClickListener)
         {
             time.text = vitalList.time
+            cholesterol.text = vitalList.cholesterol
+            fitness.text = vitalList.fitness
+            glucose.text = vitalList.glucose
+            bloodpressure.text = vitalList.bloodpressure
 
             itemView.setOnClickListener {
                 action.onItemClick(vitalList,adapterPosition)
@@ -65,9 +74,6 @@ class VitalSignsAdapter (var clickListener: OnVitalClickListener): RecyclerView.
         updateList(newList)
         return id
     }
-
-
-
 }
 
 interface OnVitalClickListener

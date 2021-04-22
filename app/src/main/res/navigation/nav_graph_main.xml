@@ -14,17 +14,32 @@
     <fragment
         android:id="@+id/MedicationsFragment"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentListMedication"
-        android:label="Add Medications"
+        android:label="Medicine info"
         tools:layout="@layout/fragment_medication_list">
         <action
             android:id="@+id/action_MedicationsFragment_to_addMedicationFragment"
-            app:destination="@id/addMedicationFragment" />
+            app:destination="@id/addMedicationFragment">
+            <argument
+                android:name="medId"
+                app:argType="integer"
+                android:defaultValue="-1"/>
+
+        </action>
+        <action
+            android:id="@+id/action_MedicationsFragment_to_fragmentAddMedicine"
+            app:destination="@id/fragmentAddMedicine">
+
+            <argument
+                android:name="dateId"
+                app:argType="integer"
+                android:defaultValue="-1"/>
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/fragmentListDoctors"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentListDoctors"
-        android:label="List Doctors">
+        android:label="Appointments's info">
         <action
             android:id="@+id/action_fragmentListDoctors_to_fragmentAddDoctors"
             app:destination="@id/fragmentAddDoctors">
@@ -32,14 +47,14 @@
         <argument
             android:name="doctorId"
             app:argType="integer"
-            android:defaultValue="1" />
+            android:defaultValue="-1" />
         </action>
     </fragment>
 
     <fragment
         android:id="@+id/fragmentAddDoctors"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddDoctor"
-        android:label="Add Doctors"/>
+        android:label="Doctor info"/>
 
 
     <fragment
@@ -50,8 +65,8 @@
 
     <fragment
         android:id="@+id/vitalSignsFragment"
-        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentVitalSigns"
-        android:label="My vital signs"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentListVitalSigns"
+        android:label="Vital signs info"
         tools:layout="@layout/fragment_vitalsigns" >
         <action
             android:id="@+id/action_vitalSignsFragment_to_addVitalSignsFragment"
@@ -60,33 +75,37 @@
         <argument
             android:name="vitalId"
             app:argType="integer"
-            android:defaultValue="1" />
+            android:defaultValue="-1" />
         </action>
 
     </fragment>
     <fragment
         android:id="@+id/addVitalSignsFragment"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddVitalSigns"
-        android:label="Add Vital Signs"
+        android:label="Test result"
         tools:layout="@layout/fragment_vital_signs" />
 
     <fragment
         android:id="@+id/addMedicationFragment"
-        android:name="com.maliatecpharm.activity.mainmenu.fragments.Fragment_Add_Medication"
-        android:label="fragment_add_medication"
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddMedication"
+        android:label="Add medicine"
         tools:layout="@layout/fragment_add_medication" >
         <action
             android:id="@+id/action_addMedicationFragment_to_fragmentAddMedicine"
             app:destination="@id/fragmentAddMedicine" />
     </fragment>
+
     <fragment
         android:id="@+id/fragmentAddMedicine"
-        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddMedicine"
-        android:label="fragment_add_medicine"
-        tools:layout="@layout/fragment_add_medicine" >
+        android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddDate"
+        android:label="Schedule to take medicine"
+        tools:layout="@layout/fragment_add_date" >
         <action
-            android:id="@+id/action_fragmentAddMedicine_to_addMedicationFragment"
-            app:destination="@id/addMedicationFragment" />
+            android:id="@+id/action_fragmentAddMedicine_to_MedicationsFragment"
+            app:destination="@id/MedicationsFragment" >
+
+
+        </action>
     </fragment>
 
 

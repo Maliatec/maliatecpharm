@@ -8,23 +8,24 @@
     <fragment
         android:id="@+id/fragmentListProfile"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentListProfile"
-        android:label="Add Profile"
+        android:label="My profiles"
         tools:layout="@layout/fragment_list_profile" >
 
         <action
             android:id="@+id/action_fragmentListProfile_to_addProfileFragment"
             app:destination="@id/addProfileFragment">
+
         <argument
             android:name="profileId"
             app:argType="integer"
-            android:defaultValue="1" />
+            android:defaultValue="-1" />
         </action>
     </fragment>
 
     <fragment
         android:id="@+id/addProfileFragment"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddProfile"
-        android:label="fragment_add"
+        android:label="Add new profile"
         tools:layout="@layout/fragment_add_profile" >
         <action
             android:id="@+id/action_addProfileFragment_to_fragmentListProfile"

@@ -47,8 +47,8 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
         actionBtn = view.findViewById(R.id.fab)
         profileRecyclerView = view.findViewById(R.id.recyclerView_Profile)
 
-        setUpSwipeToDelete()
         onBtnClicked()
+        setUpSwipeToDelete()
         listRecyclerView()
         showProfiles()
         return view
@@ -58,6 +58,13 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
     //        super.onCreate(savedInstanceState)
     //        example()
     //    }
+    private fun onBtnClicked()
+    {
+        actionBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentListProfile_to_addProfileFragment)
+        }
+    }
+
     private fun setUpSwipeToDelete()
     {
         val item = object : AdapterItemInteraction(
@@ -77,12 +84,7 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
         val itemTouchHelper = ItemTouchHelper(item)
         itemTouchHelper.attachToRecyclerView(profileRecyclerView)
     }
-    private fun onBtnClicked()
-    {
-        actionBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_fragmentListProfile_to_addProfileFragment)
-        }
-    }
+
     private fun listRecyclerView()
     {
         profileRecyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -108,7 +110,6 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
     //            }
     //        }
     //    }
-
     private fun showProfiles()
     {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -121,7 +122,6 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
             }
         }
     }
-
     override fun onItemClick(profile: ProfileUiModel, position: Int)
     {
         val bundle = bundleOf("profileId" to profile.id)

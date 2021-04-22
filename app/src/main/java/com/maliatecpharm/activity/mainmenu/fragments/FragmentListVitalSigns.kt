@@ -24,12 +24,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class FragmentVitalSigns : Fragment(), OnVitalClickListener
+class FragmentListVitalSigns : Fragment(), OnVitalClickListener
 {
     val adapter by lazy {
         VitalSignsAdapter(this)
     }
-
 
     private val vitalDao: VitalSignsDao by lazy {
         AppDataBase.getDataBase(requireContext()).vitalDao()
@@ -55,14 +54,12 @@ class FragmentVitalSigns : Fragment(), OnVitalClickListener
         //        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_MoreFragment_to_HomeFragment)}
         return view
     }
-
     private fun setOnButtonClicked()
     {
         addButton.setOnClickListener {
             findNavController().navigate(R.id.action_vitalSignsFragment_to_addVitalSignsFragment)
         }
     }
-
     private fun setUpSwipeToDelete()
     {
         val item = object : AdapterItemInteraction(

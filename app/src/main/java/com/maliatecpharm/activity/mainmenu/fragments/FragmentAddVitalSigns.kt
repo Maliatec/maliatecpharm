@@ -94,6 +94,7 @@ class FragmentAddVitalSigns : Fragment(),
                 enterFitness.setText(it.fitness)
                 enterGlucose.setText(it.glucose)
                 enterPulse.setText(it.pulse)
+                enterBloodPressure.setText(it.bloodpressure)
                 enterQualityOfLife.setText(it.physicalact)
             }
         }
@@ -103,7 +104,6 @@ class FragmentAddVitalSigns : Fragment(),
     {
         if (validateInput())
         {
-
             val date = entertime.text.toString()
             val cholesterol = enterCholesterol.text.toString()
             val fitness = enterFitness.text.toString()

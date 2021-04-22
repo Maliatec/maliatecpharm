@@ -18,17 +18,16 @@ class ProfileListAdapter( var clickListener: OnProfileClickListener) : RecyclerV
          val firstName:TextView = itemView.findViewById(R.id.firstNametxt)
          val lastName:TextView = itemView.findViewById(R.id.lastNametxt)
 
-        fun initialize(userList:ProfileUiModel, action:OnProfileClickListener)
+        fun initialize(profileList:ProfileUiModel, action:OnProfileClickListener)
         {
-            firstName.text = userList.firstName
-            lastName.text = userList.lastName
+            firstName.text = profileList.firstName
+            lastName.text = profileList.lastName
 
             itemView.setOnClickListener {
-                action.onItemClick(userList,adapterPosition)
+                action.onItemClick(profileList,adapterPosition)
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
     {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.profile_row, parent, false))
@@ -73,6 +72,6 @@ class ProfileListAdapter( var clickListener: OnProfileClickListener) : RecyclerV
 
 interface OnProfileClickListener
 {
-fun onItemClick(profile:ProfileUiModel, position: Int)
+fun onItemClick(profile : ProfileUiModel, position: Int)
 
 }

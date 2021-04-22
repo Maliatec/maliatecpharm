@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.data.AppDataBase
 import com.maliatecpharm.activity.mainmenu.data.DoctorsDao
 import com.maliatecpharm.activity.mainmenu.data.DoctorsEntity
+import com.maliatecpharm.activity.mainmenu.data.ProfileEntity
 import com.maliatecpharm.activity.mainmenu.uimodel.DoctorsUiModel
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 import kotlinx.coroutines.Dispatchers
@@ -32,8 +34,8 @@ class FragmentAddDoctor : Fragment(),
         AppDataBase.getDataBase(requireContext()).doctorDao()
     }
 
-    private lateinit var doctorsNameSpinner: SearchableSpinner
-    private lateinit var btnTimePicker: Button
+    //  private lateinit var doctorsNameSpinner: SearchableSpinner
+    private lateinit var btnTimePicker: TextView
     private lateinit var appointmentDate: TextView
     private lateinit var doctorsSpecialitySpinner: SearchableSpinner
     private lateinit var mobileNbr: EditText
@@ -48,6 +50,9 @@ class FragmentAddDoctor : Fragment(),
     private lateinit var addDrSpecBtn: Button
 
     private lateinit var doctorLiveData: LiveData<List<DoctorsEntity>>
+
+    private var doctorEntity = DoctorsEntity("", "", "", "")
+
 
     private val DoctorsSpecialityList = mutableListOf<String>(
         "Allergy and Immunology",
@@ -71,13 +76,13 @@ class FragmentAddDoctor : Fragment(),
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View?
     {
         val view = inflater.inflate(R.layout.fragment_add_doctor, container, false)
 
         enterDrName = view.findViewById(R.id.enterDrName)
-        doctorsNameSpinner = view.findViewById(R.id.spinner_doctorsNameSpinner)
+        //doctorsNameSpinner = view.findViewById(R.id.spinner_doctorsNameSpinner)
         drSpec = view.findViewById(R.id.enterDrSpec)
         btnTimePicker = view.findViewById(R.id.button_timePickerBtn1)
         appointmentDate = view.findViewById(R.id.textview_appointmentTime)
@@ -87,16 +92,17 @@ class FragmentAddDoctor : Fragment(),
         email = view.findViewById(R.id.edittext_email)
         location = view.findViewById(R.id.edittext_location)
         saveBTN = view.findViewById(R.id.button_saveButtonn)
-        addDrNameBtn = view.findViewById(R.id.AddDrName)
-        addDrSpecBtn = view.findViewById(R.id.AddDrSpec)
+        // addDrNameBtn = view.findViewById(R.id.AddDrName)
+       // addDrSpecBtn = view.findViewById(R.id.AddDrSpec)
 
         specialitySpinner()
         pickSDate()
         onSaveClickListener()
         getAppointmentDateTimeCalendar()
-        linkSpecsSpinnerToEditText()
-        linkNamesSpinnerToEditText()
-        addNewSpecDr()
+        //  linkSpecsSpinnerToEditText()
+        // linkNamesSpinnerToEditText()
+        //  addNewSpecDr()
+        linkSpinnerToDoctorsDb()
 
         return view
     }
@@ -104,8 +110,18 @@ class FragmentAddDoctor : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
-        linkSpinnerToDoctorsDb()
-        addNewDr()
+        val doctorId = arguments?.getInt("doctorId") ?: -1
+        doctorDao.getDoctorsLiveData(doctorId).observe(viewLifecycleOwner) {
+
+            if (it != null)
+            {
+                doctorEntity = it
+                enterDrName.setText(it.drName)
+                drSpec.setText(it.spec)
+                mobileNbr.setText(it.nbr)
+                appointmentDate.setText(it.app)
+            }
+        }
     }
 
     private fun linkSpinnerToDoctorsDb()
@@ -113,7 +129,7 @@ class FragmentAddDoctor : Fragment(),
         doctorLiveData = doctorDao.readAllDoctors()
         doctorLiveData.observe(viewLifecycleOwner, { dbDoctors ->
             val drUpdatedList = dbDoctors.map { doctorsEntity ->
-                doctorsEntity.drName
+                doctorsEntity.spec
             }
 
             val doctorsAdapter = ArrayAdapter(
@@ -123,7 +139,7 @@ class FragmentAddDoctor : Fragment(),
             ).apply {
                 setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             }
-            doctorsNameSpinner.adapter = doctorsAdapter
+            doctorsSpecialitySpinner.adapter = doctorsAdapter
         })
     }
 
@@ -132,6 +148,20 @@ class FragmentAddDoctor : Fragment(),
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, DoctorsSpecialityList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         doctorsSpecialitySpinner.adapter = adapter
+
+        doctorsSpecialitySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+            {
+                Toast.makeText(requireContext(), "You selected${parent?.getItemAtPosition(position).toString()}",
+                    Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?)
+            {
+            }
+        }
+//        DoctorsSpecialityList.clear()
     }
 
     private fun getAppointmentDateTimeCalendar()
@@ -166,7 +196,6 @@ class FragmentAddDoctor : Fragment(),
     {
         SavedHour = hourOfDay
         SavedMinute = minute
-
         appointmentDate.text = "Appointment's Date: \n$SavedDay - $SavedMonth - $SavedYear \nAt: $SavedHour:$SavedMinute"
     }
 
@@ -179,18 +208,21 @@ class FragmentAddDoctor : Fragment(),
 
     private fun insertDrDataToDataBase()
     {
-        val doctorName = enterDrName.text.toString()
-        val spec = drSpec.text.toString()
-        val nbr = mobileNbr.text.toString()
-        val app = appointmentDate.text.toString()
-
-        if (inputCheck(doctorName, spec, nbr, app))
+        if (validateInput())
         {
-            val doctor = DoctorsEntity(doctorName, spec, nbr, app)
-            lifecycleScope.launch(Dispatchers.IO) {
-                doctorDao.addDoctor(doctor)
-                withContext(Dispatchers.Main) {
-                    findNavController().popBackStack()
+            val doctorName = enterDrName.text.toString()
+            val spec = drSpec.text.toString()
+            val nbr = mobileNbr.text.toString()
+            val app = appointmentDate.text.toString()
+
+            if (inputCheck(doctorName, spec, nbr, app))
+            {
+                val doctor = DoctorsEntity(doctorName, spec, nbr, app)
+                lifecycleScope.launch(Dispatchers.IO) {
+                    doctorDao.addDoctor(doctor)
+                    withContext(Dispatchers.Main) {
+                        findNavController().popBackStack()
+                    }
                 }
             }
         }
@@ -199,71 +231,95 @@ class FragmentAddDoctor : Fragment(),
     }
 
     private fun inputCheck(
-        DrName: String, spec: String, nbr: String, app: String
+        DrName: String, spec: String, nbr: String, app: String,
     ): Boolean
     {
         return !(TextUtils.isEmpty(DrName) && TextUtils.isEmpty(spec)
                 && TextUtils.isEmpty(nbr) && TextUtils.isEmpty(app))
     }
 
-    private fun linkNamesSpinnerToEditText()
+    fun validateInput(): Boolean
     {
-        doctorsNameSpinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener
+        if (enterDrName.text.toString().equals(""))
         {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-            {
-                enterDrName.setText(doctorsNameSpinner.selectedItem.toString())
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?)
-            {
-            }
+            enterDrName.setError("Please Enter First Name")
+            return false
         }
-    }
-
-    private fun linkSpecsSpinnerToEditText()
-    {
-        doctorsSpecialitySpinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener
+        if (drSpec.text.toString().equals(""))
         {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-            {
-                pickedSpeciality = DoctorsSpecialityList.get(position)
-                drSpec.setText(pickedSpeciality)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?)
-            {
-            }
+            drSpec.setError("Please Enter Last Name")
+            return false
         }
+        if (mobileNbr.text.toString().equals(""))
+        {
+            mobileNbr.setError("Please Enter Contact No")
+            return false
+        }
+
+        //        if (appointmentDate.text.toString().equals(""))
+        //        {
+        //            appointmentDate.setError("Please Enter Email")
+        //            return false
+        //        }
+        return true
     }
 
-    private fun addNewDr()
-    {
-        addDrNameBtn.setOnClickListener {
-            val doctorName = enterDrName.text.toString()
+    //    private fun linkNamesSpinnerToEditText()
+    //    {
+    //        doctorsNameSpinner.onItemSelectedListener = object :
+    //            AdapterView.OnItemSelectedListener
+    //        {
+    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+    //            {
+    //                enterDrName.setText(doctorsNameSpinner.selectedItem.toString())
+    //            }
+    //
+    //            override fun onNothingSelected(parent: AdapterView<*>?)
+    //            {
+    //            }
+    //        }
+    //  }
 
-            val doctorEntity = DoctorsEntity(
-                spec = pickedSpeciality,
-                drName = doctorName
-                )
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                doctorDao.addDoctor(doctorEntity)
-                withContext(Dispatchers.Main){
-                    Toast.makeText(requireContext(), "Doctor Added", Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-    }
-
-    private fun addNewSpecDr()
-    {
-        addDrSpecBtn.setOnClickListener {
-            getDrSpec = drSpec.toString()
-            Toast.makeText(requireContext(), "Speciality Added", Toast.LENGTH_LONG).show()
-        }
-    }
+    //    private fun addNewDr()
+    //    {
+    //        addDrNameBtn.setOnClickListener {
+    //            val doctorName = enterDrName.text.toString()
+    //
+    //            val doctorEntity = DoctorsEntity(
+    //                spec = pickedSpeciality,
+    //                drName = doctorName
+    //                )
+    //
+    //            lifecycleScope.launch(Dispatchers.IO) {
+    //                doctorDao.addDoctor(doctorEntity)
+    //                withContext(Dispatchers.Main){
+    //                    Toast.makeText(requireContext(), "Doctor Added", Toast.LENGTH_LONG).show()
+    //                }
+    //            }
+    //        }
+    //    }
+    //    private fun linkSpecsSpinnerToEditText()
+    //    {
+    //        doctorsSpecialitySpinner.onItemSelectedListener = object :
+    //            AdapterView.OnItemSelectedListener
+    //        {
+    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+    //            {
+    //                pickedSpeciality = DoctorsSpecialityList.get(position)
+    //                drSpec.setText(pickedSpeciality)
+    //            }
+    //            override fun onNothingSelected(parent: AdapterView<*>?)
+    //            {
+    //            }
+    //        }
+    //    }
+    //    private fun addNewSpecDr()
+    //    {
+    //        addDrSpecBtn.setOnClickListener {
+    //            getDrSpec = drSpec.toString()
+    //            Toast.makeText(requireContext(), "Speciality Added", Toast.LENGTH_LONG).show()
+    //        }
+    //    }
 
 }

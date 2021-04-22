@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.mainmenu.fragments.FragmentAddDate">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textview_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/textview_reminder"
+            tools:ignore="MissingConstraints" />
+
+        <Spinner
+            android:id="@+id/spinner_timeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:ignore="MissingConstraints" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_alarmCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:ignore="MissingConstraints" />
+
+
+        <TextView
+            android:id="@+id/textview_selectedDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text=""
+            tools:ignore="MissingConstraints" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recylerview_dayCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:ignore="MissingConstraints" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recylerview_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/button_timePickerBtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From"
+            android:textSize="16dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textview_textTime1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Start Date"
+            android:textSize="16sp"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/button_timePickerbtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            android:textSize="16dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textview_textTime2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="End Date"
+            android:textSize="16sp"
+            tools:ignore="MissingConstraints" />
+
+
+        <CheckBox
+            android:id="@+id/checkbox_repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Repeat weekly (no end date)"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/button_confirmbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_confirm" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

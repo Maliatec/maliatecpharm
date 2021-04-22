@@ -12,6 +12,9 @@ interface DoctorsDao
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addDoctor(doctorsEntity: DoctorsEntity)
 
+    @Query("SELECT * FROM doctors WHERE id = :id")
+    fun getDoctorsLiveData(id: Int) :LiveData<DoctorsEntity?>
+
     @Query("SELECT * FROM doctors ORDER BY id ASC")
     fun readAllDoctors() : LiveData<List<DoctorsEntity>>
 

@@ -4,9 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="10dp"
     android:background="#0000FF"
-    android:padding="10dp">
+    android:paddingTop="12dp">
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -17,82 +16,75 @@
 
     <TextView
         android:id="@+id/nameTv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textColor="#fff"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/dosageTv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textColor="#fff"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/typeTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+<!--    <TextView-->
+<!--        android:id="@+id/typeTv"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
     <TextView
         android:id="@+id/diagnosisTv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/dayTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+<!--    <TextView-->
+<!--        android:id="@+id/dayTv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
-    <TextView
-        android:id="@+id/startTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+<!--    <TextView-->
+<!--        android:id="@+id/startTv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
 
-    <TextView
-        android:id="@+id/endTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+<!--    <TextView-->
+<!--        android:id="@+id/endTv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
