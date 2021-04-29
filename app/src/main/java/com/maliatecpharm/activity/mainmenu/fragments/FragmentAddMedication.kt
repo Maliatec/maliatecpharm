@@ -28,9 +28,6 @@ import java.util.*
 class FragmentAddMedication : Fragment(),
     MedicationTypeAdapter.MedicationTypeInteractor,
     AdapterView.OnItemSelectedListener
-//    DayNameAdapter.DayNameInteractor,
-//    AlarmCountAdapter.AlarmCountInteractor,
-//  DatePickerDialog.OnDateSetListener
 {
     private val medicineDao: MedicineDao by lazy {
         AppDataBase.getDataBase(requireContext()).medicineDao()
@@ -105,73 +102,6 @@ class FragmentAddMedication : Fragment(),
     private lateinit var addDiagImage: ImageView
     private lateinit var saveBtn: Button
 
-    //    private lateinit var alarmRecyclerView: RecyclerView
-    //  private lateinit var reminderSwitch: SwitchMaterial
-    //    private lateinit var timesSpinner: Spinner
-    // private lateinit var reminderTv: TextView
-    //    private lateinit var tvSelectedDays: TextView
-    //    private lateinit var atTv: TextView
-    //    private lateinit var dayRecyclerView: RecyclerView
-    //    private lateinit var dayCountRecyclerView: RecyclerView
-    //    private lateinit var onText: TextView
-    //    private lateinit var confirmButton: Button
-    //    private lateinit var checkBox: CheckBox
-    //    private lateinit var btn1Date: Button
-    //    private lateinit var textDate1: TextView
-    //    private lateinit var btn2Date: Button
-    //    private lateinit var textDate2: TextView
-    //    private lateinit var time1: TextView
-    //    private lateinit var time2: TextView
-    //    private lateinit var getMedName: String
-    //    private lateinit var getDiagnosis: String
-    //    var sDay = 0
-    //    var sMonth = 0
-    //    var sYear = 0
-    //    var fDay = 0
-    //    var fMonth = 0
-    //    var fYear = 0
-    //    var sSavedDay = 0
-    //    var sSavedMonth = 0
-    //    var sSavedYear = 0
-    //
-    //    var fSavedDay = 0
-    //    var fSavedMonth = 0
-    //    var fSavedYear = 0
-
-
-    //    private val alarmCountAdapter by lazy {
-    //        AlarmCountAdapter(context = requireContext(), interactor = this)
-    //    }
-
-    //    private val daynameAdapter by lazy {
-    //        DayNameAdapter(context = requireContext(), dayNameInteractor = this)
-    //    }
-
-    //    var lastClickedAlarmCount = 1
-    //
-    //    private var alarmsCountList = listOf(
-    //        AlarmCount(1, "Once a day", mutableListOf("02:00")),
-    //        AlarmCount(2, "2 times a day", mutableListOf("08:00", "20:00")),
-    //        AlarmCount(3, "3 times a day", mutableListOf("08:00", "14:00", "20:00")),
-    //        AlarmCount(4, "4 times a day", mutableListOf("08:00", "12:00", "16:00", "20:00")),
-    //        AlarmCount(5, "5 times a day", mutableListOf("08:00", "11:00", "14:00", "17:00", "20:00")),
-    //        AlarmCount(6, "6 times a day", mutableListOf("08:00", "10:00", "11:00")),
-    //        AlarmCount(7, "7 times a day", mutableListOf("08:00", "20:00")),
-    //    )
-
-
-    //    private val selectedDayIds: MutableList<Int> = mutableListOf(1)
-    //
-    //    private val dayNameList = listOf<Day>(
-    //        Day(id = 1, name = "Sunday", colorRes = R.color.teal_200),
-    //        Day(id = 2, name = "Monday"),
-    //        Day(id = 3, name = "Tuesday"),
-    //        Day(id = 4, name = "Wednesday"),
-    //        Day(id = 5, name = "Thursday"),
-    //        Day(id = 6, name = "Friday"),
-    //        Day(id = 7, name = "Saturday")
-    //    )
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -206,36 +136,6 @@ class FragmentAddMedication : Fragment(),
         onImageeClickListener()
         linkMedicinesSpinnerToEditText()
         linkDiagnosisSpinnerToEditText()
-
-        //        reminderSwitch = view.findViewById(R.id.switch_reminder)
-        //        reminderTv = view.findViewById(R.id.textview_reminder)
-        //        tvSelectedDays = view.findViewById(R.id.textview_selectedDays)
-        //        timesSpinner = view.findViewById(R.id.spinner_timeSpinner)
-        //        atTv = view.findViewById(R.id.textview_At)
-        //        onText = view.findViewById(R.id.textview_On)
-        //        confirmButton = view.findViewById(R.id.button_confirmbtn)
-        //        alarmRecyclerView = view.findViewById(R.id.recyclerview_alarmCount)
-        //        dayRecyclerView = view.findViewById(R.id.recylerview_day)
-        //        dayCountRecyclerView = view.findViewById(R.id.recylerview_dayCount)
-        //        checkBox = view.findViewById(R.id.checkbox_repeat)
-        //        btn1Date = view.findViewById(R.id.button_timePickerBtn1)
-        //        textDate1 = view.findViewById(R.id.textview_textTime1)
-        //        btn2Date = view.findViewById(R.id.button_timePickerbtn2)
-        //        textDate2 = view.findViewById(R.id.textview_textTime2)
-        //        time1 = view.findViewById(R.id.textview_Time1)
-        //        time2 = view.findViewById(R.id.textview_Time2)
-        //        populateAlarmCountRecycleView()
-        //        populateTimeSpinner()
-        //        setReminderSwitchListener()
-        //        popRecyclerView()
-        //          setOnButtonClicked()
-        //        pickSDate()
-        //        pickFDate()
-        //  linkMedicinesSpinnerToEditText()
-        //   linkDiagnosisSpinnerToEditText()
-        //        addNewMedication()
-        //        addDiagnosis()
-
         return view
     }
 
@@ -290,9 +190,6 @@ class FragmentAddMedication : Fragment(),
                 medicineDao.addMedicine(medicine)
             }
             Toast.makeText(requireContext(), "Medicine Added ", Toast.LENGTH_SHORT).show()
-            //  findNavController().popBackStack()
-            // finish()
-            //           findNavController().navigate(R.id.action_MedicationsFragment_to_blankFragment)
         }
         else
             Toast.makeText(requireContext(), "Please fill medicine name ", Toast.LENGTH_SHORT).show()

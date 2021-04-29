@@ -80,7 +80,6 @@ class FragmentAddDoctor : Fragment(),
         email = view.findViewById(R.id.edittext_email)
         location = view.findViewById(R.id.edittext_location)
         saveBTN = view.findViewById(R.id.button_saveButtonn)
-
         specialitySpinner()
         pickSDate()
         onSaveClickListener()

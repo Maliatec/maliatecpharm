@@ -26,7 +26,6 @@ class FragmentMore : Fragment()
         setOnBtnClicked()
         return view
     }
-
     private fun setOnBtnClicked()
     {
         moreemptyBtn.setOnClickListener {
