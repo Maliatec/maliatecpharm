@@ -70,7 +70,6 @@ class FragmentListDoctors : Fragment(), DoctorsAdapter.OnDoctorClickListener
     //    {
     //        super.onResume()
     //    }
-
     private fun onBtnClicked()
     {
         addButton.setOnClickListener {
@@ -113,7 +112,6 @@ class FragmentListDoctors : Fragment(), DoctorsAdapter.OnDoctorClickListener
         val itemTouchHelper = ItemTouchHelper(item)
         itemTouchHelper.attachToRecyclerView(doctorsrv)
     }
-
     override fun onItemClick(doctor: DoctorsUiModel, position: Int)
     {
         val bundle = bundleOf("doctorId" to doctor.id)

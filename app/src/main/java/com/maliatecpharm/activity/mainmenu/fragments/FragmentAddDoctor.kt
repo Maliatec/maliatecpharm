@@ -45,29 +45,23 @@ class FragmentAddDoctor : Fragment(),
     private lateinit var saveBTN: Button
     private lateinit var enterDrName: EditText
     private lateinit var drSpec: EditText
-    private lateinit var addDrNameBtn: Button
-    private lateinit var getDrSpec: String
-    private lateinit var addDrSpecBtn: Button
+//    private lateinit var addDrNameBtn: Button
+//    private lateinit var getDrSpec: String
+//    private lateinit var addDrSpecBtn: Button
 
     private lateinit var doctorLiveData: LiveData<List<DoctorsEntity>>
-
     private var doctorEntity = DoctorsEntity("", "", "", "")
-
-
     private val DoctorsSpecialityList = mutableListOf<String>(
         "Allergy and Immunology",
         "Anesthesiology", "Dermatology", "Diagnostic radiology",
         "Emergency medicine", "Family medicine",
         "Internal medicine", "Medical genetics"
     )
-
     var Day = 0
     var Month = 0
     var Year = 0
     var Hour = 0
     var Minute = 0
-
-    var pickedSpeciality = ""
     var SavedDay = 0
     var SavedMonth = 0
     var SavedYear = 0
@@ -82,7 +76,6 @@ class FragmentAddDoctor : Fragment(),
         val view = inflater.inflate(R.layout.fragment_add_doctor, container, false)
 
         enterDrName = view.findViewById(R.id.enterDrName)
-        //doctorsNameSpinner = view.findViewById(R.id.spinner_doctorsNameSpinner)
         drSpec = view.findViewById(R.id.enterDrSpec)
         btnTimePicker = view.findViewById(R.id.button_timePickerBtn1)
         appointmentDate = view.findViewById(R.id.textview_appointmentTime)
@@ -94,15 +87,16 @@ class FragmentAddDoctor : Fragment(),
         saveBTN = view.findViewById(R.id.button_saveButtonn)
         // addDrNameBtn = view.findViewById(R.id.AddDrName)
        // addDrSpecBtn = view.findViewById(R.id.AddDrSpec)
+        //doctorsNameSpinner = view.findViewById(R.id.spinner_doctorsNameSpinner)
 
         specialitySpinner()
         pickSDate()
         onSaveClickListener()
         getAppointmentDateTimeCalendar()
+        linkSpinnerToDoctorsDb()
         //  linkSpecsSpinnerToEditText()
         // linkNamesSpinnerToEditText()
         //  addNewSpecDr()
-        linkSpinnerToDoctorsDb()
 
         return view
     }
@@ -183,7 +177,6 @@ class FragmentAddDoctor : Fragment(),
                 .show()
         }
     }
-
     val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
         SavedDay = dayOfMonth
         SavedMonth = month
@@ -191,21 +184,18 @@ class FragmentAddDoctor : Fragment(),
         getAppointmentDateTimeCalendar()
         TimePickerDialog(requireContext(), this, Hour, Minute, true).show()
     }
-
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int)
     {
         SavedHour = hourOfDay
         SavedMinute = minute
         appointmentDate.text = "Appointment's Date: \n$SavedDay - $SavedMonth - $SavedYear \nAt: $SavedHour:$SavedMinute"
     }
-
     private fun onSaveClickListener()
     {
         saveBTN.setOnClickListener {
             insertDrDataToDataBase()
         }
     }
-
     private fun insertDrDataToDataBase()
     {
         if (validateInput())
@@ -237,7 +227,6 @@ class FragmentAddDoctor : Fragment(),
         return !(TextUtils.isEmpty(DrName) && TextUtils.isEmpty(spec)
                 && TextUtils.isEmpty(nbr) && TextUtils.isEmpty(app))
     }
-
     fun validateInput(): Boolean
     {
         if (enterDrName.text.toString().equals(""))
@@ -255,7 +244,6 @@ class FragmentAddDoctor : Fragment(),
             mobileNbr.setError("Please Enter Contact No")
             return false
         }
-
         //        if (appointmentDate.text.toString().equals(""))
         //        {
         //            appointmentDate.setError("Please Enter Email")
@@ -263,7 +251,7 @@ class FragmentAddDoctor : Fragment(),
         //        }
         return true
     }
-
+}
     //    private fun linkNamesSpinnerToEditText()
     //    {
     //        doctorsNameSpinner.onItemSelectedListener = object :
@@ -322,4 +310,4 @@ class FragmentAddDoctor : Fragment(),
     //        }
     //    }
 
-}
+

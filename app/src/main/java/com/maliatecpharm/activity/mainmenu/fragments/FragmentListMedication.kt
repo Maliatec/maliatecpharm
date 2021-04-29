@@ -67,19 +67,16 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
             findNavController().navigate(R.id.action_MedicationsFragment_to_addMedicationFragment)
         }
     }
-
     private fun medListRecyclerView()
     {
         medicinsrv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         medicinsrv.adapter = medadapter
     }
-
     private fun dateListRecyclerView()
     {
         datesrv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         datesrv.adapter = adapter
     }
-
     private fun showMedicins()
     {
         lifecycleScope.launch(Dispatchers.IO) {

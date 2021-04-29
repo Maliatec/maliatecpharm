@@ -1,10 +1,7 @@
 package com.maliatecpharm.activity.mainmenu.fragments
 
-import android.app.Activity
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -16,16 +13,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.activities.ActivityAddDiagnosis
-import com.maliatecpharm.activity.mainmenu.activities.ActivityMainMenu
 import com.maliatecpharm.activity.mainmenu.adapter.*
 import com.maliatecpharm.activity.mainmenu.data.AppDataBase
 import com.maliatecpharm.activity.mainmenu.data.MedicineDao
 import com.maliatecpharm.activity.mainmenu.data.MedicineEntity
-import com.maliatecpharm.activity.mainmenu.data.ProfileEntity
-import com.maliatecpharm.activity.mainmenu.uimodel.AlarmCount
 import com.maliatecpharm.activity.mainmenu.uimodel.InstructionsUIModel
 import com.maliatecpharm.activity.mainmenu.uimodel.MedicationTypeUIModel
 import kotlinx.coroutines.Dispatchers
@@ -35,9 +28,9 @@ import java.util.*
 
 class FragmentAddMedication : Fragment(),
     MedicationTypeAdapter.MedicationTypeInteractor,
-    //    DayNameAdapter.DayNameInteractor,
-    //    AlarmCountAdapter.AlarmCountInteractor,
     AdapterView.OnItemSelectedListener
+//    DayNameAdapter.DayNameInteractor,
+//    AlarmCountAdapter.AlarmCountInteractor,
 //  DatePickerDialog.OnDateSetListener
 {
     private val medicineDao: MedicineDao by lazy {
@@ -51,11 +44,6 @@ class FragmentAddMedication : Fragment(),
     private var medicineEntity = MedicineEntity("",
         "", "")
 
-
-    //    private val alarmCountAdapter by lazy {
-    //        AlarmCountAdapter(context = requireContext(), interactor = this)
-    //    }
-
     private val instructionsAdapter by lazy {
         InstructionsAdapter(context = requireContext()).apply {
             onMedicationInstructionClicked = { clickedItem ->
@@ -66,12 +54,6 @@ class FragmentAddMedication : Fragment(),
             }
         }
     }
-
-    //    private val daynameAdapter by lazy {
-    //        DayNameAdapter(context = requireContext(), dayNameInteractor = this)
-    //    }
-
-
     private val instructionsList = listOf(
         InstructionsUIModel(id = 1, name = "No instructions", colorRes = R.color.teal_200),
         InstructionsUIModel(id = 2, name = "Before eating"),
@@ -84,40 +66,15 @@ class FragmentAddMedication : Fragment(),
         MedicationTypeUIModel(id = 2, name = "Capsule", medicationImageRes = R.drawable.images),
         MedicationTypeUIModel(id = 3, name = "Syringe", medicationImageRes = R.drawable.syringue),
         MedicationTypeUIModel(id = 4, name = "Tablet", medicationImageRes = R.drawable.tablet),
-
-        )
-
-    //    var lastClickedAlarmCount = 1
-    //
-    //    private var alarmsCountList = listOf(
-    //        AlarmCount(1, "Once a day", mutableListOf("02:00")),
-    //        AlarmCount(2, "2 times a day", mutableListOf("08:00", "20:00")),
-    //        AlarmCount(3, "3 times a day", mutableListOf("08:00", "14:00", "20:00")),
-    //        AlarmCount(4, "4 times a day", mutableListOf("08:00", "12:00", "16:00", "20:00")),
-    //        AlarmCount(5, "5 times a day", mutableListOf("08:00", "11:00", "14:00", "17:00", "20:00")),
-    //        AlarmCount(6, "6 times a day", mutableListOf("08:00", "10:00", "11:00")),
-    //        AlarmCount(7, "7 times a day", mutableListOf("08:00", "20:00")),
-    //    )
-
+    )
     private val pillsList = arrayOf(
         "Pill(s)", "CC", "MI", "Gr", "Mg",
         "Drop(s)", "Piece(s)", "Puff(s)", "Unit(s)",
         "Teaspoon", "Patch", "Mcg", "lu", "Meq", "Cartoon", "Spray"
     )
 
-    //    private val selectedDayIds: MutableList<Int> = mutableListOf(1)
-    //
-    //    private val dayNameList = listOf<Day>(
-    //        Day(id = 1, name = "Sunday", colorRes = R.color.teal_200),
-    //        Day(id = 2, name = "Monday"),
-    //        Day(id = 3, name = "Tuesday"),
-    //        Day(id = 4, name = "Wednesday"),
-    //        Day(id = 5, name = "Thursday"),
-    //        Day(id = 6, name = "Friday"),
-    //        Day(id = 7, name = "Saturday")
-    //    )
-
     private val medicinesList = mutableListOf<String>(
+        "",
         "Cyclophosphamide",
         "Panadol", "Paracetamol", "Aspirin",
         "Aspicot", "Prozac", "Dareq", "Oradus",
@@ -125,6 +82,7 @@ class FragmentAddMedication : Fragment(),
     )
 
     private val conditionsList = mutableListOf<String>(
+        "",
         "Cancer", "Heart Disease", "Kidney problems",
         "Pulmonary Disease", "Rhumatism", "Bone Problems", "Immunity Problems",
         "Eyes Problems"
@@ -134,7 +92,7 @@ class FragmentAddMedication : Fragment(),
     private lateinit var medicationName: TextView
     private lateinit var diagnosis: TextView
     private lateinit var diagnosisSpinner: Spinner
-    private lateinit var condition: TextView
+    private lateinit var condition: EditText
     private lateinit var dosage: TextView
     private lateinit var enterDosage: EditText
     private lateinit var medicationTypeTv: TextView
@@ -182,6 +140,39 @@ class FragmentAddMedication : Fragment(),
     //    var fSavedYear = 0
 
 
+    //    private val alarmCountAdapter by lazy {
+    //        AlarmCountAdapter(context = requireContext(), interactor = this)
+    //    }
+
+    //    private val daynameAdapter by lazy {
+    //        DayNameAdapter(context = requireContext(), dayNameInteractor = this)
+    //    }
+
+    //    var lastClickedAlarmCount = 1
+    //
+    //    private var alarmsCountList = listOf(
+    //        AlarmCount(1, "Once a day", mutableListOf("02:00")),
+    //        AlarmCount(2, "2 times a day", mutableListOf("08:00", "20:00")),
+    //        AlarmCount(3, "3 times a day", mutableListOf("08:00", "14:00", "20:00")),
+    //        AlarmCount(4, "4 times a day", mutableListOf("08:00", "12:00", "16:00", "20:00")),
+    //        AlarmCount(5, "5 times a day", mutableListOf("08:00", "11:00", "14:00", "17:00", "20:00")),
+    //        AlarmCount(6, "6 times a day", mutableListOf("08:00", "10:00", "11:00")),
+    //        AlarmCount(7, "7 times a day", mutableListOf("08:00", "20:00")),
+    //    )
+
+
+    //    private val selectedDayIds: MutableList<Int> = mutableListOf(1)
+    //
+    //    private val dayNameList = listOf<Day>(
+    //        Day(id = 1, name = "Sunday", colorRes = R.color.teal_200),
+    //        Day(id = 2, name = "Monday"),
+    //        Day(id = 3, name = "Tuesday"),
+    //        Day(id = 4, name = "Wednesday"),
+    //        Day(id = 5, name = "Thursday"),
+    //        Day(id = 6, name = "Friday"),
+    //        Day(id = 7, name = "Saturday")
+    //    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -191,7 +182,7 @@ class FragmentAddMedication : Fragment(),
 
         pillsSpinner = view.findViewById(R.id.spinner_pillsSpinner)
         medicationName = view.findViewById(R.id.textview_medicationName)
-        diagnosis = view.findViewById(R.id.textview_nameOfDiseaseTextview)
+        diagnosis = view.findViewById(R.id.textview_nameOfDisease)
         diagnosisSpinner = view.findViewById(R.id.spinner_diagnosisSpinner)
         condition = view.findViewById(R.id.diagnosis)
         dosage = view.findViewById(R.id.textview_dosage)
@@ -258,7 +249,7 @@ class FragmentAddMedication : Fragment(),
             if (it != null)
             {
                 medicineEntity = it
-                medicationName.setText(it.name)
+                medicationName.text = it.name
                 enterDosage.setText(it.dosage)
                 condition.setText(it.diagnosis)
             }
@@ -278,7 +269,6 @@ class FragmentAddMedication : Fragment(),
             startActivity(Intent(requireContext(), ActivityAddDiagnosis::class.java))
         }
     }
-
 
     private fun onSaveClickListener()
     {
@@ -308,19 +298,18 @@ class FragmentAddMedication : Fragment(),
         else
             Toast.makeText(requireContext(), "Please fill medicine name ", Toast.LENGTH_SHORT).show()
     }
-
     private fun inputCheck(name: String, dosage: String, diagnosis: String): Boolean
     {
         return !(TextUtils.isEmpty(name) && TextUtils.isEmpty(dosage) && TextUtils.isEmpty(diagnosis)
                 )
     }
-
     private fun setupTextViews()
     {
         dosage.text = getString(R.string.dosage)
         instructionsTv.text = getString(R.string.instructions)
         medicationTypeTv.text = getString(R.string.medication_type)
         medicationName.text = getString(R.string.medication_title)
+        diagnosis.text = "Diagnosis"
     }
 
     private fun medSpinner()
@@ -377,13 +366,11 @@ class FragmentAddMedication : Fragment(),
             {
                 condition.setText(diagnosisSpinner.selectedItem.toString())
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?)
             {
             }
         }
     }
-
     private fun populateInstructionsRecycleView()
     {
         instructionsRecyclerView.apply {
