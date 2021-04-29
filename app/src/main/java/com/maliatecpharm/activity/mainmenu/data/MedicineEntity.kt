@@ -10,10 +10,6 @@ data class MedicineEntity(
     val name: String,
     val dosage: String,
     val diagnosis: String ,
-//    val day:String,
-//    val startdate:String,
-//val enddate: String,
-
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 )
@@ -23,9 +19,6 @@ data class MedicineEntity(
         name = name,
         dosage = dosage,
         diagnosis = diagnosis,
-//        day = day,
-//       startdate =startdate,
-//        enddate = enddate,
 
     )
 }

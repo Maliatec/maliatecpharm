@@ -27,6 +27,5 @@ data class VitalEntity(
         bloodpressure = bloodpressure,
         pulse = pulse,
         physicalact = physicalact,
-
     )
 }

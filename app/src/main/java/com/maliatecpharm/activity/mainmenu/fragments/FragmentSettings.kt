@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.activities.ActivityFeedback
 
-
 class FragmentSettings: Fragment()
 {
     private lateinit var notification :TextView
@@ -31,7 +30,6 @@ class FragmentSettings: Fragment()
         feedback = view.findViewById(R.id.textview_feedback)
         inviteAFriend = view.findViewById(R.id.textview_inviteaFriend)
         about = view.findViewById(R.id.textview_about)
-
         setOnFeedbackClicked()
         return view
     }

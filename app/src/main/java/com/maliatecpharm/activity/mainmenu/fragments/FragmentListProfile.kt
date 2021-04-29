@@ -34,7 +34,6 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
     val adapter by lazy {
         ProfileListAdapter(this)
     }
-
     private val userDao: UserDao by lazy {
         AppDataBase.getDataBase(requireContext()).userDao()
     }
@@ -53,7 +52,6 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
         showProfiles()
         return view
     }
-
     private fun onBtnClicked()
     {
         actionBtn.setOnClickListener {
@@ -105,7 +103,3 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
         findNavController().navigate(R.id.action_fragmentListProfile_to_addProfileFragment,bundle)
     }
 }
-
-
-
-

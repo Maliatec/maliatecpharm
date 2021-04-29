@@ -15,7 +15,6 @@ interface VitalSignsDao
     @Query("SELECT * FROM vital_signs WHERE id = :id")
     fun getVitalLiveData(id: Int) : LiveData<VitalEntity?>
 
-
     @Query("SELECT * FROM vital_signs ORDER BY id ASC")
     suspend fun readAllData(): List<VitalEntity>
 

@@ -14,7 +14,6 @@ data class ProfileEntity(
     val height:String,
     val age:String,
 
-
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 )

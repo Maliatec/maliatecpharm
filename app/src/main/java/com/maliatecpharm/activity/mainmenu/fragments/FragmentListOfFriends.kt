@@ -95,5 +95,4 @@ class FragmentListOfFriends : Fragment()
             }
         }
     }
-
 }

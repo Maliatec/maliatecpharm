@@ -10,7 +10,6 @@ import android.widget.Button
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.activities.ActivityProfile
 
-
 class FragmentMore : Fragment()
 {
     private lateinit var moreemptyBtn: Button
@@ -21,7 +20,6 @@ class FragmentMore : Fragment()
     ): View?
     {
         val view = inflater.inflate(R.layout.fragment_more, container, false)
-
         moreemptyBtn = view.findViewById(R.id.button_moreEmptyBtn)
         setOnBtnClicked()
         return view
