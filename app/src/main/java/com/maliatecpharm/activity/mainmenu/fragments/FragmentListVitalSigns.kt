@@ -1,6 +1,5 @@
 package com.maliatecpharm.activity.mainmenu.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maliatecpharm.R
 import com.maliatecpharm.activity.mainmenu.adapter.AdapterItemInteraction
-import com.maliatecpharm.activity.mainmenu.adapter.OnProfileClickListener
 import com.maliatecpharm.activity.mainmenu.adapter.OnVitalClickListener
 import com.maliatecpharm.activity.mainmenu.adapter.VitalSignsAdapter
 import com.maliatecpharm.activity.mainmenu.data.*
@@ -23,17 +21,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
 class FragmentListVitalSigns : Fragment(), OnVitalClickListener
 {
     val adapter by lazy {
         VitalSignsAdapter(this)
     }
-
     private val vitalDao: VitalSignsDao by lazy {
         AppDataBase.getDataBase(requireContext()).vitalDao()
     }
-
     private lateinit var addButton: FloatingActionButton
     private lateinit var vitalRecyclerView: RecyclerView
 
@@ -45,12 +40,10 @@ class FragmentListVitalSigns : Fragment(), OnVitalClickListener
         val view = inflater.inflate(R.layout.fragment_vitalsigns, container, false)
         addButton = view.findViewById(R.id.button_addButton)
         vitalRecyclerView = view.findViewById(R.id.recyclerView_Vitalsigns)
-
         setOnButtonClicked()
         setUpSwipeToDelete()
         vitalRecyclerView()
         showVitals()
-
         return view
     }
     private fun setOnButtonClicked()

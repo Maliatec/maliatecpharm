@@ -11,7 +11,6 @@ import com.maliatecpharm.activity.mainmenu.data.FriendUiModel
 class MedFriendAdapter: RecyclerView.Adapter<MedFriendAdapter.MyViewHolder>()
 {
     private var friendList = listOf<FriendUiModel>()
-
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         val firstName: TextView = itemView.findViewById(R.id.firstNametxt)
@@ -22,25 +21,21 @@ class MedFriendAdapter: RecyclerView.Adapter<MedFriendAdapter.MyViewHolder>()
     {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.friend_row, parent, false))
     }
-
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
         val currentItem = friendList[position]
         holder.firstName.text = currentItem.firstName
         holder.lastName.text = currentItem.lastName
     }
-
     override fun getItemCount(): Int
     {
         return friendList.size
     }
-
     fun updateList(friendList: List<FriendUiModel>)
     {
         this.friendList = friendList
         notifyDataSetChanged()
     }
-
     fun delete(adapterPosition: Int): Int
     {
         var id = 0
@@ -52,7 +47,6 @@ class MedFriendAdapter: RecyclerView.Adapter<MedFriendAdapter.MyViewHolder>()
                 false
             }
         }
-
         updateList(newList)
         return id
     }

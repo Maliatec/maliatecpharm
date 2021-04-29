@@ -104,7 +104,6 @@ class FragmentAddMedication : Fragment(),
     ): View?
     {
         val view = inflater.inflate(R.layout.fragment_add_medication, container, false)
-
         pillsSpinner = view.findViewById(R.id.spinner_pillsSpinner)
         medicationName = view.findViewById(R.id.textview_medicationName)
         diagnosis = view.findViewById(R.id.textview_nameOfDisease)
@@ -155,14 +154,12 @@ class FragmentAddMedication : Fragment(),
             findNavController().navigate(R.id.action_addMedicationFragment_to_fragmentAddMedicine)
         }
     }
-
     private fun onImageeClickListener()
     {
         addDiagImage.setOnClickListener {
             startActivity(Intent(requireContext(), ActivityAddDiagnosis::class.java))
         }
     }
-
     private fun onSaveClickListener()
     {
         saveBtn.setOnClickListener {
@@ -170,7 +167,6 @@ class FragmentAddMedication : Fragment(),
             findNavController().navigate(R.id.action_addMedicationFragment_to_fragmentAddMedicine)
         }
     }
-
     private fun insertDataToDataBase()
     {
         val medicineName = medicineName.text.toString()
@@ -188,13 +184,11 @@ class FragmentAddMedication : Fragment(),
         else
             Toast.makeText(requireContext(), "Please fill medicine name ", Toast.LENGTH_SHORT).show()
     }
-
     private fun inputCheck(name: String, dosage: String, diagnosis: String): Boolean
     {
         return !(TextUtils.isEmpty(name) && TextUtils.isEmpty(dosage) && TextUtils.isEmpty(diagnosis)
                 )
     }
-
     private fun setupTextViews()
     {
         dosage.text = getString(R.string.dosage)
@@ -202,21 +196,18 @@ class FragmentAddMedication : Fragment(),
         medicationTypeTv.text = getString(R.string.medication_type)
         medicationName.text = getString(R.string.medication_title)
     }
-
     private fun medSpinner()
     {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, pillsList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         pillsSpinner.adapter = adapter
     }
-
     private fun medicineNameSpinner()
     {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, medicinesList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         medicinesSpinner.adapter = adapter
     }
-
     private fun linkMedicinesSpinnerToEditText()
     {
         medicinesSpinner.onItemSelectedListener = object :
@@ -232,15 +223,12 @@ class FragmentAddMedication : Fragment(),
             }
         }
     }
-
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
     {
     }
-
     override fun onNothingSelected(parent: AdapterView<*>?)
     {
     }
-
     private fun diagnosisSpinner()
     {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, conditionsList)
@@ -270,7 +258,6 @@ class FragmentAddMedication : Fragment(),
             instructionsAdapter.updateList(instructionsList)
         }
     }
-
     private fun populateTypeRecycleView()
     {
         medicationTypeRecyclerView.apply {
@@ -279,7 +266,6 @@ class FragmentAddMedication : Fragment(),
             medicationTypeAdapter.updateList(medicationTypeList)
         }
     }
-
     override fun onMedicationTypeClicked(medicationType: MedicationTypeUIModel)
     {
         val updatedList = medicationTypeList.map { item ->
@@ -288,6 +274,4 @@ class FragmentAddMedication : Fragment(),
         medicationTypeAdapter.updateList(updatedList)
     }
     private fun getColor(selected: Boolean) = if (selected) R.color.teal_200 else R.color.white
-
 }
-

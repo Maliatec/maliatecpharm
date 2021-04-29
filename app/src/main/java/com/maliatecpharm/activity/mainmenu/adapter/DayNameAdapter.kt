@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maliatecpharm.R
 
-
 class DayNameAdapter(
     private val context: Context,
     private val dayNameInteractor: DayNameInteractor
@@ -34,7 +33,6 @@ class DayNameAdapter(
 
         return DAYNAMEViewHolder(type)
     }
-
     override fun onBindViewHolder(holder: DayNameAdapter.DAYNAMEViewHolder, position: Int)
     {
         val dayName = dayNameList[position]
@@ -63,7 +61,6 @@ class DayNameAdapter(
         fun onDayClicked(day: Day)
     }
 }
-
 data class Day(
     val id: Int,
     val name: String,

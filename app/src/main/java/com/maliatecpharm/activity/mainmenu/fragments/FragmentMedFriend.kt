@@ -19,16 +19,13 @@ class FragmentMedFriend : Fragment()
     private lateinit var phoneEmergnecyContact: EditText
     private lateinit var emailEmergnecyContact: EditText
     private lateinit var saveButtonEmergnecyContact: Button
-
     private val GenderList = arrayOf(
         "Male", "Female"
     )
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val view = inflater.inflate(R.layout.fragment_medfriend, container, false)
-
         firstNameEmergnecyContact = view.findViewById(R.id.edittext_firstNameEmergencyContact)
         lastNameEmergnecyContact = view.findViewById(R.id.edittext_lastNameEmergencyContact)
         genderEmergnecyContact = view.findViewById(R.id.textview_genderEmergencyContact)
@@ -50,7 +47,6 @@ class FragmentMedFriend : Fragment()
 
         }
     }
-
 
     private fun genderSpinner()
     {
@@ -81,14 +77,9 @@ class FragmentMedFriend : Fragment()
             emailEmergnecyContact.setError("Please Enter Valid Email")
             return false
         }
-
         return true
     }
-
     fun isEmailValid(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
-
-
-
 }

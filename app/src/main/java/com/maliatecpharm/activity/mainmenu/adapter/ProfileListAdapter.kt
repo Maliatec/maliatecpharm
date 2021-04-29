@@ -11,7 +11,6 @@ import com.maliatecpharm.activity.mainmenu.data.ProfileUiModel
 class ProfileListAdapter( var clickListener: OnProfileClickListener) : RecyclerView.Adapter<ProfileListAdapter.MyViewHolder>()
 {
     private var profileList = listOf<ProfileUiModel>()
-
     class MyViewHolder(itemView: View)
         : RecyclerView.ViewHolder(itemView)
     {
@@ -32,14 +31,8 @@ class ProfileListAdapter( var clickListener: OnProfileClickListener) : RecyclerV
     {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.profile_row, parent, false))
     }
-
-
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-//        val currentItem = userList[position]
-//        holder.firstName.text  = currentItem.firstName
-//        holder.lastName.text = currentItem.lastName
-
         holder.initialize(profileList.get(position), clickListener)
     }
 
@@ -47,13 +40,11 @@ class ProfileListAdapter( var clickListener: OnProfileClickListener) : RecyclerV
     {
         return profileList.size
     }
-
     fun updateList(profileList: List<ProfileUiModel>)
     {
         this.profileList = profileList
         notifyDataSetChanged()
     }
-
     fun delete(adapterPosition: Int): Int
     {
         var id = 0
@@ -64,14 +55,11 @@ class ProfileListAdapter( var clickListener: OnProfileClickListener) : RecyclerV
                 false
             }
         }
-
         updateList(newList)
         return id
     }
 }
-
 interface OnProfileClickListener
 {
 fun onItemClick(profile : ProfileUiModel, position: Int)
-
 }

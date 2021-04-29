@@ -42,12 +42,6 @@ class DoctorsAdapter(var clickListener: OnDoctorClickListener) : RecyclerView.Ad
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        //        val currentItem = doctorsList[position]
-        //        holder.drName.text  = currentItem.doctorsName
-        //        holder.spec.text = currentItem.spec
-        //        holder.nbr.text = currentItem.nbr
-        //        holder.app.text = currentItem.app
-
         holder.initialize(doctorsList.get(position), clickListener)
     }
 
@@ -61,7 +55,6 @@ class DoctorsAdapter(var clickListener: OnDoctorClickListener) : RecyclerView.Ad
         this.doctorsList = doctorList
         notifyDataSetChanged()
     }
-
     fun delete(adapterPosition: Int): Int
     {
         var id = 0
@@ -77,12 +70,9 @@ class DoctorsAdapter(var clickListener: OnDoctorClickListener) : RecyclerView.Ad
         updateList(newList)
         return id
     }
-
     interface OnDoctorClickListener
     {
         fun onItemClick(doctor: DoctorsUiModel, position: Int)
-
     }
-
 
 }

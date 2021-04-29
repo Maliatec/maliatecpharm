@@ -14,9 +14,7 @@ class InstructionsAdapter(private val context: Context) :
     RecyclerView.Adapter<InstructionsAdapter.MedViewHolder>() {
 
     lateinit var onMedicationInstructionClicked: (model: InstructionsUIModel)-> Unit
-
     private var instructionsUIModelList: List<InstructionsUIModel> = emptyList()
-
     fun updateList(instructionsUIModelList: List<InstructionsUIModel>) {
         this.instructionsUIModelList = instructionsUIModelList
         notifyDataSetChanged()

@@ -23,7 +23,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-
 class FragmentAddProfile : Fragment(),
     DatePickerDialog.OnDateSetListener
 {
@@ -52,7 +51,6 @@ class FragmentAddProfile : Fragment(),
     private lateinit var textDate1: TextView
     val context = this
     private val REQUEST_CODE = 42
-
     var sDay = 0
     var sMonth = 0
     var sYear = 0
@@ -66,7 +64,6 @@ class FragmentAddProfile : Fragment(),
     ): View?
     {
         val view = inflater.inflate(R.layout.fragment_add_profile, container, false)
-
         gender = view.findViewById(R.id.textview_gender)
         genderSpinner = view.findViewById(R.id.spinner_genderSpinner)
         firstName = view.findViewById(R.id.edittext_firstName)
@@ -85,7 +82,6 @@ class FragmentAddProfile : Fragment(),
         pickSDate()
         onSaveClickListener()
         insertDataToDataBase()
-
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
@@ -93,7 +89,6 @@ class FragmentAddProfile : Fragment(),
         super.onViewCreated(view, savedInstanceState)
         val profileId = arguments?.getInt("profileId") ?: -1
         userDao.getProfileLiveData(profileId).observe(viewLifecycleOwner) {
-
             if (it != null)
             {
                 profileEntity = it

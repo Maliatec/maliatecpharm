@@ -12,7 +12,6 @@ import com.maliatecpharm.activity.mainmenu.data.VitalUiModel
 class VitalSignsAdapter (var clickListener: OnVitalClickListener): RecyclerView.Adapter<VitalSignsAdapter.MyViewHolder>()
 {
     private var vitalList = listOf<VitalUiModel>()
-
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         val time: TextView = itemView.findViewById(R.id.timetxt)
@@ -20,7 +19,6 @@ class VitalSignsAdapter (var clickListener: OnVitalClickListener): RecyclerView.
         val fitness: TextView = itemView.findViewById(R.id.fitness)
         val glucose: TextView = itemView.findViewById(R.id.glucose)
         val bloodpressure: TextView = itemView.findViewById(R.id.bloodpressure)
-
 
         fun initialize(vitalList:VitalUiModel, action:OnVitalClickListener)
         {
@@ -35,30 +33,23 @@ class VitalSignsAdapter (var clickListener: OnVitalClickListener): RecyclerView.
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
     {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.vital_row, parent, false))
     }
-
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-//        val currentItem = vitalList[position]
-  //      holder.firstName.text = currentItem.firstName
-
         holder.initialize(vitalList.get(position), clickListener)
     }
     override fun getItemCount(): Int
     {
         return vitalList.size
     }
-
     fun updateList(vitalList: List<VitalUiModel>)
     {
         this.vitalList = vitalList
         notifyDataSetChanged()
     }
-
     fun delete(adapterPosition: Int): Int
     {
         var id = 0
@@ -70,14 +61,11 @@ class VitalSignsAdapter (var clickListener: OnVitalClickListener): RecyclerView.
                 false
             }
         }
-
         updateList(newList)
         return id
     }
 }
-
 interface OnVitalClickListener
 {
     fun onItemClick(vital: VitalUiModel, position: Int)
-
 }

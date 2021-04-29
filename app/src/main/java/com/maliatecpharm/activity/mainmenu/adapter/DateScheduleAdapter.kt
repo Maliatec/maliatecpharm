@@ -11,10 +11,8 @@ import com.maliatecpharm.activity.mainmenu.data.CalendarUiModel
 class DateScheduleAdapter(var clickListener: OnDateClickListener) : RecyclerView.Adapter<DateScheduleAdapter.MyViewHolder>()
 {
     private var dateList = listOf<CalendarUiModel>()
-
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-
         val day: TextView = itemView.findViewById(R.id.dayTv)
         val startDate: TextView = itemView.findViewById(R.id.startTv)
         val endDate: TextView = itemView.findViewById(R.id.endTv)
@@ -30,7 +28,6 @@ class DateScheduleAdapter(var clickListener: OnDateClickListener) : RecyclerView
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
     {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_schedule_date, parent, false))
@@ -38,11 +35,6 @@ class DateScheduleAdapter(var clickListener: OnDateClickListener) : RecyclerView
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        //   val currentItem = dateList[position]
-        //        holder.day.text = currentItem.day
-        //        holder.startDate.text = currentItem.startdate
-        //        holder.endDate.text = currentItem.enddate
-
         holder.initialize(dateList.get(position), clickListener)
     }
 
@@ -75,5 +67,4 @@ class DateScheduleAdapter(var clickListener: OnDateClickListener) : RecyclerView
     interface OnDateClickListener
     {
         fun onItemClick(calendar: CalendarUiModel, position: Int)
-
     }

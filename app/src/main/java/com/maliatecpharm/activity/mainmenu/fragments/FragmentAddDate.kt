@@ -96,7 +96,6 @@ class FragmentAddDate : Fragment(),
     ): View?
     {
         val view = inflater.inflate(R.layout.fragment_add_date, container, false)
-
         tvSelectedDays = view.findViewById(R.id.textview_selectedDays)
         timesSpinner = view.findViewById(R.id.spinner_timeSpinner)
         confirmButton = view.findViewById(R.id.button_confirmbtn)
@@ -108,7 +107,6 @@ class FragmentAddDate : Fragment(),
         textDate1 = view.findViewById(R.id.textview_textTime1)
         btn2Date = view.findViewById(R.id.button_timePickerbtn2)
         textDate2 = view.findViewById(R.id.textview_textTime2)
-
         populateAlarmCountRecycleView()
         populateTimeSpinner()
         onSaveClickListener()
@@ -122,7 +120,6 @@ class FragmentAddDate : Fragment(),
         super.onViewCreated(view, savedInstanceState)
         val dateId = arguments?.getInt("dateId") ?: -1
         calendarDao.getDateLiveData(dateId).observe(viewLifecycleOwner) {
-
             if (it != null)
             {
                 calendarEntity = it

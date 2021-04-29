@@ -12,11 +12,8 @@ import devs.mulham.horizontalcalendar.HorizontalCalendarListener
 import devs.mulham.horizontalcalendar.HorizontalCalendarView
 import java.util.*
 
-
 class FragmentHome : Fragment()
 {
-    private lateinit var emptyBtn: Button
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,

@@ -22,14 +22,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-
 class FragmentAddVitalSigns : Fragment(),
     DatePickerDialog.OnDateSetListener
 {
     private val vitalDao: VitalSignsDao by lazy {
         AppDataBase.getDataBase(requireContext()).vitalDao()
     }
-
     private var vitalEntity = VitalEntity(
         "", "",
         "", "", "", "",
@@ -54,7 +52,6 @@ class FragmentAddVitalSigns : Fragment(),
     var SavedMonth = 0
     var SavedYear = 0
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -71,16 +68,12 @@ class FragmentAddVitalSigns : Fragment(),
         chooseImage = view.findViewById(R.id.imageview_picture)
         saveButton = view.findViewById(R.id.button_saveButton)
         entertime = view.findViewById(R.id.et_time)
-        //uploadDate = view.findViewById(R.id.textview_uploadTime)
-
         takePicture()
         pickSDate()
         onSaveClickListener()
         getAppointmentDateTimeCalendar()
-
         return view
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
@@ -99,7 +92,6 @@ class FragmentAddVitalSigns : Fragment(),
             }
         }
     }
-
     private fun insertDataToDataBase()
     {
         if (validateInput())
@@ -116,7 +108,6 @@ class FragmentAddVitalSigns : Fragment(),
             {
                 Toast.makeText(requireContext(), "Form validate", Toast.LENGTH_SHORT).show()
                 val vital = VitalEntity(date, cholesterol, fitness, glucose, bloodpressure, pulse, physicalact)
-
                 lifecycleScope.launch(Dispatchers.IO) {
                     vitalDao.addVital(vital)
                 }
@@ -156,14 +147,12 @@ class FragmentAddVitalSigns : Fragment(),
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
-
     private fun onSaveClickListener()
     {
         saveButton.setOnClickListener {
             insertDataToDataBase()
         }
     }
-
     private fun validateInput(): Boolean
     {
         if (entertime.text.toString().equals(""))
@@ -173,7 +162,6 @@ class FragmentAddVitalSigns : Fragment(),
         }
         return true
     }
-
     private fun getAppointmentDateTimeCalendar()
     {
         val cal = Calendar.getInstance()
@@ -199,7 +187,6 @@ class FragmentAddVitalSigns : Fragment(),
         getAppointmentDateTimeCalendar()
         entertime.text = "$SavedDay - $SavedMonth - $SavedYear"
     }
-
     override fun onDateSet(datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int)
     {
         SavedDay = dayOfMonth

@@ -24,18 +24,15 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
     val medadapter by lazy {
         MedicinesListAdapter(this)
     }
-
     val adapter by lazy {
         DateScheduleAdapter(this)
     }
-
     private val medicineDao: MedicineDao by lazy {
         AppDataBase.getDataBase(requireContext()).medicineDao()
     }
     private val calendarDao: CalendarDao by lazy {
         AppDataBase.getDataBase(requireContext()).calendarDao()
     }
-
     private lateinit var addButton: FloatingActionButton
     private lateinit var medicinsrv: RecyclerView
     private lateinit var datesrv: RecyclerView
@@ -50,7 +47,6 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
         addButton = view.findViewById(R.id.floatingBtn)
         medicinsrv = view.findViewById(R.id.recyclerView_Medicins)
         datesrv = view.findViewById(R.id.recyclerView_Date)
-
         medListRecyclerView()
         onBtnClicked()
         showMedicins()
@@ -66,7 +62,6 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
             findNavController().navigate(R.id.action_MedicationsFragment_to_addMedicationFragment)
         }
     }
-
     private fun medListRecyclerView()
     {
         medicinsrv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -74,7 +69,6 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
         datesrv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         datesrv.adapter = adapter
     }
-
     private fun showMedicins()
     {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -87,7 +81,6 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
             }
         }
     }
-
     private fun showDate()
     {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -100,7 +93,6 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
             }
         }
     }
-
     private fun setUpSwipeToDelete()
     {
         val item = object : AdapterItemInteraction(
@@ -140,20 +132,14 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
         val itemTouchHelper = ItemTouchHelper(item)
         itemTouchHelper.attachToRecyclerView(datesrv)
     }
-
     override fun onItemClick(calendar: CalendarUiModel, position: Int)
     {
         val bundle = bundleOf("dateId" to calendar.id)
         findNavController().navigate(R.id.action_MedicationsFragment_to_fragmentAddMedicine, bundle)
     }
-
     override fun onItemClicked(medicin: MedicinesUiModel, position: Int)
     {
         val bundle = bundleOf("medId" to medicin.id)
         findNavController().navigate(R.id.action_MedicationsFragment_to_addMedicationFragment, bundle)
     }
 }
-
-
-
-

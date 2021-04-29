@@ -26,14 +26,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-
 class FragmentAddDoctor : Fragment(),
     TimePickerDialog.OnTimeSetListener
 {
     private val doctorDao: DoctorsDao by lazy {
         AppDataBase.getDataBase(requireContext()).doctorDao()
     }
-
     private lateinit var btnTimePicker: TextView
     private lateinit var appointmentDate: TextView
     private lateinit var doctorsSpecialitySpinner: SearchableSpinner
@@ -69,7 +67,6 @@ class FragmentAddDoctor : Fragment(),
     ): View?
     {
         val view = inflater.inflate(R.layout.fragment_add_doctor, container, false)
-
         enterDrName = view.findViewById(R.id.enterDrName)
         drSpec = view.findViewById(R.id.enterDrSpec)
         btnTimePicker = view.findViewById(R.id.button_timePickerBtn1)
@@ -85,7 +82,6 @@ class FragmentAddDoctor : Fragment(),
         onSaveClickListener()
         getAppointmentDateTimeCalendar()
         linkSpinnerToDoctorsDb()
-
         return view
     }
 
@@ -239,5 +235,3 @@ class FragmentAddDoctor : Fragment(),
         return true
     }
 }
-
-

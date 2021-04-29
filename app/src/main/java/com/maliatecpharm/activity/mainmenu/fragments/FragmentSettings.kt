@@ -24,7 +24,6 @@ class FragmentSettings: Fragment()
     ): View?
     {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
-
         notification = view.findViewById(R.id.textview_notification)
         whatIsNew = view.findViewById(R.id.textview_whatIsNew)
         feedback = view.findViewById(R.id.textview_feedback)
@@ -39,6 +38,4 @@ class FragmentSettings: Fragment()
              startActivity(Intent(requireContext(), ActivityFeedback::class.java))
         }
     }
-
-
 }
