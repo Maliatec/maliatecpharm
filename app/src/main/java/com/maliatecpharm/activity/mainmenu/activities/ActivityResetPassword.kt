@@ -10,12 +10,10 @@ class ActivityResetPassword: AppCompatActivity() {
     lateinit var et_code: EditText
     lateinit var etPassword:EditText
     lateinit var etRepeatPassword:EditText
-    val MIN_PASSWORD_LENGTH = 6;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
-
         viewInitializations()
     }
 
@@ -27,29 +25,4 @@ class ActivityResetPassword: AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    fun validateInput(): Boolean {
-        if (et_code.text.toString().equals("")) {
-            et_code.setError("Please Enter Valid Code")
-            return false
-        }
-        if (etPassword.text.toString().equals("")) {
-            etPassword.setError("Please Enter Password")
-            return false
-        }
-        if (etRepeatPassword.text.toString().equals("")) {
-            etRepeatPassword.setError("Please Enter Repeat Password")
-            return false
-        }
-
-        if (etPassword.text.length < MIN_PASSWORD_LENGTH) {
-            etPassword.setError("Password Length must be more than " + MIN_PASSWORD_LENGTH + "characters")
-            return false
-        }
-
-        if (!etPassword.text.toString().equals(etRepeatPassword.text.toString())) {
-            etRepeatPassword.setError("Password does not match")
-            return false
-        }
-        return true
-    }
 }

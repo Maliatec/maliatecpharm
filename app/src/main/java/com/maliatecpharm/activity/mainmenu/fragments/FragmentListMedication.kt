@@ -52,7 +52,6 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
         datesrv = view.findViewById(R.id.recyclerView_Date)
 
         medListRecyclerView()
-        dateListRecyclerView()
         onBtnClicked()
         showMedicins()
         showDate()
@@ -67,16 +66,15 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
             findNavController().navigate(R.id.action_MedicationsFragment_to_addMedicationFragment)
         }
     }
+
     private fun medListRecyclerView()
     {
         medicinsrv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         medicinsrv.adapter = medadapter
-    }
-    private fun dateListRecyclerView()
-    {
         datesrv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         datesrv.adapter = adapter
     }
+
     private fun showMedicins()
     {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -89,6 +87,7 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
             }
         }
     }
+
     private fun showDate()
     {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -101,6 +100,7 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
             }
         }
     }
+
     private fun setUpSwipeToDelete()
     {
         val item = object : AdapterItemInteraction(
@@ -139,18 +139,18 @@ class FragmentListMedication : Fragment(), OnDateClickListener, OnMedClickListen
         }
         val itemTouchHelper = ItemTouchHelper(item)
         itemTouchHelper.attachToRecyclerView(datesrv)
-        }
+    }
 
     override fun onItemClick(calendar: CalendarUiModel, position: Int)
     {
         val bundle = bundleOf("dateId" to calendar.id)
-        findNavController().navigate(R.id.action_MedicationsFragment_to_fragmentAddMedicine,bundle)
+        findNavController().navigate(R.id.action_MedicationsFragment_to_fragmentAddMedicine, bundle)
     }
 
     override fun onItemClicked(medicin: MedicinesUiModel, position: Int)
     {
         val bundle = bundleOf("medId" to medicin.id)
-        findNavController().navigate(R.id.action_MedicationsFragment_to_addMedicationFragment,bundle)
+        findNavController().navigate(R.id.action_MedicationsFragment_to_addMedicationFragment, bundle)
     }
 }
 
