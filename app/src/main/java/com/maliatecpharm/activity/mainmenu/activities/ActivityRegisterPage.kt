@@ -47,9 +47,6 @@ class ActivityRegisterPage : AppCompatActivity()
                 ")+"
     )
 
-
-    //  private lateinit var awesomeValdiation: AwesomeValidation
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)

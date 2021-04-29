@@ -12,7 +12,6 @@ class ActivityForgotMyPass: AppCompatActivity()
 {
     lateinit var etEmail: EditText
     private lateinit var login: Button
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -22,7 +21,6 @@ class ActivityForgotMyPass: AppCompatActivity()
         validateInput()
         setOnBtnClicked()
     }
-
     fun viewInitializations()
     {
         etEmail = findViewById(R.id.et_email)
@@ -49,7 +47,6 @@ class ActivityForgotMyPass: AppCompatActivity()
     {
         return EMAIL_ADDRESS.matcher(email).matches()
     }
-
     private fun setOnBtnClicked()
     {
         login.setOnClickListener {

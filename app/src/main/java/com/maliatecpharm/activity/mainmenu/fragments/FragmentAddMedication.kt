@@ -24,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-
 class FragmentAddMedication : Fragment(),
     MedicationTypeAdapter.MedicationTypeInteractor,
     AdapterView.OnItemSelectedListener
@@ -68,7 +67,6 @@ class FragmentAddMedication : Fragment(),
         "Drop(s)", "Piece(s)", "Puff(s)", "Unit(s)",
         "Teaspoon", "Patch", "Mcg", "lu", "Meq", "Cartoon", "Spray"
     )
-
     private val medicinesList = mutableListOf<String>(
         "",
         "Cyclophosphamide",
@@ -76,14 +74,12 @@ class FragmentAddMedication : Fragment(),
         "Aspicot", "Prozac", "Dareq", "Oradus",
         "Advil", "EuroFer", "Other"
     )
-
     private val conditionsList = mutableListOf<String>(
         "",
         "Cancer", "Heart Disease", "Kidney problems",
         "Pulmonary Disease", "Rhumatism", "Bone Problems", "Immunity Problems",
         "Eyes Problems"
     )
-
     private lateinit var pillsSpinner: Spinner
     private lateinit var medicationName: TextView
     private lateinit var diagnosis: TextView
@@ -144,7 +140,6 @@ class FragmentAddMedication : Fragment(),
         super.onViewCreated(view, savedInstanceState)
         val medId = arguments?.getInt("medId") ?: -1
         medicineDao.getMedLiveData(medId).observe(viewLifecycleOwner) {
-
             if (it != null)
             {
                 medicineEntity = it
@@ -154,7 +149,6 @@ class FragmentAddMedication : Fragment(),
             }
         }
     }
-
     private fun onImageClickListener()
     {
         addImage.setOnClickListener {

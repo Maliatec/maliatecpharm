@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.maliatecpharm.R
 
 class ActivityProfile : AppCompatActivity(){
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
