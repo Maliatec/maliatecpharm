@@ -18,17 +18,12 @@ class DayNameAdapter(
 ) :
     RecyclerView.Adapter<DayNameAdapter.DAYNAMEViewHolder>()
 {
-
     private var dayNameList: List<Day> = emptyList()
-
-
     fun updateList(dayNameList: List<Day>)
     {
         this.dayNameList = dayNameList
         notifyDataSetChanged()
     }
-
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -39,50 +34,36 @@ class DayNameAdapter(
 
         return DAYNAMEViewHolder(type)
     }
-
     override fun onBindViewHolder(holder: DayNameAdapter.DAYNAMEViewHolder, position: Int)
     {
         val dayName = dayNameList[position]
         holder.bindData(dayName)
     }
-
     override fun getItemCount() = dayNameList.size
-
 
     inner class DAYNAMEViewHolder constructor(private val view: View) :
         RecyclerView.ViewHolder(view)
     {
-
         private val nameTv: TextView = view.findViewById(R.id.textview_dayname)
-
         fun bindData(dayname: Day)
         {
-
             nameTv.text = dayname.name
-
             val color = ContextCompat.getColor(context, dayname.colorRes)
             nameTv.setBackgroundColor(color)
-
-
             view.setOnClickListener {
                 dayNameInteractor.onDayClicked(dayname)
-
             }
         }
-
-
         }
+
     interface DayNameInteractor
     {
         fun onDayClicked(day: Day)
     }
 }
-
 data class Day(
     val id: Int,
     val name: String,
-
-
     @ColorRes val colorRes: Int = R.color.white
 )
 

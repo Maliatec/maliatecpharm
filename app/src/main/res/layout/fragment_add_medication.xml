@@ -44,9 +44,15 @@
 
         <TextView
             android:id="@+id/textview_nameOfDisease"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Diagnosis" />
+            android:text="Diagnosis"/>
+
+<!--        <TextView-->
+<!--            android:id="@+id/textview_nameOfDisease"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            tools:text="Diagnosis" />-->
 
         <LinearLayout
             android:layout_width="match_parent"

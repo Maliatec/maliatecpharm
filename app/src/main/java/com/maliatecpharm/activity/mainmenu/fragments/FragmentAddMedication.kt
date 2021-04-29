@@ -1,6 +1,5 @@
 package com.maliatecpharm.activity.mainmenu.fragments
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -251,7 +250,7 @@ class FragmentAddMedication : Fragment(),
                 medicineEntity = it
                 medicationName.text = it.name
                 enterDosage.setText(it.dosage)
-                condition.setText(it.diagnosis)
+                diagnosis.setText(it.diagnosis)
             }
         }
     }
@@ -298,18 +297,19 @@ class FragmentAddMedication : Fragment(),
         else
             Toast.makeText(requireContext(), "Please fill medicine name ", Toast.LENGTH_SHORT).show()
     }
+
     private fun inputCheck(name: String, dosage: String, diagnosis: String): Boolean
     {
         return !(TextUtils.isEmpty(name) && TextUtils.isEmpty(dosage) && TextUtils.isEmpty(diagnosis)
                 )
     }
+
     private fun setupTextViews()
     {
         dosage.text = getString(R.string.dosage)
         instructionsTv.text = getString(R.string.instructions)
         medicationTypeTv.text = getString(R.string.medication_type)
         medicationName.text = getString(R.string.medication_title)
-        diagnosis.text = "Diagnosis"
     }
 
     private fun medSpinner()

@@ -34,7 +34,6 @@ class FragmentAddProfile : Fragment(),
         "", "", "",
         "", "", "")
 
-
     private val GenderList = arrayOf(
         "Male", "Female"
     )
@@ -51,7 +50,6 @@ class FragmentAddProfile : Fragment(),
     private lateinit var Weight: EditText
     private lateinit var saveMyProfileBtn: Button
     private lateinit var textDate1: TextView
-
     val context = this
     private val REQUEST_CODE = 42
 
@@ -82,7 +80,6 @@ class FragmentAddProfile : Fragment(),
         Weight = view.findViewById(R.id.edittext_weight)
         saveMyProfileBtn = view.findViewById(R.id.button_saveButtonn)
         textDate1 = view.findViewById(R.id.textview_textTime1)
-
         sexSpinner()
         takePicture()
         pickSDate()
@@ -91,7 +88,6 @@ class FragmentAddProfile : Fragment(),
 
         return view
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
@@ -111,14 +107,12 @@ class FragmentAddProfile : Fragment(),
             }
         }
     }
-
     private fun onSaveClickListener()
     {
         saveMyProfileBtn.setOnClickListener {
             insertDataToDataBase()
         }
     }
-
     private fun insertDataToDataBase()
     {
         if (validateInput())
@@ -133,7 +127,7 @@ class FragmentAddProfile : Fragment(),
 
             if (inputCheck(firstName, lastName, mail, phone, weight, height, age))
             {
-                Toast.makeText(requireContext(), "Form validate", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Profile added", Toast.LENGTH_SHORT).show()
                 profileEntity = profileEntity.copy(firstName, lastName, mail, phone, weight, height, age)
                 lifecycleScope.launch(Dispatchers.IO) {
                     userDao.addUser(profileEntity)
@@ -142,7 +136,6 @@ class FragmentAddProfile : Fragment(),
             }
         }
     }
-
     private fun inputCheck(
         firstName: String, lastName: String, mail: String,
         phone: String, weight: String, height: String,
@@ -195,7 +188,6 @@ class FragmentAddProfile : Fragment(),
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         genderSpinner.adapter = adapter
     }
-
     private fun takePicture()
     {
         takePicture.setOnClickListener {
@@ -203,7 +195,6 @@ class FragmentAddProfile : Fragment(),
             startActivityForResult(takePictureIntent, REQUEST_CODE)
         }
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
@@ -216,7 +207,6 @@ class FragmentAddProfile : Fragment(),
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
-
     private fun getSDateCalendar()
     {
         val cal = Calendar.getInstance()
@@ -224,7 +214,6 @@ class FragmentAddProfile : Fragment(),
         sMonth = cal.get(Calendar.MONTH)
         sYear = cal.get(Calendar.YEAR)
     }
-
     private fun pickSDate()
     {
         DateOfBirth.setOnClickListener {
@@ -232,7 +221,6 @@ class FragmentAddProfile : Fragment(),
             DatePickerDialog(requireContext(), fromListener, sYear, sMonth, sDay).show()
         }
     }
-
     private val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
 
         sSavedDay = dayOfMonth
@@ -241,7 +229,6 @@ class FragmentAddProfile : Fragment(),
         getSDateCalendar()
         textDate1.text = "$sSavedDay - $sSavedMonth - $sSavedYear"
     }
-
     override fun onDateSet(datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int)
     {
         sSavedDay = dayOfMonth
@@ -249,6 +236,4 @@ class FragmentAddProfile : Fragment(),
         sSavedYear = year
         textDate1.text = "$sSavedDay - $sSavedMonth - $sSavedYear"
     }
-
-
 }

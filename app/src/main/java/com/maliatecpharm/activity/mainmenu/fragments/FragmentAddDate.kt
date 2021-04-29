@@ -37,7 +37,7 @@ class FragmentAddDate : Fragment(),
     private var calendarEntity = CalendarEntity("", "", "")
 
     private val dayNameList = listOf<Day>(
-        Day(id = 1, name = "Sunday", colorRes = R.color.teal_200),
+        Day(id = 1, name = "Sunday"),
         Day(id = 2, name = "Monday"),
         Day(id = 3, name = "Tuesday"),
         Day(id = 4, name = "Wednesday"),
@@ -86,7 +86,6 @@ class FragmentAddDate : Fragment(),
     var sSavedDay = 0
     var sSavedMonth = 0
     var sSavedYear = 0
-
     var fSavedDay = 0
     var fSavedMonth = 0
     var fSavedYear = 0
@@ -117,10 +116,8 @@ class FragmentAddDate : Fragment(),
         popRecyclerView()
         pickSDate()
         pickFDate()
-
         return view
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
@@ -207,6 +204,7 @@ class FragmentAddDate : Fragment(),
     {
         return !(TextUtils.isEmpty(day) && TextUtils.isEmpty(start) && TextUtils.isEmpty(end))
     }
+
     private fun popRecyclerView()
     {
         dayRecyclerView.apply {
@@ -227,17 +225,14 @@ class FragmentAddDate : Fragment(),
         {
             selectedDayIds.add(day.id)
         }
-
         val updatedList = dayNameList.map { item ->
             item.copy(colorRes = getColor(selected = selectedDayIds.contains(item.id)))
         }
 
         daynameAdapter.updateList(updatedList)
-
         val selectedDaysText = dayNameList
             .filter { item -> selectedDayIds.contains(item.id) }
             .joinToString { item -> item.name }
-
         tvSelectedDays.text = selectedDaysText
     }
     override fun onAlarmTimeClicked(position: Int)
@@ -248,10 +243,8 @@ class FragmentAddDate : Fragment(),
             val newList = alarmsCountList
                 .first { item -> item.id == lastClickedAlarmCount }
                 .timeList.apply { set(position, text) }
-
             alarmCountAdapter.updateList(newList)
         }
-
         TimePickerDialog(
             requireContext(),
             { _, hour, minute -> updateList(hour, minute) },
@@ -311,5 +304,4 @@ class FragmentAddDate : Fragment(),
         sSavedYear = year
         textDate2.text = "$fSavedDay - $fSavedMonth - $fSavedYear"
     }
-
 }
