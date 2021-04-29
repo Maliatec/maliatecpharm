@@ -12,7 +12,6 @@ import com.maliatecpharm.R
 
 
 class DayNameAdapter(
-
     private val context: Context,
     private val dayNameInteractor: DayNameInteractor
 ) :
@@ -24,6 +23,7 @@ class DayNameAdapter(
         this.dayNameList = dayNameList
         notifyDataSetChanged()
     }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -34,11 +34,13 @@ class DayNameAdapter(
 
         return DAYNAMEViewHolder(type)
     }
+
     override fun onBindViewHolder(holder: DayNameAdapter.DAYNAMEViewHolder, position: Int)
     {
         val dayName = dayNameList[position]
         holder.bindData(dayName)
     }
+
     override fun getItemCount() = dayNameList.size
 
     inner class DAYNAMEViewHolder constructor(private val view: View) :
@@ -61,6 +63,7 @@ class DayNameAdapter(
         fun onDayClicked(day: Day)
     }
 }
+
 data class Day(
     val id: Int,
     val name: String,

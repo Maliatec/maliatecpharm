@@ -167,16 +167,12 @@
         android:background="#00000000"
         android:textSize="15sp"/>
 
-
-
     <Button
         android:id="@+id/button_saveButtonEmergencyContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
         android:text="Save Emergency Contact Profile"
-
         />
-
 
 </LinearLayout>

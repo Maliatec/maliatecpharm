@@ -29,30 +29,12 @@
         android:layout_marginTop="24dp"
         />
 
-<!--    <TextView-->
-<!--        android:id="@+id/layout_spec"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="14dp"-->
-<!--        android:text="Speciality"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
-
-
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         style="@android:style/Widget.Spinner.DropDown"
         android:id="@+id/spinner_specialitySpinner"
         android:layout_width="match_parent"
         android:paddingVertical="16dp"
         android:layout_height="wrap_content"/>
-
-
 
         <EditText
             android:id="@+id/enterDrSpec"
@@ -65,60 +47,6 @@
             android:textColorHint="#808080"
             android:background="#00000000"
             android:textSize="15sp"/>
-
-
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/layout_first_name"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="14dp"-->
-<!--        android:text="Doctor's name"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
-
-
-
-<!--    <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
-<!--        style="@android:style/Widget.Spinner.DropDown"-->
-<!--        android:id="@+id/spinner_doctorsNameSpinner"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:paddingVertical="16dp"-->
-<!--        />-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal">-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/enterDrName"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="First Name"-->
-<!--            android:gravity="center"-->
-<!--            android:padding="10dp"-->
-<!--            android:textColor="#000000"-->
-<!--            android:textColorHint="#808080"-->
-<!--            android:background="#00000000"-->
-<!--            android:textSize="15sp"-->
-<!--            />-->
-
-<!--        <Button-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/AddDrName"-->
-<!--            android:text="Add"/>-->
-
-<!--    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -143,22 +71,6 @@
             android:layout_gravity="center" />
 
     </LinearLayout>
-
-
-
-<!--        <TextView-->
-<!--            android:id="@+id/layout_mobileNbr"-->
-<!--            android:layout_width="match_parent"-->
-<!--            app:layout_constraintWidth_percent="0.7"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            android:text="Mobile Number"-->
-<!--            android:gravity="center"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textColorHint="#808080"-->
-<!--            android:textSize="16sp"-->
-<!--            />-->
 
     <EditText
         android:id="@+id/enterDrName"
@@ -190,21 +102,6 @@
             android:drawableLeft="@drawable/mobile"
        />
 
-
-<!--    <TextView-->
-<!--        android:id="@+id/layout_officeNbr"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:text="Office Number"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
-
         <EditText
             android:id="@+id/edittext_officePhone"
             android:drawablePadding="10dp"
@@ -221,20 +118,6 @@
             android:drawableLeft="@drawable/officenum"
             />
 
-<!--    <TextView-->
-<!--        android:id="@+id/layout_email"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:text="Doctor's email"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
-
     <EditText
 
         android:id="@+id/edittext_email"
@@ -249,20 +132,6 @@
         android:textSize="15sp"
         android:drawablePadding="10dp"
         android:drawableLeft="@drawable/email" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/layout_location"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:text="Clinic location"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
 
     <EditText
 
@@ -289,6 +158,4 @@
 
         />
 </LinearLayout>
-
-
 </androidx.core.widget.NestedScrollView>

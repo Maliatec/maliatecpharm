@@ -23,8 +23,6 @@
         android:layout_gravity="center_horizontal"
         />
     </FrameLayout>
-
-
     <TextView
         android:id="@+id/textview_medication"
         android:layout_width="wrap_content"
@@ -35,8 +33,5 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         android:layout_height="wrap_content"/>
-
-
-
 
 </LinearLayout>

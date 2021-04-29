@@ -56,7 +56,6 @@
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentAddDoctor"
         android:label="Doctor info"/>
 
-
     <fragment
         android:id="@+id/MoreFragment"
         android:name="com.maliatecpharm.activity.mainmenu.fragments.FragmentMore"
@@ -103,10 +102,7 @@
         <action
             android:id="@+id/action_fragmentAddMedicine_to_MedicationsFragment"
             app:destination="@id/MedicationsFragment" >
-
-
         </action>
     </fragment>
-
 
 </navigation>

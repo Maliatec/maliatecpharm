@@ -34,7 +34,6 @@ class FragmentAddDoctor : Fragment(),
         AppDataBase.getDataBase(requireContext()).doctorDao()
     }
 
-    //  private lateinit var doctorsNameSpinner: SearchableSpinner
     private lateinit var btnTimePicker: TextView
     private lateinit var appointmentDate: TextView
     private lateinit var doctorsSpecialitySpinner: SearchableSpinner
@@ -45,10 +44,6 @@ class FragmentAddDoctor : Fragment(),
     private lateinit var saveBTN: Button
     private lateinit var enterDrName: EditText
     private lateinit var drSpec: EditText
-//    private lateinit var addDrNameBtn: Button
-//    private lateinit var getDrSpec: String
-//    private lateinit var addDrSpecBtn: Button
-
     private lateinit var doctorLiveData: LiveData<List<DoctorsEntity>>
     private var doctorEntity = DoctorsEntity("", "", "", "")
     private val DoctorsSpecialityList = mutableListOf<String>(
@@ -85,18 +80,12 @@ class FragmentAddDoctor : Fragment(),
         email = view.findViewById(R.id.edittext_email)
         location = view.findViewById(R.id.edittext_location)
         saveBTN = view.findViewById(R.id.button_saveButtonn)
-        // addDrNameBtn = view.findViewById(R.id.AddDrName)
-       // addDrSpecBtn = view.findViewById(R.id.AddDrSpec)
-        //doctorsNameSpinner = view.findViewById(R.id.spinner_doctorsNameSpinner)
 
         specialitySpinner()
         pickSDate()
         onSaveClickListener()
         getAppointmentDateTimeCalendar()
         linkSpinnerToDoctorsDb()
-        //  linkSpecsSpinnerToEditText()
-        // linkNamesSpinnerToEditText()
-        //  addNewSpecDr()
 
         return view
     }
@@ -155,7 +144,6 @@ class FragmentAddDoctor : Fragment(),
             {
             }
         }
-//        DoctorsSpecialityList.clear()
     }
 
     private fun getAppointmentDateTimeCalendar()
@@ -177,6 +165,7 @@ class FragmentAddDoctor : Fragment(),
                 .show()
         }
     }
+
     val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
         SavedDay = dayOfMonth
         SavedMonth = month
@@ -184,18 +173,21 @@ class FragmentAddDoctor : Fragment(),
         getAppointmentDateTimeCalendar()
         TimePickerDialog(requireContext(), this, Hour, Minute, true).show()
     }
+
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int)
     {
         SavedHour = hourOfDay
         SavedMinute = minute
         appointmentDate.text = "Appointment's Date: \n$SavedDay - $SavedMonth - $SavedYear \nAt: $SavedHour:$SavedMinute"
     }
+
     private fun onSaveClickListener()
     {
         saveBTN.setOnClickListener {
             insertDrDataToDataBase()
         }
     }
+
     private fun insertDrDataToDataBase()
     {
         if (validateInput())
@@ -227,6 +219,7 @@ class FragmentAddDoctor : Fragment(),
         return !(TextUtils.isEmpty(DrName) && TextUtils.isEmpty(spec)
                 && TextUtils.isEmpty(nbr) && TextUtils.isEmpty(app))
     }
+
     fun validateInput(): Boolean
     {
         if (enterDrName.text.toString().equals(""))
@@ -244,70 +237,8 @@ class FragmentAddDoctor : Fragment(),
             mobileNbr.setError("Please Enter Contact No")
             return false
         }
-        //        if (appointmentDate.text.toString().equals(""))
-        //        {
-        //            appointmentDate.setError("Please Enter Email")
-        //            return false
-        //        }
         return true
     }
 }
-    //    private fun linkNamesSpinnerToEditText()
-    //    {
-    //        doctorsNameSpinner.onItemSelectedListener = object :
-    //            AdapterView.OnItemSelectedListener
-    //        {
-    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-    //            {
-    //                enterDrName.setText(doctorsNameSpinner.selectedItem.toString())
-    //            }
-    //
-    //            override fun onNothingSelected(parent: AdapterView<*>?)
-    //            {
-    //            }
-    //        }
-    //  }
-
-
-    //    private fun addNewDr()
-    //    {
-    //        addDrNameBtn.setOnClickListener {
-    //            val doctorName = enterDrName.text.toString()
-    //
-    //            val doctorEntity = DoctorsEntity(
-    //                spec = pickedSpeciality,
-    //                drName = doctorName
-    //                )
-    //
-    //            lifecycleScope.launch(Dispatchers.IO) {
-    //                doctorDao.addDoctor(doctorEntity)
-    //                withContext(Dispatchers.Main){
-    //                    Toast.makeText(requireContext(), "Doctor Added", Toast.LENGTH_LONG).show()
-    //                }
-    //            }
-    //        }
-    //    }
-    //    private fun linkSpecsSpinnerToEditText()
-    //    {
-    //        doctorsSpecialitySpinner.onItemSelectedListener = object :
-    //            AdapterView.OnItemSelectedListener
-    //        {
-    //            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-    //            {
-    //                pickedSpeciality = DoctorsSpecialityList.get(position)
-    //                drSpec.setText(pickedSpeciality)
-    //            }
-    //            override fun onNothingSelected(parent: AdapterView<*>?)
-    //            {
-    //            }
-    //        }
-    //    }
-    //    private fun addNewSpecDr()
-    //    {
-    //        addDrSpecBtn.setOnClickListener {
-    //            getDrSpec = drSpec.toString()
-    //            Toast.makeText(requireContext(), "Speciality Added", Toast.LENGTH_LONG).show()
-    //        }
-    //    }
 
 

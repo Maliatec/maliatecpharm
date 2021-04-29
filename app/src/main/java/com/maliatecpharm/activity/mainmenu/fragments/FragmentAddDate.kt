@@ -109,7 +109,6 @@ class FragmentAddDate : Fragment(),
         btn2Date = view.findViewById(R.id.button_timePickerbtn2)
         textDate2 = view.findViewById(R.id.textview_textTime2)
 
-      //  onAddClickListener()
         populateAlarmCountRecycleView()
         populateTimeSpinner()
         onSaveClickListener()
@@ -133,12 +132,6 @@ class FragmentAddDate : Fragment(),
             }
         }
     }
-//    private fun onAddClickListener()
-//    {
-//        addMedication.setOnClickListener {
-//            findNavController().navigate(R.id.action_fragmentAddMedicine_to_addMedicationFragment)
-//        }
-//    }
 
     private fun populateAlarmCountRecycleView()
     {
@@ -162,7 +155,6 @@ class FragmentAddDate : Fragment(),
             )
             {
                 val timeClickedText = times[position] // example: 3 times a day
-                // search in original times to find a match between an item and the text clicked
                 val itemClicked = alarmsCountList.first { item -> item.text == timeClickedText }
                 lastClickedAlarmCount = itemClicked.id
                 alarmCountAdapter.updateList(itemClicked.timeList)
@@ -194,8 +186,6 @@ class FragmentAddDate : Fragment(),
                calendarDao.addDate(date)
             }
             Toast.makeText(requireContext(), "Date Added ", Toast.LENGTH_SHORT).show()
-            //findNavController().popBackStack()
-            //           findNavController().navigate(R.id.action_MedicationsFragment_to_blankFragment)
         }
         else
             Toast.makeText(requireContext(), "Please fill date ", Toast.LENGTH_SHORT).show()
@@ -282,21 +272,21 @@ class FragmentAddDate : Fragment(),
         }
     }
     private val fromListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-
         sSavedDay = dayOfMonth
         sSavedMonth = month
         sSavedYear = year
         getSDateCalendar()
         textDate1.text = "From $sSavedDay - $sSavedMonth - $sSavedYear"
     }
-    private val toListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
 
+    private val toListener = DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
         fSavedDay = dayOfMonth
         fSavedMonth = month
         fSavedYear = year
         getFDateCalendar()
         textDate2.text = "To $fSavedDay - $fSavedMonth - $fSavedYear"
     }
+
     override fun onDateSet(datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int)
     {
         sSavedDay = dayOfMonth

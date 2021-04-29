@@ -48,12 +48,6 @@
             android:layout_height="wrap_content"
             android:text="Diagnosis"/>
 
-<!--        <TextView-->
-<!--            android:id="@+id/textview_nameOfDisease"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            tools:text="Diagnosis" />-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -138,165 +132,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp" />
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="16dp"-->
-        <!--            android:background="#DDDDDD"-->
-        <!--            android:orientation="vertical"-->
-        <!--            android:padding="16dp">-->
-
-        <!--            <com.google.android.material.switchmaterial.SwitchMaterial-->
-        <!--                android:id="@+id/switch_reminder"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="@string/switch_reminder_text"-->
-        <!--                android:textAlignment="viewStart" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/textview_reminder"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="16dp"-->
-        <!--                android:text="@string/textview_reminder"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <Spinner-->
-        <!--                android:id="@+id/spinner_timeSpinner"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="8dp"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/textview_At"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="At:"-->
-        <!--                android:visibility="gone" />-->
-
-
-        <!--            <androidx.recyclerview.widget.RecyclerView-->
-        <!--                android:id="@+id/recyclerview_alarmCount"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="16dp"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <EditText-->
-        <!--                android:id="@+id/alarmet"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:visibility="gone"-->
-        <!--/>-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/textview_On"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="16dp"-->
-        <!--                android:text="ON :"-->
-        <!--                android:visibility="gone" />-->
-
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/textview_selectedDays"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="8dp"-->
-        <!--                android:text="" />-->
-
-        <!--            <androidx.recyclerview.widget.RecyclerView-->
-        <!--                android:id="@+id/recylerview_dayCount"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="16dp"-->
-        <!--                android:visibility="gone" />-->
-
-
-        <!--            <androidx.recyclerview.widget.RecyclerView-->
-        <!--                android:id="@+id/recylerview_day"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <Button-->
-        <!--                android:id="@+id/button_timePickerBtn1"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="From"-->
-        <!--                android:textSize="16dp"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/textview_textTime1"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:layout_marginTop="20dp"-->
-        <!--                android:text="Start Date"-->
-        <!--                android:textSize="16sp"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <Button-->
-        <!--                android:id="@+id/button_timePickerbtn2"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="To"-->
-        <!--                android:textSize="16dp"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/textview_textTime2"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:layout_marginTop="20dp"-->
-        <!--                android:text="End Date"-->
-        <!--                android:textSize="16sp"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/textview_Time1"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:layout_marginTop="20dp"-->
-        <!--                android:textSize="16sp"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/textview_Time2"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:layout_marginTop="20dp"-->
-
-        <!--                android:textSize="16sp"-->
-        <!--                android:visibility="gone" />-->
-
-        <!--            <CheckBox-->
-        <!--                android:id="@+id/checkbox_repeat"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="Repeat weekly (no end date)"-->
-        <!--                android:visibility="gone"></CheckBox>-->
-
-        <!--        </LinearLayout>-->
-
-        <!--        <Button-->
-        <!--            android:id="@+id/button_confirmbtn"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="@string/button_confirm" />-->
-
         <Button
             android:id="@+id/Save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tap to schedule" />
 
-
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>

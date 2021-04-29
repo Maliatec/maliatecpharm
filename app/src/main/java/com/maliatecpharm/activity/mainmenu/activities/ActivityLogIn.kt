@@ -83,7 +83,6 @@ class ActivityLogIn : AppCompatActivity()
                     }
                 }
             }
-
     }
 
     private fun setOnBtnClicked()
@@ -92,23 +91,6 @@ class ActivityLogIn : AppCompatActivity()
             startActivity(Intent(this, ActivityRegisterPage::class.java))
         }
     }
-
-    //    private fun emailValidation(){
-    //        username.addTextChangedListener(object :TextWatcher
-    //        {
-    //            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
-    //            {
-    //            }
-    //            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
-    //            {
-    //                logInButton.isEnabled = EMAIL_ADDRESS.matcher(username.text.toString()).matches()
-    ////                username.setError("Invalid Email")
-    //            }
-    //            override fun afterTextChanged(s: Editable?)
-    //            {
-    //            }
-    //        })
-    //    }
 
     fun validateInput(): Boolean
     {

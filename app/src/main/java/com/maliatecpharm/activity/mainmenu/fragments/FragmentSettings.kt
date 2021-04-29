@@ -19,7 +19,6 @@ class FragmentSettings: Fragment()
     private lateinit var inviteAFriend: TextView
     private lateinit var about: TextView
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -32,7 +31,6 @@ class FragmentSettings: Fragment()
         feedback = view.findViewById(R.id.textview_feedback)
         inviteAFriend = view.findViewById(R.id.textview_inviteaFriend)
         about = view.findViewById(R.id.textview_about)
-
 
         setOnFeedbackClicked()
         return view

@@ -115,9 +115,7 @@
                     android:background="@android:color/transparent"
                     android:textAllCaps="false"
                     android:text="Login"
-
                     />
-
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

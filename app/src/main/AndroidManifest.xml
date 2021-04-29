@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
     package="com.maliatecpharm">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,8 +12,8 @@
         android:label="My First App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        tools:replace = "android:label"
-        android:theme="@style/Theme.InventoryManagement">
+        android:theme="@style/Theme.InventoryManagement"
+        tools:replace="android:label">
 
         <activity
             android:name=".activity.mainmenu.activities.SplashActivity"
@@ -35,28 +34,18 @@
         <activity
             android:name=".activity.mainmenu.activities.ActivityMainMenu"
             android:label="@string/title_activity_main_menu"
-            android:theme="@style/Theme.InventoryManagement.NoActionBar">
-        </activity>
-
-
-
-        <activity android:name=".activity.mainmenu.activities.ActivityAddMedications" />
-
+            android:theme="@style/Theme.InventoryManagement.NoActionBar"/>
         <activity android:name=".activity.mainmenu.activities.ActivityRegisterPage" />
 
         <activity android:name=".activity.mainmenu.activities.ActivityMedFriend" />
         <activity android:name=".activity.mainmenu.activities.ActivitySettings" />
         <activity android:name=".activity.mainmenu.activities.ActivityFeedback" />
-        <activity android:name=".activity.mainmenu.activities.ActivityVitalSigns" />
         <activity
             android:name=".activity.mainmenu.activities.ActivityLogIn"
-           android:theme="@style/Theme.InventoryManagement.NoActionBar"/>
-        <activity android:name=".activity.mainmenu.activities.ActivityDoctors" />
+            android:theme="@style/Theme.InventoryManagement.NoActionBar" />
         <activity android:name=".activity.mainmenu.activities.ActivityResetPassword" />
         <activity android:name=".activity.mainmenu.activities.ActivityForgotMyPass" />
         <activity android:name=".activity.mainmenu.activities.ActivityAddDiagnosis" />
-
-
     </application>
 
 </manifest>

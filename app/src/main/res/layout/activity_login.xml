@@ -8,8 +8,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.mainmenu.activities.ActivityMainMenu">
 
-
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,22 +48,6 @@
             android:layout_marginTop="24dp"
             />
 
-<!--        <TextView-->
-<!--            android:id="@+id/layout_email"-->
-<!--            android:layout_width="match_parent"-->
-<!--            app:layout_constraintWidth_percent="0.7"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            android:text="Email"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="16sp"-->
-<!--            android:gravity="center"-->
-<!--            android:layout_marginTop="50dp"-->
-<!--            android:textColorHint="#808080"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            />-->
-
     <EditText
         android:id="@+id/edittext_username"
         android:layout_width="match_parent"
@@ -84,23 +66,6 @@
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
   />
-        
-<!--        <TextView-->
-<!--            android:id="@+id/layout_password"-->
-<!--            android:layout_width="match_parent"-->
-<!--            app:layout_constraintWidth_percent="0.7"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="16sp"-->
-<!--            android:gravity="center"-->
-<!--            android:text="Password"-->
-<!--            android:textColorHint="#808080"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/layout_email"-->
-<!--            />-->
-
     <EditText
         android:id="@+id/edittext_password"
         android:layout_width="match_parent"
@@ -141,7 +106,6 @@
             android:text="Reset my password"
             android:layout_marginHorizontal="16dp"
             tools:ignore="MissingConstraints"/>
-
         <Button
             android:id="@+id/button_forgotMyPassBtn"
             android:layout_width="match_parent"
@@ -150,8 +114,6 @@
             android:text="Forgot my password"
             android:layout_marginHorizontal="16dp"
             tools:ignore="MissingConstraints"/>
-
-
         <LinearLayout
             android:id="@+id/layout_already_have_account"
             android:layout_width="match_parent"
@@ -164,8 +126,6 @@
             android:orientation="horizontal"
             android:gravity="center"
             >
-
-
             <TextView
                 android:id="@+id/tv_already_have_account"
                 android:layout_width="wrap_content"
@@ -188,32 +148,9 @@
                 android:textAllCaps="false"
                 android:layout_marginLeft="16dp"
                 android:text="Sign Up"
-
-
                 />
 
         </LinearLayout>
-
-
-
-        <!--    <CheckBox-->
-<!--        android:id="@+id/checkbox_remember"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:text="Remember my password"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        tools:layout_editor_absoluteX="16dp"/>-->
-
-
-
-        <!--    <ProgressBar-->
-<!--        android:id="@+id/progressbar_loading"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:visibility="gone" />-->
-
 
 </LinearLayout>
 

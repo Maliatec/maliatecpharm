@@ -13,7 +13,6 @@ import com.maliatecpharm.activity.mainmenu.activities.ActivityProfile
 
 class FragmentMore : Fragment()
 {
-
     private lateinit var moreemptyBtn: Button
 
     override fun onCreateView(
@@ -24,11 +23,7 @@ class FragmentMore : Fragment()
         val view = inflater.inflate(R.layout.fragment_more, container, false)
 
         moreemptyBtn = view.findViewById(R.id.button_moreEmptyBtn)
-
         setOnBtnClicked()
-
-
-        //        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_MoreFragment_to_HomeFragment)}
         return view
     }
 

@@ -51,7 +51,6 @@ class FragmentListVitalSigns : Fragment(), OnVitalClickListener
         vitalRecyclerView()
         showVitals()
 
-        //        view.setOnClickListener{ Navigation.findNavController(view). navigate(R.id.action_MoreFragment_to_HomeFragment)}
         return view
     }
     private fun setOnButtonClicked()

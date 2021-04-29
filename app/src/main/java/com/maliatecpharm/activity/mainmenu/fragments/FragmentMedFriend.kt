@@ -77,7 +77,6 @@ class FragmentMedFriend : Fragment()
             return false
         }
 
-        // checking the proper email format
         if (!isEmailValid(emailEmergnecyContact.text.toString())) {
             emailEmergnecyContact.setError("Please Enter Valid Email")
             return false

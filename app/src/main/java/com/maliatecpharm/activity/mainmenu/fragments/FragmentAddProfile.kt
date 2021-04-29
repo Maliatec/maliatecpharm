@@ -151,27 +151,22 @@ class FragmentAddProfile : Fragment(),
     {
         if (firstName.text.toString().equals(""))
         {
-            //  firstName.setError("Please Enter First Name")
             return false
         }
         if (lastName.text.toString().equals(""))
         {
-            //   lastName.setError("Please Enter Last Name")
             return false
         }
         if (enterPhone.text.toString().equals(""))
         {
-            //    enterPhone.setError("Please Enter Contact No")
             return false
         }
         if (enterMail.text.toString().equals(""))
         {
-            //   enterMail.setError("Please Enter Email")
             return false
         }
         if (!isEmailValid(enterMail.text.toString()))
         {
-            //  enterMail.setError("Please Enter Valid Email")
             return false
         }
         return true

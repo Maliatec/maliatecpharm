@@ -28,22 +28,6 @@
         android:layout_marginTop="24dp"
         />
 
-<!--    <TextView-->
-<!--        android:id="@+id/layout_first_name"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="14dp"-->
-<!--        android:text="First name"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
-
-
        <TextView
            android:id="@+id/et_time"
            android:layout_width="match_parent"
@@ -57,23 +41,6 @@
            android:drawableLeft="@drawable/cholesterol"
            android:drawablePadding="10dp"
            android:hint="Enter time"/>
-
-
-
-    <!--    <TextView-->
-<!--        android:id="@+id/layout_cholesterol"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="14dp"-->
-<!--        android:text="Cholesterol"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
 
     <EditText
         android:id="@+id/edittext_enterCholesterol"
@@ -90,21 +57,6 @@
         android:hint="Enter Cholesterol"/>
 
 
-<!--    <TextView-->
-<!--        android:id="@+id/layout_fitness"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="14dp"-->
-<!--        android:text="Fitness"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
-
     <EditText
         android:id="@+id/edittext_enterFitness"
         android:layout_width="match_parent"
@@ -118,22 +70,6 @@
         android:drawableLeft="@drawable/fitness"
         android:drawablePadding="10dp"
         android:hint="Enter Fitness"/>
-
-<!--    <TextView-->
-<!--        android:id="@+id/layout_glucose"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="14dp"-->
-<!--        android:text="Glucose"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
-
 
     <EditText
         android:id="@+id/edittext_enterGlucose"
@@ -149,21 +85,6 @@
         android:drawablePadding="10dp"
         android:hint="Enter Glucose"/>
 
-<!--    <TextView-->
-<!--        android:id="@+id/layout_bloodp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="14dp"-->
-<!--        android:text="Blood Pressure"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
-
     <EditText
         android:id="@+id/edittext_enterBloodPressure"
         android:layout_width="match_parent"
@@ -177,22 +98,6 @@
         android:drawableLeft="@drawable/bloodpressure"
         android:drawablePadding="10dp"
         android:hint="Enter Blood Pressure"/>
-
-<!--    <TextView-->
-<!--        android:id="@+id/layout_pulse"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="14dp"-->
-<!--        android:text="Pulse"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
-
 
     <EditText
         android:id="@+id/edittext_enterPulse"
@@ -208,20 +113,6 @@
         android:drawableLeft="@drawable/pulseicon"
         android:hint="Enter Pulse"/>
 
-<!--    <TextView-->
-<!--        android:id="@+id/layout_qualityoflife"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintWidth_percent="0.7"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="14dp"-->
-<!--        android:text="Quality of Life"-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColorHint="#808080"-->
-<!--        android:textSize="16sp"-->
-<!--        />-->
 
     <EditText
         android:id="@+id/edittext_qualityOfLife"
@@ -257,7 +148,6 @@
             android:paddingVertical="8dp"
             android:src="@mipmap/ic_launcher_round" />
     </LinearLayout>
-
     <Button
         android:id="@+id/button_saveButton"
         android:layout_width="match_parent"
@@ -265,9 +155,7 @@
         android:paddingVertical="16dp"
         android:text="Save"/>
 
-
 </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>
 
 

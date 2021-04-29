@@ -9,8 +9,6 @@
     tools:ignore="MissingConstraints"
     tools:layout_editor_absoluteX="16dp">
 
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_Profile"
             android:layout_width="match_parent"
@@ -23,7 +21,6 @@
             app:layout_constraintVertical_bias="1.0"
             tools:ignore="MissingConstraints" />
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -31,7 +28,6 @@
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_baseline_add_24"
         android:backgroundTint="@color/purple_500" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

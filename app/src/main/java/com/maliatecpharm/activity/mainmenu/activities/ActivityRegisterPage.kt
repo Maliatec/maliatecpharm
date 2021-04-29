@@ -66,22 +66,6 @@ class ActivityRegisterPage : AppCompatActivity()
         emails.forEach {
             Log.d("ActivityRegisterPage", "is valid email $it => ${isValidString(it)}")
         }
-
-//        awesomeValdiation = AwesomeValidation(ValidationStyle.BASIC)
-//        awesomeValdiation.addValidation(
-//            this, R.id.edittext_enterEmail,
-//            RegexTemplate.NOT_EMPTY, R.string.invalid_username
-//        )
-//
-//        awesomeValdiation.addValidation(
-//            this, R.id.edittext_Password,
-//            RegexTemplate.NOT_EMPTY, R.string.invalid_password
-//        )
-//
-//        awesomeValdiation.addValidation(
-//            this, R.id.edittext_confirmPassword,
-//            RegexTemplate.NOT_EMPTY, R.string.invalid_password
-//        )
         setOnButtonClicked()
 
     }

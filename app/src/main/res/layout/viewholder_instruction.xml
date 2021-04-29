@@ -14,7 +14,4 @@
         android:minWidth="72dp"
         tools:ignore="MissingConstraints" />
 
-
-
-
 </FrameLayout>

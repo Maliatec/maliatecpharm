@@ -23,14 +23,11 @@ class FragmentHome : Fragment()
     ): View?
     {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-//        emptyBtn = view.findViewById(R.id.button_emptyBtn)
-
         val endDate = Calendar.getInstance()
         endDate.add(Calendar.MONTH, 1)
 
         val startDate = Calendar.getInstance()
         startDate.add(Calendar.MONTH, -1)
-
         val horizontalCalendar: HorizontalCalendar = HorizontalCalendar.Builder(view, R.id.calendarView)
             .startDate(startDate.time)
             .endDate(endDate.time)
@@ -40,7 +37,6 @@ class FragmentHome : Fragment()
         {
             override fun onDateSelected(date: Date?, position: Int)
             {
-                //do something
             }
         }
 
@@ -60,20 +56,6 @@ class FragmentHome : Fragment()
                 return true
             }
         }
-
-
-        //   setOnBtnClicked()
-
-//        view.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_HomeFragment_to_MedicationsFragment) }
         return view
     }
-
-//    private fun setOnBtnClicked()
-//    {
-//        emptyBtn.setOnClickListener {
-//           // startActivity(Intent(requireContext(), AddMedications::class.java))
-//        }
-//    }
-
-
 }

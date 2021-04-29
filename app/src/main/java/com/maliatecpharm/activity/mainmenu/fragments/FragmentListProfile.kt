@@ -53,11 +53,7 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
         showProfiles()
         return view
     }
-    //    override fun onCreate(savedInstanceState: Bundle?)
-    //    {
-    //        super.onCreate(savedInstanceState)
-    //        example()
-    //    }
+
     private fun onBtnClicked()
     {
         actionBtn.setOnClickListener {
@@ -90,26 +86,7 @@ class FragmentListProfile : Fragment(), OnProfileClickListener
         profileRecyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         profileRecyclerView.adapter = adapter
     }
-    //    private inline fun applyIfOr(condition: ()->Boolean, ifBlock: () -> Unit, elseBlock: () -> Unit)
-    //    {
-    //        if (condition()) ifBlock() else elseBlock()
-    //    }
-    //
-    //    private fun example()
-    //    {
-    //
-    //        lifecycleScope.launch {
-    //            for (i in 0..10) {
-    //                applyIfOr({i % 2 == 0}, {
-    //                    Toast.makeText(requireContext(),"even",Toast.LENGTH_SHORT).show()
-    //                }, {
-    //                    Toast.makeText(requireContext(),"odd",Toast.LENGTH_SHORT).show()
-    //                })
-    //
-    //                delay(3000)
-    //            }
-    //        }
-    //    }
+
     private fun showProfiles()
     {
         lifecycleScope.launch(Dispatchers.IO) {

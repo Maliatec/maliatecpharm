@@ -58,18 +58,6 @@ class FragmentListDoctors : Fragment(), DoctorsAdapter.OnDoctorClickListener
         super.onViewCreated(view, savedInstanceState)
         showDoctors()
     }
-    //    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
-    //    {
-    //        super.onViewCreated(view, savedInstanceState)
-    //    }
-    //    override fun onPause()
-    //    {
-    //        super.onPause()
-    //    }
-    //    override fun onResume()
-    //    {
-    //        super.onResume()
-    //    }
     private fun onBtnClicked()
     {
         addButton.setOnClickListener {
