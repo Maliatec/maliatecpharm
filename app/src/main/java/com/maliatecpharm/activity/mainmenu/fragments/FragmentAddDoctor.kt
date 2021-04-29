@@ -77,6 +77,7 @@ class FragmentAddDoctor : Fragment(),
         email = view.findViewById(R.id.edittext_email)
         location = view.findViewById(R.id.edittext_location)
         saveBTN = view.findViewById(R.id.button_saveButtonn)
+        DoctorsSpecialityList.sortWith(Comparator { o1, o2 -> o1?.compareTo(o2!!, ignoreCase = true)!! })
         specialitySpinner()
         pickSDate()
         onSaveClickListener()

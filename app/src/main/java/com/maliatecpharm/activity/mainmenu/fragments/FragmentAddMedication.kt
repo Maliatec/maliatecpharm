@@ -3,11 +3,11 @@ package com.maliatecpharm.activity.mainmenu.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,6 +56,7 @@ class FragmentAddMedication : Fragment(),
         InstructionsUIModel(id = 4, name = "While eating")
     )
 
+
     private val medicationTypeList = listOf(
         MedicationTypeUIModel(id = 1, name = "Syrup", medicationImageRes = R.drawable.image, colorRes = R.color.teal_200),
         MedicationTypeUIModel(id = 2, name = "Capsule", medicationImageRes = R.drawable.images),
@@ -72,7 +73,7 @@ class FragmentAddMedication : Fragment(),
         "Cyclophosphamide",
         "Panadol", "Paracetamol", "Aspirin",
         "Aspicot", "Prozac", "Dareq", "Oradus",
-        "Advil", "EuroFer", "Other"
+        "Advil", "EuroFer"
     )
     private val conditionsList = mutableListOf<String>(
         "",
@@ -120,6 +121,11 @@ class FragmentAddMedication : Fragment(),
         addImage = view.findViewById(R.id.addImage)
         addDiagImage = view.findViewById(R.id.addDiagnosisImage)
         saveBtn = view.findViewById(R.id.Save)
+
+        conditionsList.sortWith(Comparator { o1, o2 -> o1?.compareTo(o2!!, ignoreCase = true)!! })
+        medicinesList.sortWith(Comparator { o1, o2 -> o1?.compareTo(o2!!, ignoreCase = true)!! })
+        pillsList.sortWith(Comparator { o1, o2 -> o1?.compareTo(o2!!, ignoreCase = true)!! })
+
         setupTextViews()
         medSpinner()
         diagnosisSpinner()
